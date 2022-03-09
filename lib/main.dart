@@ -1,5 +1,7 @@
 import 'package:feribot_lines/utils/colors_const.dart';
 import 'package:feribot_lines/utils/const.dart';
+import 'package:feribot_lines/views/_test_screen.dart';
+import 'package:feribot_lines/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
       //     },
       //   ),
       // ],
-      home: SplashScreen(),
+      home: Login(),
     );
   }
 }

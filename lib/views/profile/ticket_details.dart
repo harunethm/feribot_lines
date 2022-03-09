@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/common_functions.dart';
+import '../../utils/const.dart';
 import '../payment/payment_success.dart';
 
 class TicketDetails extends StatelessWidget {
@@ -19,7 +19,8 @@ class TicketDetails extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
             child: Column(
               children: <Widget>[
                 goToMap(context),
@@ -344,9 +345,9 @@ class TicketDetails extends StatelessWidget {
       backgroundColor: Get.theme.backgroundColor,
       elevation: 4,
       shadowColor: Colors.grey.shade300,
-      title: const Text(
+      title: Text(
         "Bilet Bilgileri",
-        style: themeTitleStyle,
+        style: Constants.themeTitleStyle,
       ),
     );
   }

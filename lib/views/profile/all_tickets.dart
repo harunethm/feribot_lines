@@ -1,9 +1,9 @@
-import 'package:feribot_lines/views/profile/ticket_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/common_functions.dart';
+import '../../utils/const.dart';
+import 'ticket_details.dart';
 
 class AllTickets extends StatelessWidget {
   const AllTickets({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class AllTickets extends StatelessWidget {
         shadowColor: Colors.transparent,
         title: Text(
           "Biletlerim",
-          style: themeTitleStyle,
+          style: Constants.themeTitleStyle,
         ),
       ),
       body: Column(

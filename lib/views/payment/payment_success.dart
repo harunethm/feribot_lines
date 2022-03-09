@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/common_functions.dart';
+import '../../utils/const.dart';
 
 class PaymentSuccess extends StatelessWidget {
   PaymentSuccess({
@@ -397,9 +397,9 @@ class PaymentSuccess extends StatelessWidget {
       backgroundColor: Get.theme.backgroundColor,
       elevation: 4,
       shadowColor: Colors.grey.shade300,
-      title: const Text(
+      title:  Text(
         "Bilet Bilgileri",
-        style: themeTitleStyle,
+        style: Constants.themeTitleStyle,
       ),
     );
   }

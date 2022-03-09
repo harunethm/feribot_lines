@@ -6,6 +6,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import '../../utils/colors_const.dart';
 import '../../utils/common_functions.dart';
+import '../../utils/const.dart';
 import '../../utils/strings.dart';
 import '../../widgets/custom_tabs.dart';
 import '../../widgets/custom_text_form_field.dart';
@@ -26,7 +27,7 @@ class FerryInformation extends StatelessWidget {
         elevation: 2,
         title: Text(
           Strings.booking,
-          style: themeTitleStyle,
+          style: Constants.themeTitleStyle,
         ),
       ),
       body: Container(
@@ -35,7 +36,6 @@ class FerryInformation extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-
               Padding(
                 padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
                 child: Card(

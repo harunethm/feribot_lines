@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:feribot_lines/utils/page_transation/enum.dart';
 import 'package:feribot_lines/utils/page_transation/page_transition.dart';
 
@@ -8,25 +7,21 @@ import '../views/Login/login.dart';
 import '../views/profile/profile.dart';
 import 'const.dart';
 
-const TextStyle themeTitleStyle = TextStyle(
-  fontWeight: FontWeight.w600,
-  fontSize: 20,
-);
-
 class CommonFunctions {
   static String apiKey = "AIzaSyDr4aP_rczqVSLo86cMdinyPs-tIFlh9AE";
-  static TextStyle titleStyle =
-      const TextStyle(letterSpacing: 1.2, fontSize: 20);
 
-  static TextStyle themeSubTitleStyle = const TextStyle(
-    fontSize: 12,
-    letterSpacing: 1.1,
-    height: 1.2,
-    fontWeight: FontWeight.w200,
-  );
-  TextStyle commonStyle() {
-    return GoogleFonts.pacifico();
-  }
+
+  // static TextStyle titleStyle =
+  //     const TextStyle(letterSpacing: 1.2, fontSize: 20);
+  // static TextStyle themeSubTitleStyle = const TextStyle(
+  //   fontSize: 12,
+  //   letterSpacing: 1.1,
+  //   height: 1.2,
+  //   fontWeight: FontWeight.w200,
+  // );
+  // TextStyle commonStyle() {
+  //   return GoogleFonts.pacifico();
+  // }
 
   static void openProfile() {
     if (CommonFunctions.isUserLogined()) {
@@ -59,36 +54,36 @@ class CommonFunctions {
     return isLightTheme;
   }
 
-  static int getRealIndex(int position, int base, int? length) {
-    final int offset = position - base;
-    return remainder(offset, length);
-  }
+  // static int getRealIndex(int position, int base, int? length) {
+  //   final int offset = position - base;
+  //   return remainder(offset, length);
+  // }
 
-  static int remainder(int input, int? source) {
-    if (source == 0) return 0;
-    final int result = input % source!;
-    return result < 0 ? source + result : result;
-  }
+  // static int remainder(int input, int? source) {
+  //   if (source == 0) return 0;
+  //   final int result = input % source!;
+  //   return result < 0 ? source + result : result;
+  // }
 
-  static Widget switchThemeWidget() {
-    return Switch(
-      inactiveTrackColor: Colors.grey,
-      inactiveThumbColor: Get.theme.primaryColor,
-      value: Get.theme == Constants.lightTheme ? false : true,
-      onChanged: (v) async {
-        if (v) {
-          // Provider.of<AppProvider>(context, listen: false)
-          //     .setTheme(Constants.darkTheme, "dark");
-          Get.changeTheme(Constants.darkTheme);
-        } else {
-          // Provider.of<AppProvider>(context, listen: false)
-          //     .setTheme(Constants.lightTheme, "light");
-          Get.changeTheme(Constants.lightTheme);
-        }
-      },
-      activeColor: Get.theme.colorScheme.secondary,
-    );
-  }
+  // static Widget switchThemeWidget() {
+  //   return Switch(
+  //     inactiveTrackColor: Colors.grey,
+  //     inactiveThumbColor: Get.theme.primaryColor,
+  //     value: Get.theme == Constants.lightTheme ? false : true,
+  //     onChanged: (v) async {
+  //       if (v) {
+  //         // Provider.of<AppProvider>(context, listen: false)
+  //         //     .setTheme(Constants.darkTheme, "dark");
+  //         Get.changeTheme(Constants.darkTheme);
+  //       } else {
+  //         // Provider.of<AppProvider>(context, listen: false)
+  //         //     .setTheme(Constants.lightTheme, "light");
+  //         Get.changeTheme(Constants.lightTheme);
+  //       }
+  //     },
+  //     activeColor: Get.theme.colorScheme.secondary,
+  //   );
+  // }
 
   static bool login = true;
   static bool isUserLogined() {

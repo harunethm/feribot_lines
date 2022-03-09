@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/common_functions.dart';
+import '../../utils/const.dart';
 import '../../utils/strings.dart';
 import '../../widgets/custom_credit_card.dart';
 import '../../widgets/custom_dropdown_sort.dart';
@@ -28,7 +28,7 @@ class Payment extends StatelessWidget {
         shadowColor: Colors.grey.shade300,
         title: Text(
           Strings.payment,
-          style: themeTitleStyle,
+          style: Constants.themeTitleStyle,
         ),
       ),
       body: Container(
