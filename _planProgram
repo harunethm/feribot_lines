@@ -1,0 +1,19 @@
+sayfalar
+    landingPage
+    ilk açılış için
+        info1
+        info2
+        info3
+    selectTourDate_f
+        chooseTour_f
+            tourInfos_h
+                userInfos_h
+                    paymnetInfos_h
+                        successPayment_t | successPayment_f
+
+        profile
+            editUser
+            tickets
+                successPayment_t | successPayment_f
+            notifications
+                relatedWebPage
