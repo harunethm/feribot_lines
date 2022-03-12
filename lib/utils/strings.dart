@@ -59,4 +59,5 @@ class Strings {
       "Biletlerini dilediğin zaman cepten değiştirebilir veya açığa alabilirsin.";
   static String splashScreenDescription3 =
       "Seyahatinle ilgili detaylar ve Feribotlines'ın benzersiz kampanyalarından haberdar olmak için bildirimlerini sık sık kontrol et.";
+  static String openReturn = "Açık Dönüş";
 }

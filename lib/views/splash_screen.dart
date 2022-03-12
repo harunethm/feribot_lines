@@ -1,5 +1,6 @@
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../utils/colors_const.dart';
@@ -134,10 +135,10 @@ class SplashScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10.0),
-                                  const Icon(
-                                    Icons.arrow_forward,
+                                  const FaIcon(
+                                    FontAwesomeIcons.arrowRight,
                                     color: Colors.white,
-                                    size: 30.0,
+                                    size: 20.0,
                                   ),
                                   const SizedBox(width: 10.0),
                                 ],

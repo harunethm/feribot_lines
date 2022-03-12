@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../utils/colors_const.dart';
@@ -9,7 +10,7 @@ class CustomDropDown extends StatelessWidget {
   final Color bgColor;
   final Color dropdownColor;
   final double borderRadius;
-  final Icon icon;
+  final FaIcon? icon;
   final List<String> items;
   final List<String> values;
   CustomDropDown({
@@ -20,11 +21,7 @@ class CustomDropDown extends StatelessWidget {
     this.borderRadius = 15,
     this.items = const ["Seçiniz."],
     this.values = const ["Seçiniz."],
-    this.icon = const Icon(
-      Icons.arrow_drop_down,
-      size: 30.0,
-      color: Colors.white,
-    ),
+    this.icon,
   }) : super(key: key) {
     this.dropDownValue = dropDownValue != null
         ? RxString(dropDownValue)
@@ -47,7 +44,12 @@ class CustomDropDown extends StatelessWidget {
               dropdownColor: ColorsConstants.lightPrimary2,
               borderRadius: BorderRadius.circular(15),
               value: dropDownValue.value,
-              icon: icon,
+              icon: icon ??
+                  FaIcon(
+                    FontAwesomeIcons.angleDown,
+                    size: 16.0,
+                    color: Colors.white,
+                  ),
               onChanged: (String? val) {
                 dropDownValue(val ?? items.first);
               },

@@ -1,5 +1,6 @@
 import 'package:feribot_lines/views/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -65,8 +66,9 @@ class ForgotPassword extends StatelessWidget {
                               prefixIcon: Padding(
                                 padding: const EdgeInsetsDirectional.only(
                                     start: 12.0, end: 5.0),
-                                child: Icon(
-                                  Icons.email,
+                                child: FaIcon(
+                                  FontAwesomeIcons.solidEnvelope,
+                                  size: 20,
                                   color: ColorsConstants.lightAccent,
                                 ),
                               ),

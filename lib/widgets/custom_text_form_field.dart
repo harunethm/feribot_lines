@@ -42,12 +42,15 @@ class CustomTextFormField extends StatelessWidget {
           textInputAction: TextInputAction.next,
           controller: controller,
           decoration: InputDecoration(
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             prefixIconConstraints:
                 const BoxConstraints(minWidth: 35, maxHeight: 35),
             prefixIcon: Padding(
               padding: const EdgeInsetsDirectional.only(start: 12.0, end: 5.0),
               child: Icon(
                 icon,
+                size: 20,
                 color: ColorsConstants.lightAccent,
               ),
             ),

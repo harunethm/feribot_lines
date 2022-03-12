@@ -1,6 +1,7 @@
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -40,6 +41,96 @@ class Register extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 32),
                           child: TextField(
                             onChanged: (text) {},
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.done,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              prefixIconConstraints: const BoxConstraints(
+                                  minWidth: 35, maxHeight: 35),
+                              prefixIcon: Padding(
+                                padding: const EdgeInsetsDirectional.only(
+                                    start: 12.0, end: 5.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.userAlt,
+                                  size: 20,
+                                  color: ColorsConstants.lightAccent,
+                                ),
+                              ),
+                              hintText: Strings.hintName,
+                              hintStyle: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Colors.grey,
+                                  width: 0.5,
+                                ),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              focusedBorder: (OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Colors.grey,
+                                  width: 0.5,
+                                ),
+                                borderRadius: BorderRadius.circular(100),
+                              )),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 32),
+                          child: TextField(
+                            onChanged: (text) {},
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.done,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              prefixIconConstraints: const BoxConstraints(
+                                  minWidth: 35, maxHeight: 35),
+                              prefixIcon: Padding(
+                                padding: const EdgeInsetsDirectional.only(
+                                    start: 12.0, end: 5.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.userAlt,
+                                  size: 20,
+                                  color: ColorsConstants.lightAccent,
+                                ),
+                              ),
+                              hintText: Strings.hintSurname,
+                              hintStyle: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Colors.grey,
+                                  width: 0.5,
+                                ),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              focusedBorder: (OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Colors.grey,
+                                  width: 0.5,
+                                ),
+                                borderRadius: BorderRadius.circular(100),
+                              )),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 32),
+                          child: TextField(
+                            onChanged: (text) {},
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
@@ -48,7 +139,11 @@ class Register extends StatelessWidget {
                               prefixIcon: Padding(
                                 padding: const EdgeInsetsDirectional.only(
                                     start: 12.0, end: 5.0),
-                                child: Icon(Icons.email),
+                                child: FaIcon(
+                                  FontAwesomeIcons.solidEnvelope,
+                                  size: 20,
+                                  color: ColorsConstants.lightAccent,
+                                ),
                               ),
                               hintText: Strings.hintEmail,
                               hintStyle: const TextStyle(
@@ -88,7 +183,11 @@ class Register extends StatelessWidget {
                               prefixIcon: Padding(
                                 padding: const EdgeInsetsDirectional.only(
                                     start: 12.0, end: 5.0),
-                                child: Icon(Icons.phone),
+                                child: FaIcon(
+                                  FontAwesomeIcons.phoneAlt,
+                                  size: 20,
+                                  color: ColorsConstants.lightAccent,
+                                ),
                               ),
                               hintText: Strings.hintPhoneNumber,
                               hintStyle: const TextStyle(
@@ -129,7 +228,11 @@ class Register extends StatelessWidget {
                               prefixIcon: Padding(
                                 padding: const EdgeInsetsDirectional.only(
                                     start: 12.0, end: 5.0),
-                                child: Icon(Icons.key),
+                                child: FaIcon(
+                                  FontAwesomeIcons.key,
+                                  size: 20,
+                                  color: ColorsConstants.lightAccent,
+                                ),
                               ),
                               hintText: Strings.hintPassword,
                               hintStyle: const TextStyle(
@@ -170,7 +273,11 @@ class Register extends StatelessWidget {
                               prefixIcon: Padding(
                                 padding: const EdgeInsetsDirectional.only(
                                     start: 12.0, end: 5.0),
-                                child: Icon(Icons.key),
+                                child: FaIcon(
+                                  FontAwesomeIcons.key,
+                                  size: 20,
+                                  color: ColorsConstants.lightAccent,
+                                ),
                               ),
                               hintText: Strings.hintConfirmPassword,
                               hintStyle: const TextStyle(

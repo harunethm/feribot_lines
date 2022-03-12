@@ -3,6 +3,7 @@ import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/profile/all_tickets.dart';
 import 'package:feribot_lines/views/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -84,21 +85,30 @@ class Profile extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: ColorsConstants.lightAccent,
-                    image: DecorationImage(
-                      image: AssetImage(imagePath),
-                      fit: BoxFit.cover,
+                Column(
+                  children: <Widget>[
+                    Center(
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 4, color: Colors.white),
+                          shape: BoxShape.circle,
+                          color: ColorsConstants.lightAccent,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "HÇ",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 3.0,
-                    ),
-                  ),
+                  ],
                 ),
                 const SizedBox(
                   width: 15.0,
@@ -180,9 +190,12 @@ class Profile extends StatelessWidget {
           title: Strings.editProfile,
           subTitle: Strings.editProfileDes,
           iconColor: ColorsConstants.profileColor1,
-          // icon: Icons.border_color_rounded,
-          icon: Icons.edit_note_rounded,
-          suffix: const Icon(Icons.chevron_right),
+          icon: FontAwesomeIcons.userEdit,
+          suffix: const FaIcon(
+            FontAwesomeIcons.chevronRight,
+            size: 20,
+            color: Colors.black54,
+          ),
           onTap: () {
             Get.to(
               () => EditProfile(),
@@ -194,8 +207,12 @@ class Profile extends StatelessWidget {
           title: Strings.myTickets,
           subTitle: Strings.myTicketsDes,
           iconColor: ColorsConstants.profileColor3,
-          icon: Icons.confirmation_number_sharp,
-          suffix: const Icon(Icons.chevron_right),
+          icon: FontAwesomeIcons.ticketAlt,
+          suffix: const FaIcon(
+            FontAwesomeIcons.chevronRight,
+            size: 20,
+            color: Colors.black54,
+          ),
           onTap: () {
             Get.to(
               () => AllTickets(),
@@ -207,8 +224,12 @@ class Profile extends StatelessWidget {
           title: Strings.notifications,
           subTitle: Strings.notificationsDes,
           iconColor: ColorsConstants.profileColor4,
-          icon: Icons.notifications,
-          suffix: const Icon(Icons.chevron_right),
+          icon: FontAwesomeIcons.solidBell,
+          suffix: const FaIcon(
+            FontAwesomeIcons.chevronRight,
+            size: 20,
+            color: Colors.black54,
+          ),
           onTap: () {
             Get.to(
               () => NotificationsPage(),
@@ -220,7 +241,7 @@ class Profile extends StatelessWidget {
           title: Strings.logout,
           subTitle: Strings.logoutDes,
           iconColor: ColorsConstants.profileColor5,
-          icon: Icons.logout,
+          icon: FontAwesomeIcons.signOutAlt,
           onTap: () {
             Get.to(
               () => Login(),
@@ -271,20 +292,20 @@ class Profile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: menu.iconColor,
                         ),
                         child: Icon(
                           menu.icon,
+                          size: 20,
                           color: Colors.white,
-                          size: 25,
                         ),
                       ),
                       Expanded(
                         child: Container(
-                          margin: const EdgeInsets.only(left: 15.0),
+                          margin: const EdgeInsets.only(left: 16.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,

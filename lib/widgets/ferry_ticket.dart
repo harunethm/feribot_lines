@@ -1,6 +1,7 @@
 import 'package:feribot_lines/views/_test_screen.dart';
 import 'package:feribot_lines/views/ferry/ferry_information.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../utils/colors_const.dart';
@@ -127,20 +128,37 @@ class FerryTicket extends StatelessWidget {
                       const SizedBox(height: 10.0),
                       Row(
                         children: <Widget>[
-                          const Icon(Icons.anchor, color: Colors.grey),
+                          const FaIcon(
+                            FontAwesomeIcons.anchor,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
                           Expanded(
                             child: CustomSeperator(
                                 color:
                                     isLightTheme ? Colors.black : Colors.white),
                           ),
-                          const Icon(Icons.directions_ferry_rounded,
-                              color: Colors.grey),
+                          // const FaIcon(
+                          //   FontAwesomeIcons.ship,
+                          //   size: 20,
+                          //   color: Colors.grey,
+                          // ),
+                          Image.asset(
+                            "assets/images/fethiye-rodos-ferry-tilos.jpg",
+                            width: 32,
+                            height: 32,
+                            fit: BoxFit.fill,
+                          ),
                           Expanded(
                             child: CustomSeperator(
                                 color:
                                     isLightTheme ? Colors.black : Colors.white),
                           ),
-                          const Icon(Icons.anchor, color: Colors.grey),
+                          const FaIcon(
+                            FontAwesomeIcons.anchor,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 5.0),

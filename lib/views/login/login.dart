@@ -4,6 +4,7 @@ import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/login/register.dart';
 import 'package:feribot_lines/widgets/custom_tabs.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -72,8 +73,9 @@ class Login extends StatelessWidget {
                               prefixIcon: const Padding(
                                 padding: EdgeInsetsDirectional.only(
                                     start: 12.0, end: 5.0),
-                                child: Icon(
-                                  Icons.email_rounded,
+                                child: FaIcon(
+                                  FontAwesomeIcons.solidEnvelope,
+                                  size: 20,
                                   color: ColorsConstants.lightAccent,
                                 ),
                               ),
@@ -116,8 +118,9 @@ class Login extends StatelessWidget {
                               prefixIcon: const Padding(
                                 padding: EdgeInsetsDirectional.only(
                                     start: 12.0, end: 5.0),
-                                child: Icon(
-                                  Icons.key,
+                                child: FaIcon(
+                                  FontAwesomeIcons.key,
+                                  size: 20,
                                   color: ColorsConstants.lightAccent,
                                 ),
                               ),
@@ -222,16 +225,15 @@ class Login extends StatelessWidget {
                       ],
                     ),
                     Positioned(
+                      top: Get.size.height * 0.1,
                       left: 0,
-                      top: MediaQuery.of(context).size.height * 0.1,
                       right: 0,
                       child: Container(
                         margin: EdgeInsets.zero,
                         width: 100,
                         height: 100,
-                        child: Icon(
-                          Icons.directions_ferry,
-                          size: 100,
+                        child: Image.asset(
+                          "assets/images/ferry-card-bg.png",
                           color: Colors.white,
                         ),
                       ),

@@ -19,20 +19,73 @@ class PaymentSuccess extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
           child: Column(
             children: <Widget>[
               ticketSuccessfullyCreated(),
-              divierWithTitle(""),
+              dividerWithTitle(""),
               goToMap(context),
-              divierWithTitle("Sefer Bilgileri"),
+              dividerWithTitle("Sefer Bilgileri"),
               tripInformation(),
-              divierWithTitle("İletişim Bilgileri"),
+              dividerWithTitle("İletişim Bilgileri"),
               contactInfo(),
-              divierWithTitle("Yolcu Bilgileri"),
+              dividerWithTitle("Yolcu Bilgileri"),
               passangerInfo(),
-              divierWithTitle("Ödeme Bilgileri"),
+              dividerWithTitle("Ödeme Bilgileri"),
               paymentInfo(),
+              dividerWithTitle("Voucher Gönder"),
+              Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            bottom: 15, left: 10, right: 10),
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: ColorsConstants.success,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Telefonuma",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Get.off(() => AllTickets());
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            bottom: 15, left: 10, right: 10),
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: ColorsConstants.success,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Mail Adresime",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
               const SizedBox(
                 height: 60,
               ),
@@ -135,45 +188,69 @@ class PaymentSuccess extends StatelessWidget {
         child: Column(
           children: [
             row(
-              "Fethiye - Rodos, Gidiş, 1 Yetişkin",
+              "Fethiye - Rodos, Gidiş",
               "30 €",
-              "Adet Fiyatı",
+              "1 Yetişkin",
               "464,06 ₺",
               true,
             ),
             row(
-              "Fethiye - Rodos, Gidiş, 2 Çocuk",
-              "25 €",
-              "Adet Fiyatı",
-              "387,55 ₺",
-              true,
-            ),
-            row(
-              "Fethiye - Rodos, Dönüş, 1 Yetişkin",
-              "30 €",
-              "Adet Fiyatı",
+              "Fethiye - Rodos, Gidiş",
+              "50 €",
+              "1 Minivan",
               "464,06 ₺",
               true,
             ),
             row(
-              "Fethiye - Rodos, Dönüş, 2 Çocuk",
-              "25 €",
-              "Adet Fiyatı",
-              "387,55 ₺",
+              "Fethiye - Rodos, Dönüş",
+              "30 €",
+              "1 Yetişkin",
+              "464,06 ₺",
               true,
             ),
-            row("Toplam Fiyat (€)", "110 €", "", "", true,
-                textColor: ColorsConstants.info,
-                descColor: ColorsConstants.info),
-            row("Toplam Fiyat (₺)", "1705,21 ₺", "", "", true,
-                textColor: ColorsConstants.info,
-                descColor: ColorsConstants.info),
-            row("Taksit Miktarı", "1", "", "", true,
-                textColor: ColorsConstants.info,
-                descColor: ColorsConstants.info),
-            row("Ödenene Miktar", "1705,21 ₺", "", "", true,
-                textColor: ColorsConstants.success,
-                descColor: ColorsConstants.success),
+            row(
+              "Fethiye - Rodos, Dönüş",
+              "50 €",
+              "1 Minivan",
+              "464,06 ₺",
+              true,
+            ),
+            row(
+              "Toplam Fiyat (€)",
+              "110 €",
+              "",
+              "",
+              true,
+              textColor: ColorsConstants.info,
+              descColor: ColorsConstants.info,
+            ),
+            row(
+              "Toplam Fiyat (₺)",
+              "1705,21 ₺",
+              "",
+              "",
+              true,
+              textColor: ColorsConstants.info,
+              descColor: ColorsConstants.info,
+            ),
+            row(
+              "Taksit Miktarı",
+              "1",
+              "",
+              "",
+              true,
+              textColor: ColorsConstants.info,
+              descColor: ColorsConstants.info,
+            ),
+            row(
+              "Ödenen Miktar",
+              "1705,21 ₺",
+              "",
+              "",
+              false,
+              textColor: ColorsConstants.success,
+              descColor: ColorsConstants.success,
+            ),
           ],
         ),
       ),
@@ -397,7 +474,7 @@ class PaymentSuccess extends StatelessWidget {
       backgroundColor: Get.theme.backgroundColor,
       elevation: 4,
       shadowColor: Colors.grey.shade300,
-      title:  Text(
+      title: Text(
         "Bilet Bilgileri",
         style: Constants.themeTitleStyle,
       ),
@@ -418,7 +495,7 @@ class PaymentSuccess extends StatelessWidget {
         ),
         child: const Center(
           child: Text(
-            "Biletlerim",
+            "Tüm Biletlerim",
             style: TextStyle(
                 color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
           ),
@@ -427,7 +504,7 @@ class PaymentSuccess extends StatelessWidget {
     );
   }
 
-  Widget divierWithTitle(String title) {
+  Widget dividerWithTitle(String title) {
     return Column(
       children: [
         const SizedBox(
@@ -461,52 +538,27 @@ class PaymentSuccess extends StatelessWidget {
   Widget tripInformation() {
     return Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: placesWidget("Fethiye", "Rodos"),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 3,
-              child: travelInfo("Fethiye", "Rodos", "1 Saat 25 Dakika",
-                  DateTime.now(), DateTime.now(), "123"),
-            ),
-          ],
-        ),
+        travelInfo("Fethiye", "Rodos", "1 Saat 25 Dakika", DateTime.now(),
+            DateTime.now(), "123"),
         const SizedBox(
           height: 15,
         ),
-        Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: travelInfo("Fethiye", "Rodos", "1 Saat 25 Dakika",
-                  DateTime.now(), DateTime.now(), "123"),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 2,
-              child: placesWidget("Rodos", "Fethiye"),
-            ),
-          ],
-        ),
+        travelInfo("Rodos", "Fethiye", "1 Saat 25 Dakika", DateTime.now(),
+            DateTime.now(), "123"),
       ],
     );
   }
 
   Widget placesWidget(String from, String to) {
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(16),
+      width: Get.size.width - 56,
       color: Get.theme.backgroundColor,
-      child: Column(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Row(
+          Column(
             children: [
               const Icon(Icons.location_on,
                   color: ColorsConstants.lightPrimary),
@@ -516,65 +568,54 @@ class PaymentSuccess extends StatelessWidget {
               ),
             ],
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
+          Row(
             children: [
               Row(
-                children: [
-                  Column(
-                    children: List.generate(
-                      3,
-                      (ii) => Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, top: 5, bottom: 5),
-                        child: Container(
-                          height: 3,
-                          width: 2,
-                          color: Colors.grey,
-                        ),
-                      ),
+                children: List.generate(
+                  3,
+                  (ii) => Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 10, top: 5, bottom: 5),
+                    child: Container(
+                      height: 2,
+                      width: 3,
+                      color: Colors.grey,
                     ),
                   ),
-                ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: const Icon(
+                  Icons.directions_ferry,
+                  color: ColorsConstants.grey,
+                ),
               ),
               Row(
-                children: const [
-                  Icon(
-                    Icons.directions_ferry,
-                    color: ColorsConstants.grey,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Column(
-                    children: List.generate(
-                      3,
-                      (ii) => Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, top: 5, bottom: 5),
-                        child: Container(
-                          height: 3,
-                          width: 2,
-                          color: Colors.grey,
-                        ),
-                      ),
+                children: List.generate(
+                  3,
+                  (ii) => Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 10, top: 5, bottom: 5),
+                    child: Container(
+                      height: 2,
+                      width: 3,
+                      color: Colors.grey,
                     ),
                   ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Icon(Icons.location_on,
-                      color: ColorsConstants.lightAccent),
-                  Text(
-                    to,
-                    style: const TextStyle(color: ColorsConstants.lightAccent),
-                  ),
-                ],
+                ),
               ),
             ],
-          )
+          ),
+          Column(
+            children: [
+              const Icon(Icons.location_on, color: ColorsConstants.lightAccent),
+              Text(
+                to,
+                style: const TextStyle(color: ColorsConstants.lightAccent),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -589,7 +630,7 @@ class PaymentSuccess extends StatelessWidget {
     String ferryNo,
   ) {
     return Container(
-      padding: const EdgeInsets.all(9.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: ColorsConstants.lightBG,
         borderRadius: BorderRadius.circular(15.0),
@@ -600,34 +641,51 @@ class PaymentSuccess extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            from,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
-          ),
-          Text(
-            to,
-            style: TextStyle(fontSize: 20),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                    text: "Yolculuk süresi: ",
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                    )),
-                TextSpan(
-                  text: tripTime,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: ColorsConstants.lightAccent,
+          placesWidget(from, to),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    from,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w500, fontSize: 30),
                   ),
-                ),
-              ],
-            ),
+                  Text(
+                    to,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: "Yolculuk süresi: ",
+                            style: TextStyle(
+                              color: Colors.grey.shade700,
+                            )),
+                        TextSpan(
+                          text: tripTime,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: ColorsConstants.lightAccent,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Image.asset(
+                "assets/images/frame.png",
+                width: Get.size.width * .3,
+                height: Get.size.width * .3,
+              ),
+            ],
           ),
           const SizedBox(
             height: 9.0,

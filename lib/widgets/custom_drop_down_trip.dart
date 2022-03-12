@@ -1,5 +1,6 @@
 import 'package:feribot_lines/utils/colors_const.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomDropDownTrip extends StatelessWidget {
   List<String> items;
@@ -39,8 +40,9 @@ class CustomDropDownTrip extends StatelessWidget {
                 )
                 .toList();
           },
-          icon: Icon(
-            Icons.keyboard_arrow_down_rounded,
+          icon: FaIcon(
+            FontAwesomeIcons.chevronDown,
+            size: 12,
             color: Colors.black,
           ),
           dropdownColor: ColorsConstants.lightPrimary2,

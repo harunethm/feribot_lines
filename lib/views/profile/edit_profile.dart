@@ -1,5 +1,6 @@
 import 'package:feribot_lines/utils/common_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -41,52 +42,24 @@ class EditProfile extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: 120,
-                          height: 120,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 4, color: Colors.white),
-                            boxShadow: [
-                              BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color:
-                                    ColorsConstants.lightBlack.withOpacity(.3),
-                                offset: const Offset(0, 10),
-                              )
-                            ],
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                "assets/images/fethiye-rodos-ferry-tilos.jpg",
-                              ),
-                            ),
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 4, color: Colors.white),
+                        shape: BoxShape.circle,
+                        color: ColorsConstants.lightAccent,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "HÇ",
+                          style: TextStyle(
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                width: 4,
-                                color: Colors.white.withOpacity(0.7),
-                              ),
-                              color: ColorsConstants.lightPrimary,
-                            ),
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -113,13 +86,18 @@ class EditProfile extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-                      MyTextFormField(icon: Icons.person, hint: "Ad"),
-                      MyTextFormField(icon: Icons.person, hint: "Soyad"),
                       MyTextFormField(
-                          icon: Icons.mail_rounded, hint: "E-Posta"),
+                          icon: FontAwesomeIcons.userAlt, hint: "Ad"),
                       MyTextFormField(
-                          icon: Icons.call_rounded, hint: "Telefon Numarası"),
-                      MyTextFormField(icon: Icons.key, hint: "Şifre"),
+                          icon: FontAwesomeIcons.userAlt, hint: "Soyad"),
+                      MyTextFormField(
+                          icon: FontAwesomeIcons.solidEnvelope,
+                          hint: "E-Posta"),
+                      MyTextFormField(
+                          icon: FontAwesomeIcons.phoneAlt,
+                          hint: "Telefon Numarası"),
+                      MyTextFormField(
+                          icon: FontAwesomeIcons.key, hint: "Şifre"),
                       Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Row(
@@ -128,7 +106,7 @@ class EditProfile extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).pop();
+                                Get.back();
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -138,11 +116,9 @@ class EditProfile extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
-                                    color: ColorsConstants
-                                        .danger, //Color of the border
-                                    style:
-                                        BorderStyle.solid, //Style of the border
-                                    width: 1, //width of the border
+                                    color: ColorsConstants.danger,
+                                    style: BorderStyle.solid,
+                                    width: 1,
                                   ),
                                 ),
                                 child: const Text(
@@ -199,7 +175,7 @@ class MyTextFormField extends StatelessWidget {
   IconData icon;
   MyTextFormField({
     this.hint = "",
-    this.icon = Icons.person,
+    this.icon = FontAwesomeIcons.userAlt,
     Key? key,
   }) : super(key: key);
   @override
@@ -227,7 +203,8 @@ class MyTextFormField extends StatelessWidget {
               ),
               prefixIcon: Icon(
                 icon,
-                color: Colors.grey,
+                size: 20,
+                color: ColorsConstants.lightAccent,
               ),
             ),
           ),

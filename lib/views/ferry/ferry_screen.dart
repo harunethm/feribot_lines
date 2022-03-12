@@ -1,5 +1,6 @@
 import 'package:feribot_lines/viewModels/tab_controller_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -35,12 +36,15 @@ class FerryScreen extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           actions: [
-            IconButton(
-              icon: const Icon(Icons.person),
-              iconSize: 32,
-              onPressed: () {
-                CommonFunctions.openProfile();
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: const FaIcon(FontAwesomeIcons.userAlt),
+                iconSize: 28,
+                onPressed: () {
+                  CommonFunctions.openProfile();
+                },
+              ),
             ),
           ],
           backgroundColor: Colors.transparent,
@@ -81,12 +85,12 @@ class FerryScreen extends StatelessWidget {
                         //   color: Colors.grey,
                         // ),
                         Obx(
-                          () => Icon(
-                            Icons.directions_ferry_rounded,
-                            size: 20,
+                          () => FaIcon(
+                            FontAwesomeIcons.ship,
+                            size: 16,
                             color: isOneWay.value
-                                ? ColorsConstants.lightPrimary
-                                : ColorsConstants.lightAccent,
+                                ? ColorsConstants.lightAccent
+                                : ColorsConstants.lightPrimary,
                           ),
                         ),
                         const SizedBox(
@@ -143,10 +147,10 @@ class FerryScreen extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: isOneWay.value
-                                          ? Icon(
-                                              Icons.arrow_downward_rounded,
+                                          ? FaIcon(
+                                              FontAwesomeIcons.arrowDown,
                                               color: Colors.white,
-                                              size: 15,
+                                              size: 12,
                                             )
                                           : Image.asset(
                                               strSortIcon,
@@ -165,6 +169,9 @@ class FerryScreen extends StatelessWidget {
                           child: InkWell(
                             onTap: () {
                               isOneWay.value = !isOneWay.value;
+                              isOneWay.value
+                                  ? isOpenReturn.value = false
+                                  : null;
                             },
                             child: Obx(
                               () => Column(
@@ -197,12 +204,12 @@ class FerryScreen extends StatelessWidget {
                         //   color: Colors.grey,
                         // ),
                         Obx(
-                          () => Icon(
-                            Icons.directions_ferry_rounded,
-                            size: 20,
+                          () => FaIcon(
+                            FontAwesomeIcons.ship,
+                            size: 16,
                             color: isOneWay.value
-                                ? ColorsConstants.lightPrimary
-                                : ColorsConstants.lightAccent,
+                                ? ColorsConstants.lightAccent
+                                : ColorsConstants.lightPrimary,
                           ),
                         ),
                         const SizedBox(
@@ -267,12 +274,15 @@ class FerryScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                               ),
-                              activeColor: ColorsConstants.lightAccent,
-                              onChanged: !isOneWay.value
-                                  ? (val) {
-                                      isOpenReturn.value = val!;
-                                    }
-                                  : null,
+                              activeColor: isOneWay.value
+                                  ? Colors.grey
+                                  : ColorsConstants.lightAccent,
+                              onChanged: (val) {
+                                if (isOneWay.value) {
+                                  isOneWay.value = !isOneWay.value;
+                                }
+                                isOpenReturn.value = val!;
+                              },
                               visualDensity: VisualDensity(
                                 horizontal: VisualDensity.minimumDensity,
                                 vertical: VisualDensity.minimumDensity,
@@ -286,12 +296,15 @@ class FerryScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Açık Dönüş",
-                              style: TextStyle(
+                            Obx(
+                              () => Text(
+                                Strings.openReturn,
+                                style: TextStyle(
                                   color: isOneWay.value
                                       ? Colors.grey
-                                      : Colors.black),
+                                      : Colors.black,
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -332,8 +345,9 @@ class FerryScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Icon(
-                            Icons.person,
+                          FaIcon(
+                            FontAwesomeIcons.userAlt,
+                            size: 16,
                             color: ColorsConstants.lightPrimary,
                           ),
                           Text(
@@ -344,8 +358,9 @@ class FerryScreen extends StatelessWidget {
                             ),
                           ),
                           Center(
-                            child: Icon(
-                              Icons.keyboard_arrow_down_rounded,
+                            child: FaIcon(
+                              FontAwesomeIcons.chevronDown,
+                              size: 16,
                               color: ColorsConstants.grey,
                             ),
                           ),
@@ -421,15 +436,15 @@ class FerryScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: customPassangerCountsDropDown(
-                          Icons.person, "Yetişkin", " (12+ Yaş)"),
+                          FontAwesomeIcons.userAlt, "Yetişkin", " (12+ Yaş)"),
                     ),
                     Expanded(
                       child: customPassangerCountsDropDown(
-                          Icons.child_care, "Çocuk", " (6-12 Yaş)"),
+                          FontAwesomeIcons.child, "Çocuk", " (6-12 Yaş)"),
                     ),
                     Expanded(
                       child: customPassangerCountsDropDown(
-                          Icons.child_friendly, "Bebek", " (0-6 Yaş)"),
+                          FontAwesomeIcons.babyCarriage, "Bebek", " (0-6 Yaş)"),
                     ),
                   ],
                 ),
@@ -443,7 +458,7 @@ class FerryScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: customPassangerCountsDropDown(
-                        Icons.drive_eta_rounded,
+                        FontAwesomeIcons.car,
                         "Araç Türü",
                         "",
                         items: [
@@ -458,7 +473,10 @@ class FerryScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: customPassangerCountsDropDown(
-                          Icons.drive_eta_rounded, "Araç Sayısı", ""),
+                        FontAwesomeIcons.car,
+                        "Araç Sayısı",
+                        "",
+                      ),
                     ),
                   ],
                 ),
@@ -481,8 +499,9 @@ class FerryScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            FaIcon(
               icon,
+              size: 16,
               color: ColorsConstants.lightPrimary,
             ),
             Column(
@@ -516,8 +535,9 @@ class FerryScreen extends StatelessWidget {
                 height: 1,
                 color: ColorsConstants.dividerColor,
               ),
-              icon: Icon(
-                Icons.keyboard_arrow_down_rounded,
+              icon: FaIcon(
+                FontAwesomeIcons.chevronDown,
+                size: 12,
                 color: ColorsConstants.grey,
               ),
               items: (items != null && items.isNotEmpty
@@ -548,26 +568,22 @@ class FerryScreen extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (disabled) {
-          isOneWay.value = !isOneWay.value;
-        } else {
-          showDatePicker(
-            locale: const Locale("tr", "TR"),
-            context: Get.context!,
-            initialEntryMode: DatePickerEntryMode.calendarOnly,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2000, 1, 1),
-            lastDate: DateTime(2024, 1, 1),
-            cancelText: Strings.cancel,
-            confirmText: Strings.select,
-            currentDate: DateTime.now(),
-            helpText: "Tarih Seçin",
-            errorFormatText:
-                "Tarih doğru formatta girilmedi. Tavsiye edilen tarih formatı \"01/01/2000\"",
-            errorInvalidText: "Tarih geçerli değil.",
-            fieldHintText: "01/01/2000",
-            fieldLabelText: "",
-          );
+          isOneWay.value = false;
+          isOpenReturn.value = false;
         }
+
+        showDatePicker(
+          locale: const Locale("tr", "TR"),
+          context: Get.context!,
+          initialEntryMode: DatePickerEntryMode.calendarOnly,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2000, 1, 1),
+          lastDate: DateTime(2024, 1, 1),
+          cancelText: Strings.cancel,
+          confirmText: Strings.select,
+          currentDate: DateTime.now(),
+          helpText: "Tarih Seçin",
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -579,9 +595,9 @@ class FerryScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Icon(
-                    Icons.calendar_today,
-                    size: 20,
+                  FaIcon(
+                    FontAwesomeIcons.calendarDay,
+                    size: 16,
                     color:
                         disabled ? Colors.grey : ColorsConstants.lightPrimary,
                   ),
@@ -595,9 +611,9 @@ class FerryScreen extends StatelessWidget {
                           : Get.theme.textTheme.bodyText1!.color,
                     ),
                   ),
-                  Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 20,
+                  FaIcon(
+                    FontAwesomeIcons.chevronDown,
+                    size: 12,
                     color: disabled ? Colors.grey : Colors.black,
                   ),
                 ],

@@ -661,6 +661,38 @@ class FerryInformation extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: InkWell(
+                  onTap: () {
+                    Get.to(
+                      () => Payment(),
+                      duration: Duration(milliseconds: 300),
+                      transition: Transition.rightToLeft,
+                    );
+                  },
+                  child: Container(
+                    margin:
+                        const EdgeInsets.only(bottom: 10, right: 15, left: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: ColorsConstants.lightPrimary),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: Center(
+                      child: Text(
+                        Strings.continueText,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:feribot_lines/viewModels/ferry/ferrt_services_vm.dart';
 import 'package:feribot_lines/viewModels/tab_controller_vm.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,10 @@ class FerryServices extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person),
+            icon: const FaIcon(
+              FontAwesomeIcons.userAlt,
+              size: 20,
+            ),
             onPressed: () {
               CommonFunctions.openProfile();
             },
@@ -106,7 +110,7 @@ class FerryServices extends StatelessWidget {
                   CustomDropDown(
                     items: [
                       'Fiyat',
-                      'Sefer Süresi,',
+                      'Sefer Süresi',
                       'Varış Saati',
                       'Kalkış Saati',
                     ],
@@ -126,8 +130,8 @@ class FerryServices extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  personIcon(Icons.person_outline_rounded, 2),
-                  personIcon(Icons.drive_eta_rounded, 1),
+                  personIcon(FontAwesomeIcons.user, 2),
+                  personIcon(FontAwesomeIcons.car, 1),
                 ],
               )
             ],
@@ -141,19 +145,20 @@ class FerryServices extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-          height: 40.0,
-          width: 40.0,
           decoration: BoxDecoration(
             // color: ColorsConstants.lightPrimary.withAlpha(40),
             borderRadius: BorderRadius.circular(20.0),
           ),
-          child: Icon(
+          padding: const EdgeInsets.all(8),
+          child: FaIcon(
             icon,
+            size: 20,
             color: Colors.white,
           ),
         ),
         Positioned(
-          left: 20.0,
+          right: 0,
+          top: 0,
           child: Container(
             height: 16.0,
             width: 16.0,

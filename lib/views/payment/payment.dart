@@ -5,6 +5,7 @@ import 'package:feribot_lines/views/payment/payment_success.dart';
 import 'package:feribot_lines/views/profile/ticket_details.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -58,13 +59,13 @@ class Payment extends StatelessWidget {
                               CustomTextFormField(
                                 "Kart Üzerindeki Ad Soyad",
                                 "İsim Soyisim",
-                                Icons.credit_card,
+                                FontAwesomeIcons.creditCard,
                                 TextInputType.number,
                               ),
                               CustomTextFormField(
                                 "Kart Numarası",
                                 "Kart Numarası",
-                                Icons.credit_card,
+                                FontAwesomeIcons.creditCard,
                                 TextInputType.number,
                               ),
                               Column(
@@ -133,7 +134,7 @@ class Payment extends StatelessWidget {
                                     child: CustomTextFormField(
                                       "CVC",
                                       "CVC",
-                                      Icons.credit_card,
+                                      FontAwesomeIcons.creditCard,
                                       TextInputType.number,
                                     ),
                                   ),
@@ -235,8 +236,9 @@ class Payment extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Icon(
-                            Icons.shield_sharp,
+                          FaIcon(
+                            FontAwesomeIcons.shieldAlt,
+                            size: 20,
                             color: Colors.white,
                           ),
                           Text(
@@ -246,8 +248,9 @@ class Payment extends StatelessWidget {
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Icon(
-                            Icons.chevron_right,
+                          FaIcon(
+                            FontAwesomeIcons.chevronRight,
+                            size: 20,
                             color: Colors.white,
                           ),
                         ],
