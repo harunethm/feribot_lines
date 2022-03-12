@@ -61,7 +61,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
           animation: animationController!,
           builder: (BuildContext context, Widget? child) {
             return AnimatedOpacity(
-              duration: const Duration(milliseconds: 100),
+              duration: const Duration(milliseconds: 300),
               opacity: animationController!.value,
               child: InkWell(
                 splashColor: Colors.transparent,

@@ -1,4 +1,5 @@
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
+import 'package:feribot_lines/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -205,7 +206,8 @@ class Register extends StatelessWidget {
                             onTap: () {
                               Get.to(
                                 () => FerryScreen(),
-                                duration: const Duration(milliseconds: 800),
+                                duration: Duration(milliseconds: 300),
+                                transition: Transition.rightToLeft,
                               );
                             },
                             child: Container(
@@ -248,7 +250,13 @@ class Register extends StatelessWidget {
                                   TextStyle(color: ColorsConstants.lightAccent),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(
+                                  () => Login(),
+                                  duration: Duration(milliseconds: 300),
+                                  transition: Transition.rightToLeft,
+                                );
+                              },
                               child: Text(
                                 Strings.signIn,
                                 style: TextStyle(
@@ -267,14 +275,15 @@ class Register extends StatelessWidget {
                       top: Get.size.height * 0.1,
                       right: 0,
                       child: Container(
-                          margin: EdgeInsets.zero,
-                          width: 100,
-                          height: 100,
-                          child: Icon(
-                            Icons.directions_ferry,
-                            color: Colors.white,
-                            size: 100,
-                          )),
+                        margin: EdgeInsets.zero,
+                        width: 100,
+                        height: 100,
+                        child: Icon(
+                          Icons.directions_ferry,
+                          color: Colors.white,
+                          size: 100,
+                        ),
+                      ),
                     ),
                   ],
                 ),

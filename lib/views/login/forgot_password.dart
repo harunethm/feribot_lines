@@ -126,6 +126,8 @@ class ForgotPassword extends StatelessWidget {
                           onPressed: () => {
                             Get.to(
                               () => Login(),
+                              duration: Duration(milliseconds: 300),
+                              transition: Transition.rightToLeft,
                             ),
                           },
                           clipBehavior: Clip.hardEdge,

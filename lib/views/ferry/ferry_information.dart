@@ -1,3 +1,4 @@
+import 'package:feribot_lines/views/payment/payment_success.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,6 @@ import '../../utils/colors_const.dart';
 import '../../utils/common_functions.dart';
 import '../../utils/const.dart';
 import '../../utils/strings.dart';
-import '../../widgets/custom_tabs.dart';
 import '../../widgets/custom_text_form_field.dart';
 import '../payment/payment.dart';
 
@@ -16,6 +16,12 @@ class FerryInformation extends StatelessWidget {
   FerryInformation({Key? key}) : super(key: key);
 
   RxBool checkBoxValue = true.obs;
+
+  PageController _pageController =
+      PageController(initialPage: 0, keepPage: true);
+
+  RxInt currentPage = 0.obs;
+
   @override
   Widget build(BuildContext context) {
     bool isLightTheme = CommonFunctions.isLightTheme();
@@ -582,113 +588,75 @@ class FerryInformation extends StatelessWidget {
                   child: Padding(
                     padding:
                         const EdgeInsets.only(top: 20, left: 10, right: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const Text(
-                          "Bilet Bilgileri",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: CustomTabs(
-                            tabs: const [
-                              "İletişim\nBilgileri",
-                              "Yetişkin 1",
-                              "Yetişkin 2",
-                              "Çocuk 1",
-                              "Çocuk 2",
-                              "Araç",
-                            ],
-                            activeTab: 0,
-                            selectedBGColor: ColorsConstants.lightAccent,
-                            selectedTextColor: Colors.white,
-                            unSelectedTextColor: ColorsConstants.lightPrimary,
-                            borderColor: ColorsConstants.lightPrimary,
-                            padding: 60,
-                          ),
-                        ),
-                        const CustomTextFormField(
-                          "Ad",
-                          "Adınız",
-                          Icons.person,
-                          TextInputType.name,
-                        ),
-                        const CustomTextFormField(
-                          "Soyad",
-                          "Soyadınız",
-                          Icons.person,
-                          TextInputType.name,
-                        ),
-                        const CustomTextFormField(
-                          "Telefon",
-                          "Telefon Numaranız",
-                          Icons.phone,
-                          TextInputType.phone,
-                        ),
-                        const CustomTextFormField(
-                          "E-Mail",
-                          "Mail Adresiniz",
-                          Icons.mail,
-                          TextInputType.emailAddress,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            "Sefer ve bilet bilgilerinizi e-posta ve ücretsiz SMS yoluyla ileteceğiz.",
-                            style: TextStyle(
-                              color: Colors.grey.shade700,
-                              fontSize: 12,
+                    child: Container(
+                      height: Get.size.height * .8,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 16.0),
+                            child: Text(
+                              "Bilet Bilgileri",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            Obx(
-                              () => Checkbox(
-                                checkColor: ColorsConstants.lightWhite,
-                                activeColor: ColorsConstants.lightAccent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                                value: checkBoxValue.value,
-                                onChanged: (bool? value) {
-                                  checkBoxValue.value = value!;
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _pageController.previousPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeIn);
                                 },
+                                icon: Icon(Icons.chevron_left_rounded),
                               ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                'Feribotlines bana bilgilendirme ve tanıtım amaçlı eposta ve SMS mesajları gönderebilir.',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.grey.shade800,
-                                ),
+                              Obx(() => currentPage == 0
+                                  ? Text("İletişim Bilgileri")
+                                  : currentPage == 1
+                                      ? Text("Yetişkin 1")
+                                      : currentPage == 2
+                                          ? Text("Yetişkin 2")
+                                          : currentPage == 3
+                                              ? Text("Çocuk 1")
+                                              : Text("Araç Bilgileri")),
+                              IconButton(
+                                onPressed: () {
+                                  _pageController.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeIn);
+                                },
+                                icon: Icon(Icons.chevron_right_rounded),
                               ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Expanded(
+                            child: PageView(
+                              onPageChanged: (curr) {
+                                currentPage.value = curr;
+                              },
+                              controller: _pageController,
+                              children: [
+                                contactInfoPage(),
+                                contactInfoPage(),
+                                contactInfoPage(),
+                                contactInfoPage(),
+                                contactInfoPage(),
+                              ],
                             ),
-                            // Text(
-                            //   "(Zorunlu Değil)",
-                            //   style: TextStyle(
-                            //     color: Colors.grey.shade600,
-                            //     fontSize: 12,
-                            //   ),
-                            // )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        )
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -745,6 +713,8 @@ class FerryInformation extends StatelessWidget {
                   onTap: () {
                     Get.to(
                       () => Payment(),
+                      duration: Duration(milliseconds: 300),
+                      transition: Transition.rightToLeft,
                     );
                   },
                   child: Container(
@@ -773,6 +743,82 @@ class FerryInformation extends StatelessWidget {
     );
   }
 
+  Widget contactInfoPage() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextFormField(
+            "Ad",
+            "Adınız",
+            Icons.person,
+            TextInputType.name,
+          ),
+          const CustomTextFormField(
+            "Soyad",
+            "Soyadınız",
+            Icons.person,
+            TextInputType.name,
+          ),
+          const CustomTextFormField(
+            "Telefon",
+            "Telefon Numaranız",
+            Icons.phone,
+            TextInputType.phone,
+          ),
+          const CustomTextFormField(
+            "E-Mail",
+            "Mail Adresiniz",
+            Icons.mail,
+            TextInputType.emailAddress,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              "Sefer ve bilet bilgilerinizi e-posta ve ücretsiz SMS yoluyla ileteceğiz.",
+              style: TextStyle(
+                color: Colors.grey.shade700,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Obx(
+                () => Checkbox(
+                  checkColor: ColorsConstants.lightWhite,
+                  activeColor: ColorsConstants.lightAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  value: checkBoxValue.value,
+                  onChanged: (bool? value) {
+                    checkBoxValue.value = value!;
+                  },
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  'Feribotlines bana bilgilendirme ve tanıtım amaçlı eposta ve SMS mesajları gönderebilir.',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey.shade800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Row tourInfo(
     DateTime depertureTime,
     String departurePortName,
@@ -781,7 +827,6 @@ class FerryInformation extends StatelessWidget {
     String directionText,
   ) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
@@ -789,28 +834,24 @@ class FerryInformation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
+              Text(
+                "${departurePortName}",
+                textAlign: TextAlign.start,
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 3),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "${departurePortName}",
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700),
+                    "${Strings.departure}: ",
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
-                  const SizedBox(height: 3),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${Strings.departure}: ",
-                        style:
-                            const TextStyle(color: Colors.grey, fontSize: 14),
-                      ),
-                      Text(
-                        "${depertureTime.hour.toString().padLeft(2, "0")}:${depertureTime.minute.toString().padLeft(2, "0")}",
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ],
+                  Text(
+                    "${depertureTime.hour.toString().padLeft(2, "0")}:${depertureTime.minute.toString().padLeft(2, "0")}",
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),

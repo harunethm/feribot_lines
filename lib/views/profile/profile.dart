@@ -1,4 +1,5 @@
 import 'package:feribot_lines/views/Login/login.dart';
+import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/profile/all_tickets.dart';
 import 'package:feribot_lines/views/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
@@ -183,7 +184,11 @@ class Profile extends StatelessWidget {
           icon: Icons.edit_note_rounded,
           suffix: const Icon(Icons.chevron_right),
           onTap: () {
-            Get.to(() => EditProfile());
+            Get.to(
+              () => EditProfile(),
+              duration: Duration(milliseconds: 300),
+              transition: Transition.rightToLeft,
+            );
           }),
       ProfileMenuModel(
           title: Strings.myTickets,
@@ -192,7 +197,11 @@ class Profile extends StatelessWidget {
           icon: Icons.confirmation_number_sharp,
           suffix: const Icon(Icons.chevron_right),
           onTap: () {
-            Get.to(() => AllTickets());
+            Get.to(
+              () => AllTickets(),
+              duration: Duration(milliseconds: 300),
+              transition: Transition.rightToLeft,
+            );
           }),
       ProfileMenuModel(
           title: Strings.notifications,
@@ -201,7 +210,11 @@ class Profile extends StatelessWidget {
           icon: Icons.notifications,
           suffix: const Icon(Icons.chevron_right),
           onTap: () {
-            Get.to(() => NotificationsPage());
+            Get.to(
+              () => NotificationsPage(),
+              duration: Duration(milliseconds: 300),
+              transition: Transition.rightToLeft,
+            );
           }),
       ProfileMenuModel(
           title: Strings.logout,
@@ -209,7 +222,11 @@ class Profile extends StatelessWidget {
           iconColor: ColorsConstants.profileColor5,
           icon: Icons.logout,
           onTap: () {
-            Get.to(() => Login());
+            Get.to(
+              () => Login(),
+              duration: Duration(milliseconds: 300),
+              transition: Transition.rightToLeft,
+            );
           }),
     ];
     return Column(

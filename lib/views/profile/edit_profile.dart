@@ -120,7 +120,6 @@ class EditProfile extends StatelessWidget {
                       MyTextFormField(
                           icon: Icons.call_rounded, hint: "Telefon Numarası"),
                       MyTextFormField(icon: Icons.key, hint: "Şifre"),
-                      MyTextFormField(icon: Icons.key, hint: "Şifre Tekrar"),
                       Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Row(

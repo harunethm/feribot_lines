@@ -141,6 +141,7 @@ class Strings {
   static String cancelPolicy =
       "Cancellation & Property Booking Policies"; // TODO Çeviri Yapılacak
   static String continueText = "Devam Et";
+  static String searchTrip = "Sefer Ara";
   static String oneWay = "Tek Yön";
   static String twoWay = "Gidiş-Dönüş";
   // static String london = "London...";

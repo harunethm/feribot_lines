@@ -174,7 +174,7 @@ class FerryTicket extends StatelessWidget {
                 right: 0,
 
                 child: Container(
-                  margin: const EdgeInsets.only(right: 3, top: 3),
+                  margin: const EdgeInsets.only(right: 4, top: 4),
                   decoration: BoxDecoration(
                     color: ColorsConstants.lightAccent,
                     borderRadius: const BorderRadius.only(
@@ -222,7 +222,11 @@ class FerryTicket extends StatelessWidget {
                 right: 0,
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(() => FerryInformation());
+                    Get.to(
+                      () => FerryInformation(),
+                      duration: Duration(milliseconds: 300),
+                      transition: Transition.rightToLeft,
+                    );
                   },
                   child: Container(
                     margin: const EdgeInsets.only(right: 3, top: 3),

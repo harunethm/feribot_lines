@@ -29,7 +29,11 @@ class AllTickets extends StatelessWidget {
                 TicketModel model = ticketModelList[index];
                 return InkWell(
                   onTap: () {
-                    Get.to(() => TicketDetails());
+                    Get.to(
+                      () => TicketDetails(),
+                      duration: Duration(milliseconds: 300),
+                      transition: Transition.rightToLeft,
+                    );
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10),

@@ -1,3 +1,5 @@
+import 'package:feribot_lines/viewModels/ferry/ferrt_services_vm.dart';
+import 'package:feribot_lines/viewModels/tab_controller_vm.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -11,15 +13,17 @@ import '../Login/login.dart';
 import '../profile/profile.dart';
 
 class FerryServices extends StatelessWidget {
-  final List<String> tabs;
-
-  const FerryServices({
+  FerryServices({
     Key? key,
-    this.tabs = const ["Gidiş", "Dönüş"],
   }) : super(key: key);
+
+  FerryServicesVM _vm = Get.put(FerryServicesVM());
+
+  CustomTabController tabController = Get.find(tag: "ferryScreen");
 
   @override
   Widget build(BuildContext context) {
+    _vm.init();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
@@ -57,8 +61,23 @@ class FerryServices extends StatelessWidget {
               const SizedBox(height: 10.0),
               sortingDetails(),
               const SizedBox(height: 20.0),
-              CustomTabs(tabs: tabs),
-              const FerryTickets()
+              CustomTabs(
+                onChange: () {},
+                controllerTag: "ferryScreen",
+              ),
+              Expanded(
+                child: PageView(
+                  physics: const ClampingScrollPhysics(),
+                  controller: tabController.pageController,
+                  onPageChanged: (int page) {
+                    tabController.activeTab(page);
+                  },
+                  children: [
+                    FerryTickets(),
+                    FerryTickets(),
+                  ],
+                ),
+              ),
             ],
           )
         ],
@@ -162,117 +181,115 @@ class FerryTickets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        padding: const EdgeInsets.all(0),
-        shrinkWrap: true,
-        children: const <Widget>[
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: false,
-          ),
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: true,
-          ),
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: false,
-          ),
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: false,
-          ),
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: false,
-          ),
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: false,
-          ),
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: false,
-          ),
-          FerryTicket(
-            price: 634,
-            originCode: 'FETHİYE',
-            destinationCode: 'RODOS',
-            departureTime: '14:55',
-            departureDate: 'Pt 06 Haz',
-            arrivalTime: '20:20',
-            arrivalDate: 'Pt 06 Haz',
-            totalTime: '13 saat 25 dakika',
-            companyName: "Şirket Adı",
-            ferryName: "Feribot Adı",
-            isSelected: false,
-          ),
-        ],
-      ),
+    return ListView(
+      padding: const EdgeInsets.all(0),
+      shrinkWrap: true,
+      children: const <Widget>[
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: false,
+        ),
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: true,
+        ),
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: false,
+        ),
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: false,
+        ),
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: false,
+        ),
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: false,
+        ),
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: false,
+        ),
+        FerryTicket(
+          price: 634,
+          originCode: 'FETHİYE',
+          destinationCode: 'RODOS',
+          departureTime: '14:55',
+          departureDate: 'Pt 06 Haz',
+          arrivalTime: '20:20',
+          arrivalDate: 'Pt 06 Haz',
+          totalTime: '13 saat 25 dakika',
+          companyName: "Şirket Adı",
+          ferryName: "Feribot Adı",
+          isSelected: false,
+        ),
+      ],
     );
   }
 }

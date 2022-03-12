@@ -1,3 +1,4 @@
+import 'package:feribot_lines/utils/common_functions.dart';
 import 'package:feribot_lines/views/Login/forgot_password.dart';
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/login/register.dart';
@@ -38,15 +39,25 @@ class Login extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(
+                        //       horizontal: 32.0, vertical: 16),
+                        //   child: CustomTabs(
+                        //     tabs: ["E-Posta", "Telefon Numarası"],
+                        //     padding: 64,
+                        //     borderColor: Colors.grey,
+                        //     selectedBGColor: ColorsConstants.lightPrimary,
+                        //     unSelectedTextColor: ColorsConstants.lightPrimary,
+                        //   ),
+                        // ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
                               horizontal: 32.0, vertical: 16),
-                          child: CustomTabs(
-                            tabs: ["E-Posta", "Telefon Numarası"],
-                            padding: 64,
-                            borderColor: Colors.grey,
-                            selectedBGColor: ColorsConstants.lightPrimary,
-                            unSelectedTextColor: ColorsConstants.lightPrimary,
+                          child: Center(
+                            child: Text(
+                              "ÜYE GİRİŞİ",
+                              style: titleStyle,
+                            ),
                           ),
                         ),
                         Padding(
@@ -166,6 +177,8 @@ class Login extends StatelessWidget {
                           onPressed: () => {
                             Get.to(
                               () => ForgotPassword(),
+                              duration: Duration(milliseconds: 300),
+                              transition: Transition.rightToLeft,
                             ),
                           },
                           child: Text(
@@ -189,7 +202,11 @@ class Login extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                Get.to(Register());
+                                Get.to(
+                                  () => Register(),
+                                  duration: Duration(milliseconds: 300),
+                                  transition: Transition.rightToLeft,
+                                );
                               },
                               child: Text(
                                 "Hemen Kaydol",

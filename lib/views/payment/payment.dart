@@ -256,7 +256,11 @@ class Payment extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Get.to(() => PaymentSuccess());
+                    Get.to(
+                      () => PaymentSuccess(),
+                      duration: Duration(milliseconds: 300),
+                      transition: Transition.rightToLeft,
+                    );
                   },
                 ),
               )

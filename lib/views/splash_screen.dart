@@ -1,4 +1,3 @@
-import 'package:feribot_lines/views/_test_screen.dart';
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

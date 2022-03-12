@@ -10,7 +10,6 @@ import 'const.dart';
 class CommonFunctions {
   static String apiKey = "AIzaSyDr4aP_rczqVSLo86cMdinyPs-tIFlh9AE";
 
-
   // static TextStyle titleStyle =
   //     const TextStyle(letterSpacing: 1.2, fontSize: 20);
   // static TextStyle themeSubTitleStyle = const TextStyle(
@@ -25,9 +24,17 @@ class CommonFunctions {
 
   static void openProfile() {
     if (CommonFunctions.isUserLogined()) {
-      Get.to(() => Profile());
+      Get.to(
+        () => Profile(),
+        duration: Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
     } else {
-      Get.offAll(() => Login());
+      Get.offAll(
+        () => Login(),
+        duration: Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
     }
   }
 
