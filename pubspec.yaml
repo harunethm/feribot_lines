@@ -48,7 +48,12 @@ dependencies:
 
   # for better icons
   font_awesome_flutter: ^9.2.0
+
+  # extendable card
   expansion_tile_card: ^2.0.0
+
+  # responsive button grid
+  responsive_grid_list: ^1.2.4
 
   # for better card vision
   # awesome_card: ^1.1.7

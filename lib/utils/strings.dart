@@ -37,8 +37,31 @@ class Strings {
   static String adultsChildren = "Yetişkinler &\nÇocuklar &\nAraçlar";
   static String infoTitle = "Bilgilendirme";
   static String cancelIn = "Son 6 saate kadar ücretsiz iptal hakkı.";
-  static String cancelFees =
-      "23 Haziran 11:59' a kadar ücretsiz iptal ettirebilirsiniz.";
+  static String tripRulesButton = "Sefer kurallarını okumak için tıklayınız.";
+  static String tripRules =
+      "Voucherınız biniş kartı yerine geçmez. Sefer günü feribot firmasının kalkış limanındaki kiosk/ofis’inden pasaportunuz ile chek-in yapmanız ve biniş kartınızı almanız gerekmektedir.\n\n"
+      "Pasaportunuzun seyahat bitiş tarihi itibari ile en az 90 gün geçerliliği olmak zorundadır. 10 yıldan daha eski pasaportlarla Yunanistan'a giriş izini verilmemektedir (geçerlilik süresi uygun olsa dahi).\n\n"
+      "Bordo pasaport sahiplerinin Yunanistan’a seyahat edebilmesi için geçerli bir Schengen vizesi olması veya kapı vizesi başvurusunu yapmış olması gerekmektedir. Yeşil pasaport sahipleri vizesiz seyahat edebilmektedir.\n\n"
+      "Sefer saatinden en az 1 saat önce kalkış limanında olmanız önerilmektedir. Check-in işlemleri 30 dakika önce sona erer. Yolcu, sefer kalkış saatinden 10 dakika önce, tüm gümrük işlerini bitirmiş, yolculuğa hazır olarak gemi içerisinde bulunmak zorundadır.\n\n"
+      "Check-in işlemi yapılmış biletin kaybedilmesi halinde yeni bilet satın alınması zorunludur.\n\n"
+      "Yurt dışı çıkış harçlarınızı limana gelmeden önce banka şubelerinden pasaport bilgilerinizi vererek yatırabilir ve dekontu yanınızda getirebilirsiniz.\n\n"
+      "Yunan Adalarının birçoğunda döviz bürosu bulunmamakta, bulunanlarda ise TL’den Euro’ya çevirme işleminde yüksek kur kaybı yaşanabilmektedir. Yanınızda Euro getirmenizi önermekteyiz. Alışverişinizi Euro ve kredi kartı ile yapabilirsiniz.\n\n"
+      "Pasaportunda Kıbrıs kaşesi olan yolcular, Türkiye’ye Kıbrıs pasaportu ile giriş yapmamış Kıbrıs vatandaşları, pasaportunda doğum yeri KKTC veya Rodos yazan kişiler Yunanistan’a giriş yapamazlar.\n\n"
+      "Yolcu bileti satın alarak seyahati için gerekli belgelerinin eksiksiz olduğunu beyan etmiş ve sorumluluğu kabul etmiş olur. Geçerli pasaport, vize ve gümrük işlemlerinin eksiksizliği yolcunun sorumluluğundadır.\n\n"
+      "Araçlı yolcular, araçları başkasının adına kayıtlı ise noter vekâletnamesini; imza yetkilisi olduğu şirket adına kayıtlı ise şirket imza sirkülerini getirmek zorundadır.\n\n"
+      "Araçlı yolcular, araçlarına ''Yeşil Sigorta’’ yaptırması gerekmektedir\n\n"
+      "Olağanüstü haller ve feribot firmasından kaynaklanan nedenlerden dolayı planlanan sefer süresinin aşılması durumunda, bilet iptal veya iade yapılmaz.\n\n"
+      "Feribotlines ve feribot firması önceden haber vermeksizin ücret, tarife, sefer gün ve saatlerinde değişiklik yapma hakkını kendisinde saklı tutar.\n\n"
+      "\nÜlkeye Giriş Koşulları:\n\n"
+      "- 5 yaşından büyük yolcuların Yunanistan'a giriş yapabilmesi için Covid-19 sebebiyle aşağıdakilerden birini sunması gerekmektedir; \n\n"
+      "- En az iki doz aşı olduğunu belgeleyen aşı sertifikası (son dozun üzerinden en az 14 gün geçmiş olmalıdır ve hatırlatma dozu yaptırılmadığı takdirde, son dozun yaptırıldığı tarihten itibaren dokuz (9) aya kadar geçerlidir.) veya,\n\n"
+      "- PCR veya hızlı antijen testi sonucunda alınan hastalık sertifikası (Sertifikalar ilk pozitif test sonucundan 14 gün sonra düzenlenmelidir ve o tarihten itibaren 180 gün geçerlidir) veya,\n\n"
+      "- Geçerli aşı sertifikasına sahip olunmadığı takdirde Yunanistan’a girişten önce son 72 saat içinde yaptırılmış negatif PCR ya da son 24 saat içinde yaptırılmış negatif hızlı antijen test sonucu ibraz etmesi gereklidir.\n\n"
+      "- Kabul edilen aşılar; Pfizer Biontech, Sinovac, Moderna, Astra Zeneca/Oxford, Novavax, Johnson Johnson/Janssen, Sputnik, Cansino Biologics, Sinopharm.\n\n"
+      "- Tüm sertifikalarda doz sayısı ve ilgili tarihleri gibi kritik bilgiler İngilizce, Almanca, Fransızca, İtalyanca, İspanyolca, Rusça dillerinden birinde olmalıdır.\n\n"
+      "- Yunanistan'a seyahatten en fazla  1 hafta önce tüm yolcular için www.travel.gov.gr adresinden Yolcu Bulucu Formu (PLF) doldurulmalıdır.\n\n"
+      "- Kişiler Yunanistan'a varışta rastgele sağlık taramasına tabii tutulabilir.\n\n"
+      "- Covid-19 sebebiyle ülkeye giriş politikalarında değişikler olabilir.";
   static String ferryPolicy = "Bilet İptali ve İptal Etme Politikaları";
   static String basePrice = "Temel Fiyat";
   static String tDiscount = "İndirim Miktarı";
