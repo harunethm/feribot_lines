@@ -61,7 +61,8 @@ class FerryScreen extends StatelessWidget {
               ),
               Text(
                 Strings.bookTrip,
-                style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: Get.size.height * 0.02,
@@ -287,7 +288,10 @@ class FerryScreen extends StatelessWidget {
                           children: [
                             Text(
                               "Açık Dönüş",
-                              style: TextStyle(color: isOneWay.value ? Colors.grey : Colors.black),
+                              style: TextStyle(
+                                  color: isOneWay.value
+                                      ? Colors.grey
+                                      : Colors.black),
                             ),
                           ],
                         ),
@@ -348,6 +352,12 @@ class FerryScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
+                  Divider(
+                    indent: 24,
+                    endIndent: 24,
+                    thickness: 1,
+                    color: ColorsConstants.dividerColor,
                   ),
                   Obx(() => customPassangerCountsCard(choosePassengers.value)),
                 ],
@@ -536,26 +546,29 @@ class FerryScreen extends StatelessWidget {
     bool disabled = false,
   }) {
     return InkWell(
-      onTap: !disabled
-          ? () {
-              showDatePicker(
-                context: Get.context!,
-                initialEntryMode: DatePickerEntryMode.calendarOnly,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(2000, 1, 1),
-                lastDate: DateTime(2024, 1, 1),
-                cancelText: Strings.cancel,
-                confirmText: Strings.select,
-                currentDate: DateTime.now(),
-                helpText: "Tarih Seçin",
-                errorFormatText:
-                    "Tarih doğru formatta girilmedi. Tavsiye edilen tarih formatı \"01/01/2000\"",
-                errorInvalidText: "Tarih geçerli değil.",
-                fieldHintText: "01/01/2000",
-                fieldLabelText: "",
-              );
-            }
-          : null,
+      onTap: () {
+        if (disabled) {
+          isOneWay.value = !isOneWay.value;
+        } else {
+          showDatePicker(
+            locale: const Locale("tr", "TR"),
+            context: Get.context!,
+            initialEntryMode: DatePickerEntryMode.calendarOnly,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000, 1, 1),
+            lastDate: DateTime(2024, 1, 1),
+            cancelText: Strings.cancel,
+            confirmText: Strings.select,
+            currentDate: DateTime.now(),
+            helpText: "Tarih Seçin",
+            errorFormatText:
+                "Tarih doğru formatta girilmedi. Tavsiye edilen tarih formatı \"01/01/2000\"",
+            errorInvalidText: "Tarih geçerli değil.",
+            fieldHintText: "01/01/2000",
+            fieldLabelText: "",
+          );
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

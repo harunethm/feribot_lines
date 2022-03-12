@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import '../../utils/colors_const.dart';
 import '../../utils/const.dart';
 import '../../utils/strings.dart';
-import '../../widgets/custom_credit_card.dart';
 import '../../widgets/custom_dropdown_sort.dart';
 import '../../widgets/custom_text_form_field.dart';
 
@@ -48,9 +47,9 @@ class Payment extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        CustomCreditCard(
-                          showBackSide: false,
-                        ),
+                        // CustomCreditCard(
+                        //   showBackSide: false,
+                        // ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(

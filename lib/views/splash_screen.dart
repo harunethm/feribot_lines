@@ -41,7 +41,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -90,11 +90,17 @@ class SplashScreen extends StatelessWidget {
                     },
                     children: <Widget>[
                       walktroughtPage(
-                          "assets/icons/01.png", "title", "description"),
+                          "assets/icons/01.png",
+                          Strings.splashScreenTitle1,
+                          Strings.splashScreenDescription1),
                       walktroughtPage(
-                          "assets/icons/02.png", "title", "description"),
+                          "assets/icons/02.png",
+                          Strings.splashScreenTitle2,
+                          Strings.splashScreenDescription2),
                       walktroughtPage(
-                          "assets/icons/03.png", "title", "description"),
+                          "assets/icons/03.png",
+                          Strings.splashScreenTitle3,
+                          Strings.splashScreenDescription3),
                     ],
                   ),
                 ),
@@ -206,22 +212,27 @@ class SplashScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30.0),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-              overflow: TextOverflow.ellipsis,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 15.0),
           Text(
             description,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 15,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
