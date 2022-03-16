@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:feribot_lines/views/splash_screen.dart';
-import 'package:feribot_lines/viewModels/ferry/ferrt_consolidations_vm.dart';
+import 'package:feribot_lines/viewModels/ferry/ferry_consolidations_vm.dart';
 import 'package:feribot_lines/views/ferry/ferry_information.dart';
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/ferry/ferry_consolidations.dart';

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../models/ferry/consolidation_model.dart';
-import '../viewModels/ferry/ferrt_consolidations_vm.dart';
+import '../viewModels/ferry/ferry_consolidations_vm.dart';
 import 'ferry_ticket.dart';
 
 class FerryTicketsList extends StatelessWidget {
