@@ -1,6 +1,7 @@
+import 'package:feribot_lines/models/key_value_model.dart';
 import 'package:feribot_lines/widgets/custom_drop_down_trip.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 
 class TestScreen extends StatelessWidget {
   const TestScreen({Key? key}) : super(key: key);
@@ -9,8 +10,8 @@ class TestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: Get.size.width,
+        height: Get.size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -37,7 +38,13 @@ class TestScreen extends StatelessWidget {
                       ),
                       width: MediaQuery.of(context).size.width * .5,
                       child: CustomDropDownTrip(
-                        items: ["test", "test2", "test3"],
+                        items: [
+                          KeyValue(0, "name0"),
+                          KeyValue(1, "name1"),
+                          KeyValue(2, "name2")
+                        ],
+                        selected: 0,
+                        onChanged: (val) {},
                       ),
                     ),
                   ),

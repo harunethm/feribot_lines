@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import '../../models/key_value_model.dart';
 import '../../utils/colors_const.dart';
 import '../../utils/const.dart';
 import '../../utils/strings.dart';
@@ -696,7 +697,7 @@ class FerryInformation extends StatelessWidget {
               height: 5,
             ),
             ResponsiveGridList(
-              minItemWidth: Get.size.width * .25,
+              minItemWidth: Get.size.width * .2,
               shrinkWrap: true,
               horizontalGridMargin: 10,
               verticalGridMargin: 10,
@@ -854,13 +855,20 @@ class FerryInformation extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomDropDown(
-                      bgColor: ColorsConstants.lightAccent,
-                      dropDownValue: "0",
-                      values: List.generate(30, (index) => index.toString())
-                          .toList(),
-                      items: List.generate(30,
-                              (index) => index == 0 ? "Gün" : index.toString())
-                          .toList(),
+                      items: List.generate(
+                        31,
+                        (index) {
+                          return KeyValue(
+                            index,
+                            index == 0
+                                ? "Gün"
+                                : index.toString().padLeft(2, "0"),
+                          );
+                        },
+                      ),
+                      value: 0,
+                      onChange: (val) {},
+                      bgColor: ColorsConstants.lightPrimary2,
                     ),
                   ),
                   SizedBox(
@@ -868,14 +876,20 @@ class FerryInformation extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomDropDown(
-                      bgColor: ColorsConstants.lightAccent,
-                      dropDownValue: "Ay",
-                      values: List.generate(30,
-                              (index) => index == 0 ? "Ay" : index.toString())
-                          .toList(),
-                      items: List.generate(30,
-                              (index) => index == 0 ? "Ay" : index.toString())
-                          .toList(),
+                      items: List.generate(
+                        12,
+                        (index) {
+                          return KeyValue(
+                            index,
+                            index == 0
+                                ? "Ay"
+                                : index.toString().padLeft(2, "0"),
+                          );
+                        },
+                      ),
+                      value: 0,
+                      onChange: (val) {},
+                      bgColor: ColorsConstants.lightPrimary2,
                     ),
                   ),
                   SizedBox(
@@ -883,14 +897,18 @@ class FerryInformation extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomDropDown(
-                      bgColor: ColorsConstants.lightAccent,
-                      dropDownValue: "Yıl",
-                      values: List.generate(30,
-                              (index) => index == 0 ? "Yıl" : index.toString())
-                          .toList(),
-                      items: List.generate(30,
-                              (index) => index == 0 ? "Yıl" : index.toString())
-                          .toList(),
+                      items: List.generate(
+                        100,
+                        (index) {
+                          return KeyValue(
+                            index + 2000,
+                            index == 0 ? "Yıl" : index.toString(),
+                          );
+                        },
+                      ),
+                      value: 2000,
+                      onChange: (val) {},
+                      bgColor: ColorsConstants.lightPrimary2,
                     ),
                   ),
                 ],
@@ -916,24 +934,15 @@ class FerryInformation extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomDropDown(
-                      bgColor: ColorsConstants.lightAccent,
-                      dropDownValue: "Türkiye",
-                      values: [
-                        "Türkiye",
-                        "Almanya",
-                        "Hollanda",
-                        "Rusya",
-                        "Ukrayna",
-                        "ABD",
-                      ],
                       items: [
-                        "Türkiye",
-                        "Almanya",
-                        "Hollanda",
-                        "Rusya",
-                        "Ukrayna",
-                        "ABD",
+                        KeyValue(0, "Türkiye"),
+                        KeyValue(1, "Yunanistan"),
+                        KeyValue(2, "Bulgaristan"),
+                        KeyValue(3, "Azerbeycan"),
                       ],
+                      value: 0,
+                      onChange: (val) {},
+                      bgColor: ColorsConstants.lightPrimary2,
                     ),
                   ),
                 ],
@@ -975,7 +984,9 @@ class FerryInformation extends StatelessWidget {
                     onChanged: (val) {},
                   ),
                   Text("Bay"),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Radio(
                     value: false,
                     groupValue: "cinsiyet",

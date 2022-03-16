@@ -1,4 +1,3 @@
-import 'package:feribot_lines/models/ferry/consolidation_model.dart';
 import 'package:feribot_lines/views/ferry/ferry_information.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,7 @@ import '../../models/key_value_model.dart';
 import '../../utils/colors_const.dart';
 import '../../utils/common_functions.dart';
 import '../../utils/strings.dart';
-import '../../viewModels/ferry/ferrt_consolidations_vm.dart';
+import '../../viewModels/ferry/ferry_consolidations_vm.dart';
 import '../../widgets/custom_dropdown_sort.dart';
 import '../../widgets/custom_tabs.dart';
 import '../../widgets/ferry_details.dart';
