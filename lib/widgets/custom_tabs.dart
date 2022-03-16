@@ -1,5 +1,3 @@
-import 'package:feribot_lines/utils/common_functions.dart';
-import 'package:feribot_lines/viewModels/ferry/ferrt_services_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +12,7 @@ class CustomTabs extends StatelessWidget {
   late final int _padding;
 
   late final Function? onChange;
+  late CustomTabController tabController;
 
   CustomTabs({
     Key? key,
@@ -25,6 +24,7 @@ class CustomTabs extends StatelessWidget {
     Color? borderColor,
     int? padding,
     String? controllerTag,
+    required this.tabController,
   }) : super(key: key) {
     _padding = padding ?? 40;
 
@@ -34,10 +34,7 @@ class CustomTabs extends StatelessWidget {
 
     _selectedTextColor = selectedTextColor ?? Colors.white;
     _unSelectedTextColor = unSelectedTextColor ?? Colors.white;
-
-    tabController = Get.find(tag: controllerTag);
   }
-  late CustomTabController tabController;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -66,17 +63,13 @@ class CustomTabs extends StatelessWidget {
                     onTap: () {
                       int _lastIndex = tabController.activeTab.value;
                       tabController.activeTab(i);
-                      debugPrint(
-                          "activeTab: " + tabController.activeTab.toString());
-                      debugPrint(
-                          "lastIndex: " + _lastIndex.toString());
                       if (_lastIndex > tabController.activeTab.value) {
                         tabController.pageController.previousPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn);
                       } else if (_lastIndex < tabController.activeTab.value) {
                         tabController.pageController.nextPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn);
                       }
                       onChange != null ? onChange!() : null;
@@ -116,61 +109,3 @@ class CustomTabs extends StatelessWidget {
     );
   }
 }
-
-// class CategoryWidget extends StatelessWidget {
-//   final Category category;
-//   final bool isSelected;
-//   TabController controller = Get.find();
-//   CategoryWidget({Key? key, required this.category, required this.isSelected})
-//       : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     double width = (Get.size.width - 44) / controller.tabCount.value;
-//     return InkWell(
-//       onTap: () {
-//         if (!isSelected) {
-//           controller.selectedCategory(category.categoryId);
-//         }
-//       },
-//       child: Container(
-//         constraints: BoxConstraints(
-//           minWidth: width > 100 ? width : 100,
-//         ),
-//         decoration: BoxDecoration(
-//           color: isSelected ? Colors.white : Colors.transparent,
-//           borderRadius: BorderRadius.circular(18.0),
-//         ),
-//         child: Center(
-//           child: Text(
-//             category.name,
-//             style: isSelected
-//                 ? TextStyle(color: ColorsConstants.appColor)
-//                 : const TextStyle(color: Colors.white),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-class Category {
-  final int categoryId;
-  final String name;
-  Category({required this.categoryId, required this.name});
-}
-
-final oneWay = Category(
-  categoryId: 0,
-  name: 'On Way',
-);
-
-final twoWay = Category(
-  categoryId: 1,
-  name: 'Two Way',
-);
-
-final categories = [
-  oneWay,
-  twoWay,
-];

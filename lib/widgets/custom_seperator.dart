@@ -6,7 +6,7 @@ class CustomSeperator extends StatelessWidget {
   const CustomSeperator({
     Key? key,
     this.height = 4,
-    this.color = Colors.black,
+    this.color = Colors.grey,
   }) : super(key: key);
 
   @override

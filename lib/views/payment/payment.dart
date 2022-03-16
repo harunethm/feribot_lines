@@ -1,6 +1,7 @@
+import 'package:feribot_lines/models/key_value_model.dart';
 import 'package:feribot_lines/views/_test_screen.dart';
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
-import 'package:feribot_lines/views/ferry/ferry_services.dart';
+import 'package:feribot_lines/views/ferry/ferry_consolidations.dart';
 import 'package:feribot_lines/views/payment/payment_success.dart';
 import 'package:feribot_lines/views/profile/ticket_details.dart';
 import 'package:flutter/gestures.dart';
@@ -87,14 +88,19 @@ class Payment extends StatelessWidget {
                                           child: CustomDropDown(
                                             items: List.generate(
                                               12,
-                                              (index) => (index + 1)
-                                                  .toString()
-                                                  .padLeft(2, "0"),
+                                              (index) {
+                                                return KeyValue(
+                                                  index,
+                                                  index == 0
+                                                      ? "Gün"
+                                                      : index
+                                                          .toString()
+                                                          .padLeft(2, "0"),
+                                                );
+                                              },
                                             ),
-                                            values: List.generate(
-                                              12,
-                                              (index) => index.toString(),
-                                            ),
+                                            value: 0,
+                                            onChange: (val) {},
                                             bgColor:
                                                 ColorsConstants.lightPrimary2,
                                           ),
@@ -106,16 +112,19 @@ class Payment extends StatelessWidget {
                                           child: CustomDropDown(
                                             items: List.generate(
                                               30,
-                                              (index) =>
-                                                  (index + DateTime.now().year)
-                                                      .toString(),
+                                              (index) {
+                                                return KeyValue(
+                                                  index,
+                                                  index == 0
+                                                      ? "Ay"
+                                                      : index
+                                                          .toString()
+                                                          .padLeft(2, "0"),
+                                                );
+                                              },
                                             ),
-                                            values: List.generate(
-                                              30,
-                                              (index) =>
-                                                  (index + DateTime.now().year)
-                                                      .toString(),
-                                            ),
+                                            value: 0,
+                                            onChange: (val) {},
                                             bgColor:
                                                 ColorsConstants.lightPrimary2,
                                           ),
