@@ -10,13 +10,32 @@ import '../utils/strings.dart';
 import 'custom_seperator.dart';
 
 class FerryTicket extends StatelessWidget {
+<<<<<<< Updated upstream
   final int price;
   final String destinationCode;
   final String originCode;
+=======
+  final double price;
+
+  final String arrivePort;
+  final String deperturePort;
+
+  final String companyName;
+  final String companyLogoPath;
+  final String ferryName;
+  final RxBool isSelected;
+
+>>>>>>> Stashed changes
   final String arrivalTime;
   final String arrivalDate;
   final String departureTime;
   final String departureDate;
+<<<<<<< Updated upstream
+=======
+
+  final VoidCallback onTap;
+
+>>>>>>> Stashed changes
   final String totalTime;
   final String companyName;
   final String ferryName;
@@ -35,6 +54,7 @@ class FerryTicket extends StatelessWidget {
     required this.companyName,
     required this.ferryName,
     required this.isSelected,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -169,6 +189,7 @@ class FerryTicket extends StatelessWidget {
                           fontSize: 12.0,
                         ),
                       ),
+<<<<<<< Updated upstream
                       const SizedBox(height: 10.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -182,6 +203,44 @@ class FerryTicket extends StatelessWidget {
                           ),
                         ],
                       )
+=======
+                    ],
+                  ),
+                  const SizedBox(height: 10.0),
+                  Row(
+                    children: <Widget>[
+                      const FaIcon(
+                        FontAwesomeIcons.anchor,
+                        size: 20,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: CustomSeperator(
+                            color: isLightTheme ? Colors.black : Colors.white),
+                      ),
+                      companyLogoPath.isNotEmpty
+                          ? Image.asset(
+                              companyLogoPath,
+                              width: 48,
+                              height: 48,
+                              fit: BoxFit.fill,
+                            )
+                          : Image.asset(
+                              "assets/images/fethiye-rodos-ferry-tilos.jpg",
+                              width: 48,
+                              height: 48,
+                              fit: BoxFit.fill,
+                            ),
+                      Expanded(
+                        child: CustomSeperator(
+                            color: isLightTheme ? Colors.black : Colors.white),
+                      ),
+                      const FaIcon(
+                        FontAwesomeIcons.anchor,
+                        size: 20,
+                        color: Colors.grey,
+                      ),
+>>>>>>> Stashed changes
                     ],
                   ),
                 ),
@@ -257,6 +316,7 @@ class FerryTicket extends StatelessWidget {
                         topLeft: Radius.circular(10),
                       ),
                     ),
+<<<<<<< Updated upstream
                     // constraints: BoxConstraints(
                     //   maxWidth: Get.size.width * 0.4,
                     //   minWidth: Get.size.width * 0.4,
@@ -281,6 +341,47 @@ class FerryTicket extends StatelessWidget {
                           ),
                         ],
                       ),
+=======
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 4,
+            right: 0,
+            child: GestureDetector(
+              onTap: onTap,
+              child: Obx(
+                () => Container(
+                  margin: const EdgeInsets.only(right: 3, top: 3),
+                  decoration: BoxDecoration(
+                    color: isSelected.value
+                        ? ColorsConstants.lightPrimary
+                        : Colors.grey,
+                    borderRadius: const BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      topLeft: Radius.circular(10),
+                    ),
+                  ),
+                  height: 32.0,
+                  width: 70,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 4.0,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          isSelected.value ? Strings.selected : Strings.select,
+                          style: const TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+>>>>>>> Stashed changes
                     ),
                   ),
                 ),

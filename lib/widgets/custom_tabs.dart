@@ -64,8 +64,8 @@ class CustomTabs extends StatelessWidget {
                         (Get.size.width - _padding - 2 /* -2 for borders */) /
                             tabController.tabs.length,
                     onTap: () {
-                      int _lastIndex = tabController.activeTab.value;
                       tabController.activeTab(i);
+<<<<<<< Updated upstream
                       debugPrint(
                           "activeTab: " + tabController.activeTab.toString());
                       debugPrint(
@@ -79,6 +79,15 @@ class CustomTabs extends StatelessWidget {
                             duration: Duration(milliseconds: 300),
                             curve: Curves.easeIn);
                       }
+=======
+
+                      tabController.pageController.animateToPage(
+                        tabController.activeTab.value,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                      
+>>>>>>> Stashed changes
                       onChange != null ? onChange!() : null;
                     },
                   ),
