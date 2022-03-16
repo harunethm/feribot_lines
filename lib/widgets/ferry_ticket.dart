@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import '../utils/colors_const.dart';
 import '../utils/common_functions.dart';
 import '../utils/strings.dart';
+import '../views/ferry/ferry_information.dart';
 import 'custom_seperator.dart';
 
 class FerryTicket extends StatelessWidget {
   final int ID = 0;
-
   final double price;
 
   final String arrivePort;
@@ -26,14 +26,12 @@ class FerryTicket extends StatelessWidget {
   final String departureTime;
   final String departureDate;
 
-  final VoidCallback onTap;
-
   final String totalTime;
 
-  const FerryTicket({
+  final VoidCallback onTap;
+
+  FerryTicket({
     Key? key,
-    required this.price,
-    required this.arrivalTime,
     required this.arrivalDate,
     required this.departureDate,
     required this.departureTime,
@@ -44,12 +42,13 @@ class FerryTicket extends StatelessWidget {
     required this.companyLogoPath,
     required this.ferryName,
     required this.isSelected,
+    required this.price,
+    required this.arrivalTime,
     required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool isLightTheme = CommonFunctions.isLightTheme();
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Stack(
@@ -131,19 +130,6 @@ class FerryTicket extends StatelessWidget {
                           fontSize: 15.0,
                         ),
                       ),
-                      const SizedBox(height: 10.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            totalTime,
-                            style: const TextStyle(
-                              color: Colors.black54,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                        ],
-                      )
                     ],
                   ),
                   const SizedBox(height: 10.0),
@@ -154,9 +140,8 @@ class FerryTicket extends StatelessWidget {
                         size: 20,
                         color: Colors.grey,
                       ),
-                      Expanded(
-                        child: CustomSeperator(
-                            color: isLightTheme ? Colors.black : Colors.white),
+                      const Expanded(
+                        child: CustomSeperator(),
                       ),
                       companyLogoPath.isNotEmpty
                           ? Image.asset(
@@ -171,40 +156,8 @@ class FerryTicket extends StatelessWidget {
                               height: 48,
                               fit: BoxFit.fill,
                             ),
-                      Expanded(
-                        child: CustomSeperator(
-                            color: isLightTheme ? Colors.black : Colors.white),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10.0),
-                  Row(
-                    children: <Widget>[
-                      const FaIcon(
-                        FontAwesomeIcons.anchor,
-                        size: 20,
-                        color: Colors.grey,
-                      ),
-                      Expanded(
-                        child: CustomSeperator(
-                            color: isLightTheme ? Colors.black : Colors.white),
-                      ),
-                      companyLogoPath.isNotEmpty
-                          ? Image.asset(
-                              companyLogoPath,
-                              width: 48,
-                              height: 48,
-                              fit: BoxFit.fill,
-                            )
-                          : Image.asset(
-                              "assets/images/fethiye-rodos-ferry-tilos.jpg",
-                              width: 48,
-                              height: 48,
-                              fit: BoxFit.fill,
-                            ),
-                      Expanded(
-                        child: CustomSeperator(
-                            color: isLightTheme ? Colors.black : Colors.white),
+                      const Expanded(
+                        child: CustomSeperator(),
                       ),
                       const FaIcon(
                         FontAwesomeIcons.anchor,
