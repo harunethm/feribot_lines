@@ -158,10 +158,8 @@ class SplashScreen extends StatelessWidget {
           return currentPage.value == numPages.value - 1
               ? InkWell(
                   onTap: () {
-                    Get.offAll(
-                      FerryScreen(),
-                      transition: Transition.downToUp,
-                      duration: const Duration(seconds: 1),
+                    Get.offAllNamed(
+                      "/FerryScreen",
                     );
                   },
                   child: Container(

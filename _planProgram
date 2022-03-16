@@ -17,3 +17,34 @@ sayfalar
                 successPayment_t | successPayment_f
             notifications
                 relatedWebPage
+
+                
+SORULAR
+splashScreen
+    3 sayfa için 3 adet başlık, metin ve resim 
+
+ferryScreen
+    header gif, image ne isteniyorsa
+
+profile
+    istatistikler isteniyor mu?
+        cüzdan bakiyesi
+        para puan
+    profil fotoğrafı olacak mı
+        ismin baş harfleri
+
+login
+    giriş türü tek mi olacak yoksa iki şekilde de girilebilecek mi
+        email girişi
+        şifre kısıtı en az 4 karakter
+    registerda alınacak bilgiler
+        ad soyad ekle
+
+ferryServices
+    sıralama filtresi olacak mı
+        olacak
+    iconlar iyi mi, çocuk için ayrı icon isteniyor mu
+        isteniyor
+    
+ferryInfo
+    özet bilgiler verildikten sonra ayrı sayfada mı veriler istensin yoksa aşağıdan devam mı
