@@ -28,7 +28,11 @@ class FerryConsolidationsVM extends GetxController {
     selectedReturnConsolidationID.value = 0;
 
     ferryVM.searchTrip(0).then((value) => consolidations.value = value);
-    consolidations.refresh();
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      // executes after build
+      consolidations.refresh();
+    });
 
     if (!SearchModel.isOneWay.value) {
       if (SearchModel.isOpenReturn.value) {

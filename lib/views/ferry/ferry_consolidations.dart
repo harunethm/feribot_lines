@@ -61,7 +61,9 @@ class FerryConsolidations extends StatelessWidget {
               FerryDetails(
                 from: SearchModel.deperturePort.value.value.toString(),
                 to: SearchModel.arrivePort.value.value.toString(),
-                date: DateFormat("d MMMM", "tr_TR")
+                fromDate: DateFormat("d MMMM", "tr_TR")
+                    .format(SearchModel.depertureDate.value),
+                toDate: DateFormat("d MMMM", "tr_TR")
                     .format(SearchModel.depertureDate.value),
               ),
               const SizedBox(height: 10.0),
@@ -80,9 +82,10 @@ class FerryConsolidations extends StatelessWidget {
                       _vm.tabController.activeTab(page);
                     },
                     children: [
-                      FerryTicketsList(_vm.consolidations.value),
+                      Obx(() => FerryTicketsList(_vm.consolidations.value)),
                       if (!SearchModel.isOneWay.value)
-                        FerryTicketsList(_vm.returnConsolidations.value),
+                        Obx(() =>
+                            FerryTicketsList(_vm.returnConsolidations.value)),
                     ],
                   ),
                 ),

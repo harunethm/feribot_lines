@@ -4,7 +4,6 @@ import 'package:feribot_lines/services/ferry_services.dart';
 import 'package:get/get.dart';
 
 class FerryScreenVM extends GetxController {
-  // final FerryVM _ferryVM = Get.put(FerryVM());
   RxBool choosePassengers = false.obs;
 
   Rx<List<KeyValue>> deperturePorts = Rx([]);
@@ -12,19 +11,17 @@ class FerryScreenVM extends GetxController {
   Rx<List<KeyValue>> arrivePorts = Rx([]);
 
   init() {
-    // deperturePorts = Rx(await FerryServices.getDeperturePorts());
-
     FerryServices.getDeperturePorts().then((value) {
       deperturePorts.value = value;
       deperturePorts.refresh();
+      SearchModel.deperturePort.value = deperturePorts.value.first;
     });
 
-    // arrivePorts = Rx(
-    //     await FerryServices.getArrivePorts(_ferryVM.deperturePort.value.value));
     FerryServices.getArrivePorts(SearchModel.deperturePort.value.key)
         .then((value) {
       arrivePorts.value = value;
       arrivePorts.refresh();
+      SearchModel.arrivePort.value = arrivePorts.value.first;
     });
   }
 }

@@ -4,47 +4,51 @@ import 'package:feribot_lines/models/key_value_model.dart';
 import 'package:get/get.dart';
 
 class FerryServices {
-  static Future<List<ConsolidationModel>> searchTrip() async {
+  static Future<List<ConsolidationModel>> searchTrip(
+      int searchType /* 0 => gidiş, 1 => dönüş */) async {
     // TODO modeldeki tek yön, açık bilet bilgise göre doldur
-    SearchModel.adultCount; // static veriler direkt erişilebilir
-    return [
-      ConsolidationModel(
-        consolidationID: 1,
-        arriveDate: DateTime.now(),
-        depertureDate: DateTime.now(),
-        totalTime: DateTime.now(),
-        deperturePort: KeyValue(1, "FETHİYE"),
-        arrivePort: KeyValue(1, "RODOS"),
-        companyName: "UZUN ŞİRKET İSMİ",
-        ferryName: "UZUN FERİBOT İSMİ",
-        isSelected: false.obs,
-        price: 634.5,
-      ),
-      ConsolidationModel(
-        consolidationID: 2,
-        arriveDate: DateTime.now(),
-        depertureDate: DateTime.now(),
-        totalTime: DateTime.now(),
-        deperturePort: KeyValue(1, "FETHİYE"),
-        arrivePort: KeyValue(1, "RODOS"),
-        companyName: "UZUN ŞİRKET İSMİ",
-        ferryName: "UZUN FERİBOT İSMİ",
-        isSelected: false.obs,
-        price: 634.5,
-      ),
-      ConsolidationModel(
-        consolidationID: 3,
-        arriveDate: DateTime.now(),
-        depertureDate: DateTime.now(),
-        totalTime: DateTime.now(),
-        deperturePort: KeyValue(1, "FETHİYE"),
-        arrivePort: KeyValue(1, "RODOS"),
-        companyName: "UZUN ŞİRKET İSMİ",
-        ferryName: "UZUN FERİBOT İSMİ",
-        isSelected: false.obs,
-        price: 634.5,
-      ),
-    ];
+    List<ConsolidationModel> _searchResults = [];
+    await Future.delayed(const Duration(seconds: 2), () {
+      return [
+        ConsolidationModel(
+          consolidationID: 1,
+          arriveDate: DateTime.now(),
+          depertureDate: DateTime.now(),
+          totalTime: DateTime.now(),
+          deperturePort: KeyValue(1, "FETHİYE"),
+          arrivePort: KeyValue(1, "RODOS"),
+          companyName: "UZUN ŞİRKET İSMİ",
+          ferryName: "UZUN FERİBOT İSMİ",
+          isSelected: false.obs,
+          price: 634.5,
+        ),
+        ConsolidationModel(
+          consolidationID: 2,
+          arriveDate: DateTime.now(),
+          depertureDate: DateTime.now(),
+          totalTime: DateTime.now(),
+          deperturePort: KeyValue(1, "FETHİYE"),
+          arrivePort: KeyValue(1, "RODOS"),
+          companyName: "UZUN ŞİRKET İSMİ",
+          ferryName: "UZUN FERİBOT İSMİ",
+          isSelected: false.obs,
+          price: 634.5,
+        ),
+        ConsolidationModel(
+          consolidationID: 3,
+          arriveDate: DateTime.now(),
+          depertureDate: DateTime.now(),
+          totalTime: DateTime.now(),
+          deperturePort: KeyValue(1, "FETHİYE"),
+          arrivePort: KeyValue(1, "RODOS"),
+          companyName: "UZUN ŞİRKET İSMİ",
+          ferryName: "UZUN FERİBOT İSMİ",
+          isSelected: false.obs,
+          price: 634.5,
+        ),
+      ];
+    }).then((value) => _searchResults = value);
+    return _searchResults;
   }
 
   static Future<List<KeyValue>> getDeperturePorts() async {

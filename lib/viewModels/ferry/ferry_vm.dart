@@ -66,7 +66,7 @@ class FerryVM extends GetxController {
 
   Future<List<ConsolidationModel>> searchTrip(
       int tripIndex /* 0 => gidiş, 1 => dönüş */) {
-    return FerryServices
-        .searchTrip(); // TODO direkt return etme kontrolleri yap
+    return FerryServices.searchTrip(
+        tripIndex); // TODO direkt return etme kontrolleri yap
   }
 }

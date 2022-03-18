@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class FerryDetails extends StatelessWidget {
   final String from;
   final String to;
-  final String date;
+  final String fromDate;
+  final String toDate;
 
   const FerryDetails({
     Key? key,
     required this.from,
     required this.to,
-    required this.date,
+    required this.fromDate,
+    required this.toDate,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class FerryDetails extends StatelessWidget {
                 ],
               ),
               Text(
-                date,
+                fromDate,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22.0,
@@ -44,13 +46,22 @@ class FerryDetails extends StatelessWidget {
           ),
           const SizedBox(height: 5.0),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 to,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 26.0,
                   fontWeight: FontWeight.w700,
+                ),
+              ),
+              Text(
+                toDate,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.w100,
                 ),
               ),
             ],

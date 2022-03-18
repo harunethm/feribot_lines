@@ -19,6 +19,7 @@ class FerryScreen extends StatelessWidget {
   final String strBackgroundGif = "assets/images/flight_page.gif";
   final String strDropDownIcon = "assets/images/flight_icon.png";
   final String strSortIcon = "assets/icons/sort_icon.png";
+  final Rx<Color> iconColor = ColorsConstants.lightPrimary.obs;
 
   final FerryScreenVM _vm = Get.put(FerryScreenVM());
   final FerryVM _ferryVM = Get.put(FerryVM());
@@ -79,9 +80,7 @@ class FerryScreen extends StatelessWidget {
                           () => FaIcon(
                             FontAwesomeIcons.ship,
                             size: 16,
-                            color: SearchModel.isOneWay.value
-                                ? ColorsConstants.lightAccent
-                                : ColorsConstants.lightPrimary,
+                            color: iconColor.value,
                           ),
                         ),
                         const SizedBox(
@@ -136,9 +135,7 @@ class FerryScreen extends StatelessWidget {
                                     height: 30,
                                     width: 30,
                                     decoration: BoxDecoration(
-                                      color: SearchModel.isOneWay.value
-                                          ? ColorsConstants.lightAccent
-                                          : ColorsConstants.lightPrimary,
+                                      color: iconColor.value,
                                       shape: BoxShape.circle,
                                     ),
                                     child: Center(
@@ -171,6 +168,10 @@ class FerryScreen extends StatelessWidget {
 
                               SearchModel.isOneWay.refresh();
                               SearchModel.isOpenReturn.refresh();
+
+                              iconColor.value = SearchModel.isOneWay.value
+                                  ? ColorsConstants.lightAccent
+                                  : ColorsConstants.lightPrimary;
                             },
                             child: Obx(
                               () => Column(
@@ -200,9 +201,7 @@ class FerryScreen extends StatelessWidget {
                           () => FaIcon(
                             FontAwesomeIcons.ship,
                             size: 16,
-                            color: SearchModel.isOneWay.value
-                                ? ColorsConstants.lightAccent
-                                : ColorsConstants.lightPrimary,
+                            color: iconColor.value,
                           ),
                         ),
                         const SizedBox(
@@ -264,9 +263,6 @@ class FerryScreen extends StatelessWidget {
                                 if (val!) {
                                   SearchModel.isOneWay.value = false;
                                 }
-                                // debugPrint("isOpenReturn: " +
-                                //     _vm.isOpenReturn.value.toString());
-                                // debugPrint("val: " + val.toString());
                               },
                               visualDensity: VisualDensity(
                                 horizontal: VisualDensity.minimumDensity,
@@ -322,10 +318,10 @@ class FerryScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          const FaIcon(
+                          FaIcon(
                             FontAwesomeIcons.userAlt,
                             size: 16,
-                            color: ColorsConstants.lightPrimary,
+                            color: iconColor.value,
                           ),
                           Obx(
                             () => Text(
@@ -371,35 +367,35 @@ class FerryScreen extends StatelessWidget {
 
   InkWell bottomButton() {
     return InkWell(
-        onTap: () {
-          Get.to(
-            () => FerryConsolidations(),
-            duration: Duration(milliseconds: 300),
-            transition: Transition.rightToLeft,
-          );
-        },
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 16, right: 16, left: 16),
-          padding: const EdgeInsets.only(top: 16, bottom: 16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: ColorsConstants.lightPrimary,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                Strings.searchTrip,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+      onTap: () {
+        Get.to(
+          () => FerryConsolidations(),
+          duration: Duration(milliseconds: 300),
+          transition: Transition.rightToLeft,
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16, right: 16, left: 16),
+        padding: const EdgeInsets.only(top: 16, bottom: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: ColorsConstants.lightPrimary,
         ),
-      );
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              Strings.searchTrip,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   customPassangerCountsCard(bool choosePassenger) {
@@ -426,10 +422,10 @@ class FerryScreen extends StatelessWidget {
                         "Yetişkin",
                         " (12+ Yaş)",
                         items: List.generate(
-                          11,
+                          10,
                           (index) => KeyValue(
-                            index,
-                            index.toString(),
+                            index + 1,
+                            (index + 1).toString(),
                           ),
                         ),
                         value: SearchModel.adultCount.value,
@@ -552,14 +548,14 @@ class FerryScreen extends StatelessWidget {
             FaIcon(
               icon,
               size: 16,
-              color: ColorsConstants.lightPrimary,
+              color: iconColor.value,
             ),
             Column(
               children: [
                 Text(
                   text,
                   style: TextStyle(
-                    color: ColorsConstants.lightPrimary,
+                    color: iconColor.value,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
@@ -581,6 +577,7 @@ class FerryScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             DropdownButton<int>(
+              menuMaxHeight: Get.size.height * .5,
               underline: Container(
                 height: 1,
                 color: ColorsConstants.dividerColor,
@@ -590,7 +587,7 @@ class FerryScreen extends StatelessWidget {
                 size: 12,
                 color: ColorsConstants.grey,
               ),
-              dropdownColor: ColorsConstants.lightAccent,
+              dropdownColor: iconColor.value,
               items: items
                   .map(
                     (KeyValue e) => DropdownMenuItem<int>(
@@ -663,11 +660,12 @@ class FerryScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  FaIcon(
-                    FontAwesomeIcons.calendarDay,
-                    size: 16,
-                    color:
-                        disabled ? Colors.grey : ColorsConstants.lightPrimary,
+                  Obx(
+                    () => FaIcon(
+                      FontAwesomeIcons.calendarDay,
+                      size: 16,
+                      color: disabled ? Colors.grey : iconColor.value,
+                    ),
                   ),
                   Obx(
                     () => Text(
