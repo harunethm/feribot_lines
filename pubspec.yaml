@@ -55,6 +55,9 @@ dependencies:
   # responsive button grid
   responsive_grid_list: ^1.2.4
 
+  # image with retry
+  flutter_image: ^4.1.0
+  
   # for better card vision
   # awesome_card: ^1.1.7
 

@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import '../../utils/colors_const.dart';
 import '../../utils/const.dart';
 import '../../utils/strings.dart';
-import '../../widgets/custom_dropdown_sort.dart';
+import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_text_form_field.dart';
 
 class Payment extends StatelessWidget {
@@ -92,7 +92,7 @@ class Payment extends StatelessWidget {
                                                 return KeyValue(
                                                   index,
                                                   index == 0
-                                                      ? "Gün"
+                                                      ? "Ay"
                                                       : index
                                                           .toString()
                                                           .padLeft(2, "0"),
@@ -116,7 +116,7 @@ class Payment extends StatelessWidget {
                                                 return KeyValue(
                                                   index,
                                                   index == 0
-                                                      ? "Ay"
+                                                      ? "Gün"
                                                       : index
                                                           .toString()
                                                           .padLeft(2, "0"),

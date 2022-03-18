@@ -1,5 +1,4 @@
 import 'package:feribot_lines/models/ferry/consolidation_model.dart';
-import 'package:feribot_lines/models/ferry/search_model.dart';
 import 'package:feribot_lines/models/key_value_model.dart';
 import 'package:get/get.dart';
 

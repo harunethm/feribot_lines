@@ -16,7 +16,7 @@ class FerryTicketsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (data.isNotEmpty && _vm.tabController.activeTab.value == 0) {
+    if (data.isNotEmpty) {
       return ListView(
         padding: const EdgeInsets.all(0),
         shrinkWrap: true,
@@ -45,7 +45,7 @@ class FerryTicketsList extends StatelessWidget {
                 onTap: () {
                   if (item.isSelected.value) {
                     item.isSelected.value = false;
-                    _vm.selectConsolidation(0);
+                    _vm.selectConsolidation(null);
                   } else {
                     List<ConsolidationModel> _selectedItems = data
                         .where((element) => element.isSelected.value == true)
@@ -58,7 +58,7 @@ class FerryTicketsList extends StatelessWidget {
                     }
 
                     item.isSelected.value = true;
-                    _vm.selectConsolidation(item.consolidationID);
+                    _vm.selectConsolidation(item);
                   }
                 },
               ),
@@ -66,62 +66,32 @@ class FerryTicketsList extends StatelessWidget {
             .toList(),
       );
     } else {
-      if (SearchModel.isOpenReturn.value &&
-          _vm.tabController.activeTab.value == 1) {
-        return Padding(
-          padding: const EdgeInsets.all(20),
-          child: Card(
-            color: Get.theme.backgroundColor,
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/icons/icon_acik_tarih.png"),
-                SizedBox(
-                  height: Get.size.height * .01,
-                ),
-                const Text(
-                  "Dönüş biletiniz açık tarihlidir.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Card(
+          color: Get.theme.backgroundColor,
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
           ),
-        );
-      } else {
-        return Padding(
-          padding: const EdgeInsets.all(20),
-          child: Card(
-            color: Get.theme.backgroundColor,
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const FaIcon(FontAwesomeIcons.spinner),
-                SizedBox(
-                  height: Get.size.height * .01,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const FaIcon(FontAwesomeIcons.spinner),
+              SizedBox(
+                height: Get.size.height * .01,
+              ),
+              const Text(
+                "Sefer aranıyor ...",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
                 ),
-                const Text(
-                  "Sefer aranıyor ...",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
-      }
+        ),
+      );
     }
   }
 }

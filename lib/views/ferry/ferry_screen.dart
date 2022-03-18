@@ -325,7 +325,7 @@ class FerryScreen extends StatelessWidget {
                           ),
                           Obx(
                             () => Text(
-                              _ferryVM.passengersAndCars.value,
+                              _ferryVM.passengersAndCars().value,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

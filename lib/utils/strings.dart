@@ -34,7 +34,8 @@ class Strings {
   static String payment = "Ödeme";
   static String arrive = "Varış";
   static String departure = "Kalkış";
-  static String adultsChildren = "Yetişkinler &\nÇocuklar &\nAraçlar";
+  static String adultsChildren =
+      "Yetişkinler &\nÇocuklar &\n Bebekler&\nAraçlar";
   static String infoTitle = "Bilgilendirme";
   static String cancelIn = "Son 6 saate kadar ücretsiz iptal hakkı.";
   static String tripRulesButton = "Sefer kurallarını okumak için tıklayınız.";
@@ -63,6 +64,8 @@ class Strings {
       "- Kişiler Yunanistan'a varışta rastgele sağlık taramasına tabii tutulabilir.\n\n"
       "- Covid-19 sebebiyle ülkeye giriş politikalarında değişikler olabilir.";
   static String ferryPolicy = "Bilet İptali ve İptal Etme Politikaları";
+  static String confirmSMS =
+      "Feribotlines bana bilgilendirme ve tanıtım amaçlı eposta ve SMS mesajları gönderebilir.";
   static String basePrice = "Temel Fiyat";
   static String tDiscount = "İndirim Miktarı";
   static String priceDiscount = "İndirimli Fiyat";
@@ -83,4 +86,14 @@ class Strings {
   static String splashScreenDescription3 =
       "Seyahatinle ilgili detaylar ve Feribotlines'ın benzersiz kampanyalarından haberdar olmak için bildirimlerini sık sık kontrol et.";
   static String openReturn = "Açık Dönüş";
+  static String consolidation = "Gidiş Seferi";
+  static String returnConsolidation = "Dönüş Seferi";
+
+  static String male = "Bay";
+  static String female = "Bayan";
+
+  static String emptyFerryImagePath =
+      "https://feribotlines.com/media/company/2019/06/10/fethiye-rodos-ferry-tilos.jpg";
+  static String emptyCompanyImagePath =
+      "https://feribotlines.com/media/company/2018/12/16/ocean-travel.png";
 }

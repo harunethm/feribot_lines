@@ -1,3 +1,4 @@
+import 'package:feribot_lines/models/ferry/ferry_info_model.dart';
 import 'package:feribot_lines/views/ferry/ferry_information.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ import '../../utils/colors_const.dart';
 import '../../utils/common_functions.dart';
 import '../../utils/strings.dart';
 import '../../viewModels/ferry/ferry_consolidations_vm.dart';
-import '../../widgets/custom_dropdown_sort.dart';
+import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_tabs.dart';
 import '../../widgets/ferry_details.dart';
 import '../../widgets/ferry_tickets_list.dart';
@@ -64,7 +65,7 @@ class FerryConsolidations extends StatelessWidget {
                 fromDate: DateFormat("d MMMM", "tr_TR")
                     .format(SearchModel.depertureDate.value),
                 toDate: DateFormat("d MMMM", "tr_TR")
-                    .format(SearchModel.depertureDate.value),
+                    .format(SearchModel.arriveDate.value),
               ),
               const SizedBox(height: 10.0),
               sortingDetailsAndPassengerCounts(),
@@ -84,8 +85,10 @@ class FerryConsolidations extends StatelessWidget {
                     children: [
                       Obx(() => FerryTicketsList(_vm.consolidations.value)),
                       if (!SearchModel.isOneWay.value)
-                        Obx(() =>
-                            FerryTicketsList(_vm.returnConsolidations.value)),
+                        !SearchModel.isOpenReturn.value
+                            ? Obx(() => FerryTicketsList(
+                                _vm.returnConsolidations.value))
+                            : openReturnCard()
                     ],
                   ),
                 ),
@@ -95,6 +98,35 @@ class FerryConsolidations extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: bottomButton(),
+    );
+  }
+
+  Widget openReturnCard() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Card(
+        color: Get.theme.backgroundColor,
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/icons/icon_acik_tarih.png"),
+            SizedBox(
+              height: Get.size.height * .01,
+            ),
+            const Text(
+              "Dönüş biletiniz açık tarihlidir.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -118,12 +150,7 @@ class FerryConsolidations extends StatelessWidget {
                   const SizedBox(width: 10.0),
                   Obx(
                     () => CustomDropDown(
-                      items: [
-                        KeyValue(0, "Fiyat"),
-                        KeyValue(1, "Sefer Süresi"),
-                        KeyValue(2, "Varış Saati"),
-                        KeyValue(3, "Kalkış Saati"),
-                      ],
+                      items: _vm.sortTypes,
                       value: _vm.sortType.value,
                       onChange: (val) {
                         _vm.sortType.value = val!;
@@ -206,8 +233,8 @@ class FerryConsolidations extends StatelessWidget {
   Widget bottomButton() {
     return Obx(
       () => Visibility(
-        visible: _vm.selectedConsolidationID.value != 0 &&
-            (_vm.selectedReturnConsolidationID.value != 0 ||
+        visible: FerryInfoModel.sConsolidation.value.consolidationID != 0 &&
+            (FerryInfoModel.sReturnConsolidation.value.consolidationID != 0 ||
                 SearchModel.isOneWay.value ||
                 SearchModel.isOpenReturn.value),
         child: InkWell(

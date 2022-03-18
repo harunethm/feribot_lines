@@ -46,27 +46,37 @@ class FerryVM extends GetxController {
     }
   }
 
-  RxString get passengersAndCars {
-    int _count = 0;
-    String _return = "";
-    _count += SearchModel.adultCount.value;
-    _count += SearchModel.childCount.value;
-    _count += SearchModel.babyCount.value;
-    _return = "$_count Yolcu,";
-    if (SearchModel.carCount > 0 && SearchModel.carType.value != 0) {
-      _return += " ${SearchModel.carCount} ${_carType()}";
-    } else {
-      _return += " Araçsız";
-    }
+  RxString passengersAndCars({String joinString = " ", int type = 0}) {
+    switch (type) {
+      case 0:
+        int _count = 0;
+        String _return = "";
+        _count += SearchModel.adultCount.value;
+        _count += SearchModel.childCount.value;
+        _count += SearchModel.babyCount.value;
+        _return = "$_count Yolcu,";
+        if (SearchModel.carCount > 0 && SearchModel.carType.value != 0) {
+          _return += SearchModel.carCount.value.toString() + " " + _carType();
+        } else {
+          _return += " Araçsız";
+        }
+        return _return.obs;
+      case 1:
+        List<String> _list = [];
+        _list.add(SearchModel.adultCount.value.toString() + " Yetişkin");
+        _list.add(SearchModel.childCount.value.toString() + " Çocuk");
+        _list.add(SearchModel.babyCount.value.toString() + " Bebek");
 
-    return _return.obs;
+        if (SearchModel.carCount > 0 && SearchModel.carType.value != 0) {
+          _list.add(SearchModel.carCount.value.toString() + " " + _carType());
+        } else {
+          _list.add("Araçsız");
+        }
+        return _list.join(joinString).obs;
+      default:
+        return "".obs;
+    }
   }
 
   void init() {}
-
-  Future<List<ConsolidationModel>> searchTrip(
-      int tripIndex /* 0 => gidiş, 1 => dönüş */) {
-    return FerryServices.searchTrip(
-        tripIndex); // TODO direkt return etme kontrolleri yap
-  }
 }

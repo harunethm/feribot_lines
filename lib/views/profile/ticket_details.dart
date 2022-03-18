@@ -326,7 +326,7 @@ class TicketDetails extends StatelessWidget {
           image: const DecorationImage(
             image: NetworkImage(
                 "https://images.squarespace-cdn.com/content/v1/54ff63f0e4b0bafce6932642/1572988511564-XPIO8NOVBL7U5CQ1O1QY/Google+Maps.gif?format=750w"),
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
           borderRadius: BorderRadius.circular(20),
         ),

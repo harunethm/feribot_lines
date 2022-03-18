@@ -71,7 +71,7 @@ class NotificationsPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   child: Image.network(
                                     model.image,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               )
