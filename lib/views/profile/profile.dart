@@ -71,7 +71,6 @@ class Profile extends StatelessWidget {
       ),
       elevation: 10.0,
       child: Container(
-        height: Get.size.height * 0.2,
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         decoration: const BoxDecoration(
           color: ColorsConstants.lightAccent,
@@ -83,6 +82,9 @@ class Profile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              height: Get.size.height * .02,
+            ),
             Row(
               children: <Widget>[
                 Column(
@@ -94,7 +96,7 @@ class Profile extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border.all(width: 4, color: Colors.white),
                           shape: BoxShape.circle,
-                          color: ColorsConstants.lightAccent,
+                          color: ColorsConstants.lightPrimary2,
                         ),
                         child: Center(
                           child: Text(
@@ -145,8 +147,8 @@ class Profile extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 15.0,
+            SizedBox(
+              height: Get.size.height * .02,
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -177,7 +179,10 @@ class Profile extends StatelessWidget {
                     ],
                   ),
               ],
-            )
+            ),
+            SizedBox(
+              height: Get.size.height * .02,
+            ),
           ],
         ),
       ),
@@ -263,7 +268,6 @@ class Profile extends StatelessWidget {
   }
 
   Widget menuItem(ProfileMenuModel menu) {
-    Size deviceSize = Get.size;
     return GestureDetector(
       onTap: () => menu.onTap(),
       child: Card(
@@ -275,7 +279,7 @@ class Profile extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          height: deviceSize.height * 0.09,
+          height: 64,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
               30.0,
@@ -286,53 +290,51 @@ class Profile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Expanded(
-                child: Center(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: menu.iconColor,
-                        ),
-                        child: Icon(
-                          menu.icon,
-                          size: 20,
-                          color: Colors.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: menu.iconColor,
+                      ),
+                      child: Icon(
+                        menu.icon,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              menu.title,
+                              style: const TextStyle(
+                                fontSize: 17.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                menu.subTitle,
+                                style: const TextStyle(
+                                  fontSize: 14.0,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 16.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                menu.title,
-                                style: const TextStyle(
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Flexible(
-                                child: Text(
-                                  menu.subTitle,
-                                  style: const TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
               menu.suffix ?? Container(),
@@ -345,9 +347,9 @@ class Profile extends StatelessWidget {
 }
 
 const List profileItems = [
-  {'count': '4', 'name': 'Alınan Biletler'},
-  {'count': '8', 'name': 'Yolculuk Sayısı'},
-  {'count': 'Rodos', 'name': 'En Çok Gidilen Liman'},
+  {'count': '+20 ₺', 'name': 'Onay Bekleyen'},
+  {'count': '40 ₺', 'name': 'Para Puan'},
+  {'count': '80 ₺', 'name': 'Cüzdan Bakiyesi'},
 ];
 
 class ProfileMenuModel {

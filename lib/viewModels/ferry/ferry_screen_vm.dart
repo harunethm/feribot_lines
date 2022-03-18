@@ -14,14 +14,17 @@ class FerryScreenVM extends GetxController {
   init() {
     // deperturePorts = Rx(await FerryServices.getDeperturePorts());
 
-    FerryServices.getDeperturePorts()
-        .then((value) => deperturePorts.value = value);
-    deperturePorts.refresh();
+    FerryServices.getDeperturePorts().then((value) {
+      deperturePorts.value = value;
+      deperturePorts.refresh();
+    });
 
     // arrivePorts = Rx(
     //     await FerryServices.getArrivePorts(_ferryVM.deperturePort.value.value));
     FerryServices.getArrivePorts(SearchModel.deperturePort.value.key)
-        .then((value) => arrivePorts.value = value);
-    arrivePorts.refresh();
+        .then((value) {
+      arrivePorts.value = value;
+      arrivePorts.refresh();
+    });
   }
 }
