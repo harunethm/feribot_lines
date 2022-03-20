@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [
         const Locale('tr'),
-        const Locale('en'),
       ],
       title: "FeribotLines",
       theme: Constants.lightTheme.copyWith(

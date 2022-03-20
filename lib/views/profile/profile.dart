@@ -64,7 +64,6 @@ class Profile extends StatelessWidget {
     String eMail,
     String phone,
   ) {
-    debugPrint(imagePath);
     return Material(
       borderRadius: const BorderRadius.all(
         Radius.circular(20.0),

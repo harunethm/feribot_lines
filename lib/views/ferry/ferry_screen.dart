@@ -26,6 +26,7 @@ class FerryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _ferryVM.init();
     _vm.init();
     return SafeArea(
       child: Scaffold(
@@ -261,7 +262,11 @@ class FerryScreen extends StatelessWidget {
                               onChanged: (val) {
                                 SearchModel.isOpenReturn.value = val ?? false;
                                 if (val!) {
+                                  iconColor.value =
+                                      ColorsConstants.lightPrimary;
                                   SearchModel.isOneWay.value = false;
+                                } else {
+                                  iconColor.value = ColorsConstants.lightAccent;
                                 }
                               },
                               visualDensity: VisualDensity(
@@ -562,7 +567,7 @@ class FerryScreen extends StatelessWidget {
                 subText != null && subText.isNotEmpty
                     ? Text(
                         subText,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: ColorsConstants.lightGrey,
                           fontWeight: FontWeight.w300,
                           fontSize: 12,
@@ -588,17 +593,46 @@ class FerryScreen extends StatelessWidget {
                 color: ColorsConstants.grey,
               ),
               dropdownColor: iconColor.value,
+              isDense: true,
               items: items
                   .map(
                     (KeyValue e) => DropdownMenuItem<int>(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(e.value),
+                        child: Text(
+                          e.value,
+                          style: TextStyle(
+                            color: e.key == value
+                                ? SearchModel.isOneWay.value
+                                    ? ColorsConstants.lightPrimary
+                                    : ColorsConstants.lightAccent
+                                : Colors.white,
+                            fontSize: e.key == value ? 18 : 14,
+                            fontWeight: e.key == value
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
+                        ),
                       ),
                       value: e.key,
                     ),
                   )
                   .toList(),
+              selectedItemBuilder: (BuildContext con) {
+                return items
+                    .map(
+                      (KeyValue e) => DropdownMenuItem<int>(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            e.value,
+                          ),
+                        ),
+                        value: e.key,
+                      ),
+                    )
+                    .toList();
+              },
               value: value,
               onChanged: onChange,
             ),

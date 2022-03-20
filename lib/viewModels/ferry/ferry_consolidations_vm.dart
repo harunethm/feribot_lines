@@ -8,10 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../services/ferry_services.dart';
+import 'ferry_information_vm.dart';
 
 class FerryConsolidationsVM extends GetxController {
   late CustomTabController tabController;
   FerryVM ferryVM = Get.find();
+  FerryInformationVM infoVM = Get.find();
 
   Rx<List<ConsolidationModel>> consolidations = Rx([]);
   Rx<List<ConsolidationModel>> returnConsolidations = Rx([]);
@@ -28,27 +30,51 @@ class FerryConsolidationsVM extends GetxController {
   }
 
   void searchTrip(int tripIndex /* 0 => gidiş, 1 => dönüş */) {
-    debugPrint("statement 1");
     if (tripIndex == 0) {
-      debugPrint("statement 2");
       FerryServices.searchTrip(0).then((value) {
-        debugPrint("searchTrip 0 end");
         consolidations.value = value;
       });
     } else if (tripIndex == 1) {
-      debugPrint("statement 3");
       FerryServices.searchTrip(1).then((value) {
-        debugPrint("searchTrip 1 end");
         returnConsolidations.value = value;
       });
     }
-    debugPrint("statement 4");
   }
 
   init() {
-    debugPrint("statement a");
     tabController = Get.put(CustomTabController(active: 0));
     tabController.tabs = tabs;
+
+    List<PassengerModel> _temp = [];
+    int _pageNumber = 0;
+    List.generate(
+      SearchModel.adultCount.value,
+      (index) => _temp.add(
+        PassengerModel(
+          title: "Yetişkin ${index + 1}".obs,
+          pageNumber: (_pageNumber++).obs,
+        ),
+      ),
+    );
+    List.generate(
+      SearchModel.childCount.value,
+      (index) => _temp.add(
+        PassengerModel(
+          title: "Çocuk ${index + 1}".obs,
+          pageNumber: (_pageNumber++).obs,
+        ),
+      ),
+    );
+    List.generate(
+      SearchModel.babyCount.value,
+      (index) => _temp.add(
+        PassengerModel(
+          title: "Bebek ${index + 1}".obs,
+          pageNumber: (_pageNumber++).obs,
+        ),
+      ),
+    );
+    infoVM.passengers = _temp.obs;
 
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       searchTrip(0);

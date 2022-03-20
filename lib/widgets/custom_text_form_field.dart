@@ -9,7 +9,9 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextEditingController? controller;
   final FocusNode? focusNode;
+  final String? value;
   final String? Function(String?)? validation;
+  final VoidCallback? Function(String)? onChange;
 
   const CustomTextFormField(
     this.title,
@@ -17,8 +19,10 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.keyboardType, {
     Key? key,
+    this.value,
     this.controller,
     this.validation,
+    this.onChange,
     this.focusNode,
   }) : super(key: key);
 
@@ -37,8 +41,9 @@ class CustomTextFormField extends StatelessWidget {
         TextFormField(
           focusNode: focusNode,
           validator: validation,
-          // onChanged: (text) {},
+          onChanged: onChange,
           keyboardType: keyboardType,
+          initialValue: value,
           textInputAction: TextInputAction.next,
           controller: controller,
           decoration: InputDecoration(

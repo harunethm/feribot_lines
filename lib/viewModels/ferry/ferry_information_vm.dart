@@ -6,12 +6,11 @@ import 'package:feribot_lines/models/key_value_model.dart';
 import 'package:intl/intl.dart';
 
 class FerryInformationVM extends GetxController {
-  RxBool confirmSMS = true.obs;
-
   PageController pageController =
       PageController(initialPage: 0, keepPage: true);
 
   RxList<PassengerModel> passengers = RxList();
+  ContactInfoModel contactInfo = ContactInfoModel.createEmpty();
 
   List<KeyValue> days = [];
   List<KeyValue> months = [];
@@ -27,6 +26,12 @@ class FerryInformationVM extends GetxController {
 
   late List<KeyValue> years = [];
 
+  List<KeyValue> phoneCodes = [
+    KeyValue(90, "Türkiye +90"),
+    KeyValue(1, "US +1"),
+    KeyValue(1684, "American Samoa +1684"),
+    KeyValue(355, "Albenia +355"),
+  ];
   List<KeyValue> nations = [
     KeyValue(90, "Türkiye"),
     KeyValue(30, "Yunanistan"),
@@ -35,37 +40,6 @@ class FerryInformationVM extends GetxController {
   ];
 
   init() {
-    List<PassengerModel> _temp = [];
-    int _pageNumber = 0;
-    List.generate(
-      SearchModel.adultCount.value,
-      (index) => _temp.add(
-        PassengerModel(
-          title: "Yetişkin ${index + 1}".obs,
-          pageNumber: (_pageNumber++).obs,
-        ),
-      ),
-    );
-    List.generate(
-      SearchModel.childCount.value,
-      (index) => _temp.add(
-        PassengerModel(
-          title: "Çocuk ${index + 1}".obs,
-          pageNumber: (_pageNumber++).obs,
-        ),
-      ),
-    );
-    List.generate(
-      SearchModel.babyCount.value,
-      (index) => _temp.add(
-        PassengerModel(
-          title: "Bebek ${index + 1}".obs,
-          pageNumber: (_pageNumber++).obs,
-        ),
-      ),
-    );
-    passengers = _temp.obs;
-
     days = List.generate(
       31,
       (index) {
@@ -94,6 +68,7 @@ class FerryInformationVM extends GetxController {
 class ContactInfoModel {
   RxString name = "".obs;
   RxString surName = "".obs;
+  RxInt phoneCode = 90.obs;
   RxString phoneNumber = "".obs;
   RxString eMail = "".obs;
   RxBool confirmSMS = true.obs;
@@ -101,6 +76,7 @@ class ContactInfoModel {
   ContactInfoModel({
     required this.name,
     required this.surName,
+    required this.phoneCode,
     required this.phoneNumber,
     required this.eMail,
     required this.confirmSMS,

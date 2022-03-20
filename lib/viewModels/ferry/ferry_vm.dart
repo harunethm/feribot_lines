@@ -1,5 +1,5 @@
-import 'package:feribot_lines/models/ferry/consolidation_model.dart';
-import 'package:feribot_lines/services/ferry_services.dart';
+import 'package:feribot_lines/viewModels/ferry/ferry_consolidations_vm.dart';
+import 'package:feribot_lines/viewModels/ferry/ferry_information_vm.dart';
 import 'package:get/get.dart';
 
 import '../../models/ferry/search_model.dart';
@@ -78,5 +78,8 @@ class FerryVM extends GetxController {
     }
   }
 
-  void init() {}
+  void init() {
+    Get.put(FerryInformationVM());
+    Get.put(FerryConsolidationsVM());
+  }
 }

@@ -1,26 +1,25 @@
-import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:feribot_lines/utils/colors_const.dart';
+import 'package:feribot_lines/utils/const.dart';
+import 'package:feribot_lines/utils/strings.dart';
+import 'package:feribot_lines/utils/validations.dart';
 import 'package:feribot_lines/viewModels/ferry/ferry_information_vm.dart';
+import 'package:feribot_lines/views/payment/payment.dart';
 import 'package:feribot_lines/widgets/custom_dropdown.dart';
 import 'package:feribot_lines/widgets/custom_ferry_information_card.dart';
+import 'package:feribot_lines/widgets/custom_price_info_card.dart';
+import 'package:feribot_lines/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../models/key_value_model.dart';
-import '../../utils/colors_const.dart';
-import '../../utils/const.dart';
-import '../../utils/strings.dart';
-import '../../widgets/custom_price_info_card.dart';
-import '../../widgets/custom_text_form_field.dart';
-import '../payment/payment.dart';
 
 class FerryInformation extends StatelessWidget {
   FerryInformation({Key? key}) : super(key: key);
 
-  final FerryInformationVM _vm = Get.put(FerryInformationVM());
+  final FerryInformationVM _vm = Get.find();
 
-  RxInt currentPage = 0.obs;
+  final RxInt _currentPage = 0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +72,176 @@ class FerryInformation extends StatelessWidget {
     );
   }
 
+  Widget contactInfo() {
+    return Card(
+      color: Get.theme.backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              "İletişim Bilgileri",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            contactInfoView(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget contactInfoView() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomTextFormField(
+            "Ad",
+            "Adınız",
+            Icons.person,
+            TextInputType.name,
+            value: _vm.contactInfo.name.value.toString(),
+            onChange: (newVal) {
+              _vm.contactInfo.name.value = newVal;
+              return;
+            },
+            validation: (val) {
+              return Validation.nameValidation(text: val!);
+            },
+          ),
+          CustomTextFormField(
+            "Soyad",
+            "Soyadınız",
+            Icons.person,
+            TextInputType.name,
+            value: _vm.contactInfo.surName.toString(),
+            onChange: (newVal) {
+              _vm.contactInfo.surName.value = newVal;
+              return;
+            },
+            validation: (val) {
+             return Validation.surNameValidation(text: val!);
+            },
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Telefon Kodu",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Obx(
+                      () => CustomDropDown(
+                        items: _vm.phoneCodes,
+                        value: _vm.contactInfo.phoneCode.value,
+                        onChange: (val) {
+                          _vm.contactInfo.phoneCode.value = val!;
+                        },
+                        bgColor: ColorsConstants.lightPrimary2,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+          CustomTextFormField(
+            "Telefon",
+            "Telefon Numaranız",
+            Icons.phone,
+            TextInputType.phone,
+            value: _vm.contactInfo.phoneNumber.toString(),
+            onChange: (newVal) {
+              _vm.contactInfo.phoneNumber.value = newVal;
+              return;
+            },
+            validation: (val) {
+              return Validation.phoneNumberValidation(text: val!);
+            },
+          ),
+          CustomTextFormField(
+            "E-Mail",
+            "Mail Adresiniz",
+            Icons.mail,
+            TextInputType.emailAddress,
+            value: _vm.contactInfo.eMail.toString(),
+            onChange: (newVal) {
+              _vm.contactInfo.eMail.value = newVal;
+              return;
+            },
+            validation: (val) {
+              return Validation.eMailValidation(text: val!);
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              "Sefer ve bilet bilgilerinizi e-posta ve ücretsiz SMS yoluyla ileteceğiz.",
+              style: TextStyle(
+                color: ColorsConstants.lightGrey,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            children: [
+              Obx(
+                () => Checkbox(
+                  checkColor: ColorsConstants.lightWhite,
+                  activeColor: ColorsConstants.lightAccent,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  value: _vm.contactInfo.confirmSMS.value,
+                  onChanged: (bool? value) {
+                    _vm.contactInfo.confirmSMS.value = value!;
+                  },
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  Strings.confirmSMS,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey.shade800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget passengerInfoCard() {
     return Card(
       color: Get.theme.backgroundColor,
@@ -97,11 +266,13 @@ class FerryInformation extends StatelessWidget {
             ),
             Obx(
               () => ResponsiveGridList(
+                shrinkWrap: true,
                 horizontalGridMargin: 10,
                 verticalGridMargin: 10,
+                verticalGridSpacing: 10,
+                horizontalGridSpacing: 10,
                 minItemWidth: Get.size.width * .2,
                 rowMainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                shrinkWrap: true,
                 children: _vm.passengers
                     .map(
                       (e) => ElevatedButton(
@@ -131,89 +302,13 @@ class FerryInformation extends StatelessWidget {
                     return passengerInfoView(_vm.passengers[index]);
                   },
                   onPageChanged: (curr) {
-                    currentPage.value = curr;
+                    _currentPage.value = curr;
                   },
                 ),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget contactInfoView() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomTextFormField(
-            "Ad",
-            "Adınız",
-            Icons.person,
-            TextInputType.name,
-          ),
-          const CustomTextFormField(
-            "Soyad",
-            "Soyadınız",
-            Icons.person,
-            TextInputType.name,
-          ),
-          const CustomTextFormField(
-            "Telefon",
-            "Telefon Numaranız",
-            Icons.phone,
-            TextInputType.phone,
-          ),
-          const CustomTextFormField(
-            "E-Mail",
-            "Mail Adresiniz",
-            Icons.mail,
-            TextInputType.emailAddress,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              "Sefer ve bilet bilgilerinizi e-posta ve ücretsiz SMS yoluyla ileteceğiz.",
-              style: TextStyle(
-                color: ColorsConstants.lightGrey,
-                fontSize: 12,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Row(
-            children: [
-              Obx(
-                () => Checkbox(
-                  checkColor: ColorsConstants.lightWhite,
-                  activeColor: ColorsConstants.lightAccent,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                  ),
-                  value: _vm.confirmSMS.value,
-                  onChanged: (bool? value) {
-                    _vm.confirmSMS.value = value!;
-                  },
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  Strings.confirmSMS,
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.grey.shade800,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -234,17 +329,33 @@ class FerryInformation extends StatelessWidget {
               ),
             ),
           ),
-          const CustomTextFormField(
+          CustomTextFormField(
             "Ad",
             "Adınız",
             FontAwesomeIcons.userAlt,
             TextInputType.name,
+            value: passenger.name.value.toString(),
+            onChange: (newVal) {
+              passenger.name.value = newVal;
+              return;
+            },
+            validation: (val) {
+              return Validation.nameValidation(text: val!);
+            },
           ),
-          const CustomTextFormField(
+          CustomTextFormField(
             "Soyad",
             "Soyadınız",
             FontAwesomeIcons.userAlt,
             TextInputType.name,
+            value: passenger.surName.value.toString(),
+            onChange: (newVal) {
+              passenger.surName.value = newVal;
+              return;
+            },
+            validation: (val) {
+              return Validation.surNameValidation(text: val!);
+            },
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,6 +443,9 @@ class FerryInformation extends StatelessWidget {
                         value: passenger.nationalityCode.value,
                         onChange: (val) {
                           passenger.nationalityCode.value = val!;
+                          if (val != 90) {
+                            passenger.identificationNumber.value = "";
+                          }
                         },
                         bgColor: ColorsConstants.lightPrimary2,
                       ),
@@ -344,17 +458,38 @@ class FerryInformation extends StatelessWidget {
               ),
             ],
           ),
-          const CustomTextFormField(
+          CustomTextFormField(
             "Pasaport Numarası",
             "Pasaport Numaranız",
             FontAwesomeIcons.passport,
             TextInputType.phone,
+            value: passenger.passportNumber.value.toString(),
+            onChange: (newVal) {
+              passenger.passportNumber.value = newVal;
+              return;
+            },
+            validation: (val) {
+             return Validation.passportNumberValidation(text: val!);
+            },
           ),
-          const CustomTextFormField(
-            "TC Kimlik No",
-            "Türkiye Cumhuriyeti Kimlik Numaranız",
-            FontAwesomeIcons.idCard,
-            TextInputType.phone,
+          Obx(
+            () => Visibility(
+              visible: passenger.nationalityCode.value == 90,
+              child: CustomTextFormField(
+                "TC Kimlik No",
+                "Türkiye Cumhuriyeti Kimlik Numaranız",
+                FontAwesomeIcons.idCard,
+                TextInputType.phone,
+                value: passenger.identificationNumber.value.toString(),
+                onChange: (newVal) {
+                  passenger.identificationNumber.value = newVal;
+                  return;
+                },
+                validation: (val) {
+                 return Validation.identificationNumberValidation(text: val!);
+                },
+              ),
+            ),
           ),
           const SizedBox(
             height: 10,
@@ -442,35 +577,6 @@ class FerryInformation extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
               color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-
-  Widget contactInfo() {
-    return Card(
-      color: Get.theme.backgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              "İletişim Bilgileri",
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            contactInfoView(),
-          ],
         ),
       ),
     );
