@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/const.dart';
+import '../../utils/theme_constants.dart';
 import 'ticket_details.dart';
 
 class AllTickets extends StatelessWidget {
@@ -17,7 +17,7 @@ class AllTickets extends StatelessWidget {
         shadowColor: Colors.transparent,
         title: Text(
           "Biletlerim",
-          style: Constants.themeTitleStyle,
+          style: ThemeConstants.themeTitleStyle,
         ),
       ),
       body: Column(

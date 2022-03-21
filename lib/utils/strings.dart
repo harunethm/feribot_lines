@@ -1,4 +1,5 @@
 class Strings {
+  static String continueWithOutLogin = "Giriş yapmadan devam et.";
   static String forgotPassword = "Şifreni mi unuttun ?";
   static String forgotPassDesc =
       "Lütfen mail adresini gir. Sana, yeni şifre oluşturabileceğin bir link göndereceğiz.";
@@ -96,4 +97,6 @@ class Strings {
       "https://feribotlines.com/media/company/2019/06/10/fethiye-rodos-ferry-tilos.jpg";
   static String emptyCompanyImagePath =
       "https://feribotlines.com/media/company/2018/12/16/ocean-travel.png";
+
+  static String waves = "assets/icons/waves.png";
 }

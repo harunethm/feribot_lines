@@ -3,9 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'colors_const.dart';
 
-class Constants {
-  static String appName = "Themes UI Kit";
-
+class ThemeConstants {
   static TextStyle themeTitleStyle = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 20,

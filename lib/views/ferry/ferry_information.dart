@@ -1,5 +1,5 @@
 import 'package:feribot_lines/utils/colors_const.dart';
-import 'package:feribot_lines/utils/const.dart';
+import 'package:feribot_lines/utils/theme_constants.dart';
 import 'package:feribot_lines/utils/strings.dart';
 import 'package:feribot_lines/utils/validations.dart';
 import 'package:feribot_lines/viewModels/ferry/ferry_information_vm.dart';
@@ -67,7 +67,7 @@ class FerryInformation extends StatelessWidget {
       elevation: 2,
       title: Text(
         Strings.booking,
-        style: Constants.themeTitleStyle,
+        style: ThemeConstants.themeTitleStyle,
       ),
     );
   }

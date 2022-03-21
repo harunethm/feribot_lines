@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/const.dart';
+import '../../utils/theme_constants.dart';
 import '../../utils/strings.dart';
 
 class NotificationsPage extends StatelessWidget {
@@ -15,7 +15,7 @@ class NotificationsPage extends StatelessWidget {
         backgroundColor: Theme.of(context).backgroundColor,
         title: Text(
           Strings.notifications,
-          style: Constants.themeTitleStyle,
+          style: ThemeConstants.themeTitleStyle,
         ),
       ),
       body: Column(

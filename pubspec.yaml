@@ -58,6 +58,12 @@ dependencies:
   # image with retry
   flutter_image: ^4.1.0
   
+  # web view
+  webview_flutter: ^3.0.1
+
+  # dialog windows
+  awesome_dialog: ^2.1.2
+  
   # for better card vision
   # awesome_card: ^1.1.7
 

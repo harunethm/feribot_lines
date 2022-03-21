@@ -1,13 +1,19 @@
+import 'package:feribot_lines/utils/validations.dart';
+import 'package:feribot_lines/viewModels/login/forgot_password_vm.dart';
 import 'package:feribot_lines/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
+import '../../utils/theme_constants.dart';
 import '../../utils/strings.dart';
 
 class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+  ForgotPassword({Key? key}) : super(key: key);
+
+  TextEditingController _controller = TextEditingController();
+  ForgotPasswordVM _vm = Get.put(ForgotPasswordVM());
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class ForgotPassword extends StatelessWidget {
                           height: MediaQuery.of(context).size.height * 0.4,
                           width: double.infinity,
                           child: Image.asset(
-                            'assets/icons/waves.png',
+                            Strings.waves,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -54,70 +60,84 @@ class ForgotPassword extends StatelessWidget {
                               textAlign: TextAlign.center,
                             )),
                         const SizedBox(height: 30),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32),
-                          child: TextField(
-                            onChanged: (text) {},
-                            keyboardType: TextInputType.emailAddress,
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                              prefixIconConstraints: const BoxConstraints(
-                                  minWidth: 35, maxHeight: 35),
-                              prefixIcon: Padding(
-                                padding: const EdgeInsetsDirectional.only(
-                                    start: 12.0, end: 5.0),
-                                child: FaIcon(
-                                  FontAwesomeIcons.solidEnvelope,
-                                  size: 20,
-                                  color: ColorsConstants.lightAccent,
+                        Form(
+                          key: _vm.mailFormKey,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: TextFormField(
+                              controller: _controller,
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              validator: (val) =>
+                                  Validation.eMailValidation(text: val!),
+                              decoration: InputDecoration(
+                                prefixIconConstraints: const BoxConstraints(
+                                    minWidth: 35, maxHeight: 35),
+                                prefixIcon: const Padding(
+                                  padding: EdgeInsetsDirectional.only(
+                                      start: 12.0, end: 5.0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.solidEnvelope,
+                                    size: 20,
+                                    color: ColorsConstants.lightAccent,
+                                  ),
                                 ),
-                              ),
-                              hintText: Strings.hintEmail,
-                              hintStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.grey,
-                                  width: 0.5,
+                                hintText: Strings.hintEmail,
+                                hintStyle: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              focusedBorder: (OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.grey,
-                                  width: 0.5,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.grey,
+                                    width: 0.5,
+                                  ),
+                                  borderRadius: BorderRadius.circular(100),
                                 ),
-                                borderRadius: BorderRadius.circular(100),
-                              )),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                focusedBorder: (OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.grey,
+                                    width: 0.5,
+                                  ),
+                                  borderRadius: BorderRadius.circular(100),
+                                )),
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(height: 20),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pop();
+                            if (!_vm.isLoading.value) {
+                              _vm.forgotPassword(_controller.text);
+                            }
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 32),
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.only(top: 15, bottom: 15),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: ColorsConstants.lightPrimary),
-                              child: Center(
-                                child: Text(
-                                  Strings.send,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
+                            child: Obx(
+                              () => Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: ColorsConstants.lightPrimary),
+                                child: Center(
+                                  child: !_vm.isLoading.value
+                                      ? Text(
+                                          Strings.send,
+                                          style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : const Icon(
+                                          FontAwesomeIcons.spinner,
+                                          color: Colors.white,
+                                        ),
                                 ),
                               ),
                             ),
@@ -125,13 +145,7 @@ class ForgotPassword extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         TextButton(
-                          onPressed: () => {
-                            Get.to(
-                              () => Login(),
-                              duration: Duration(milliseconds: 300),
-                              transition: Transition.rightToLeft,
-                            ),
-                          },
+                          onPressed: () => Get.offAll(Login()),
                           clipBehavior: Clip.hardEdge,
                           child: Text(
                             Strings.getBack,
@@ -149,13 +163,13 @@ class ForgotPassword extends StatelessWidget {
                     ),
                     Positioned(
                       left: 0,
-                      top: MediaQuery.of(context).size.height * 0.1,
+                      top: Get.size.height * 0.1,
                       right: 0,
                       child: Container(
                         margin: EdgeInsets.zero,
                         width: 100,
                         height: 100,
-                        child: Icon(
+                        child: const Icon(
                           Icons.directions_ferry,
                           size: 100,
                           color: Colors.white,

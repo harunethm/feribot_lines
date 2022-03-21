@@ -5,7 +5,7 @@ import 'package:feribot_lines/utils/page_transation/page_transition.dart';
 
 import '../views/Login/login.dart';
 import '../views/profile/profile.dart';
-import 'const.dart';
+import 'theme_constants.dart';
 
 class CommonFunctions {
   static String apiKey = "AIzaSyDr4aP_rczqVSLo86cMdinyPs-tIFlh9AE";
@@ -57,7 +57,7 @@ class CommonFunctions {
   }
 
   static bool isLightTheme() {
-    bool isLightTheme = Get.theme == Constants.lightTheme;
+    bool isLightTheme = Get.theme == ThemeConstants.lightTheme;
     return isLightTheme;
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/const.dart';
+import '../../utils/theme_constants.dart';
 import '../payment/payment_success.dart';
 
 class TicketDetails extends StatelessWidget {
@@ -371,7 +371,7 @@ class TicketDetails extends StatelessWidget {
       shadowColor: Colors.grey.shade300,
       title: Text(
         "Bilet Bilgileri",
-        style: Constants.themeTitleStyle,
+        style: ThemeConstants.themeTitleStyle,
       ),
     );
   }

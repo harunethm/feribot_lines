@@ -1,6 +1,7 @@
 import 'package:feribot_lines/utils/colors_const.dart';
-import 'package:feribot_lines/utils/const.dart';
+import 'package:feribot_lines/utils/theme_constants.dart';
 import 'package:feribot_lines/utils/routes.dart';
+import 'package:feribot_lines/views/login/login.dart';
 
 import 'package:feribot_lines/views/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +31,11 @@ class MyApp extends StatelessWidget {
         const Locale('tr'),
       ],
       title: "FeribotLines",
-      theme: Constants.lightTheme.copyWith(
+      theme: ThemeConstants.lightTheme.copyWith(
         unselectedWidgetColor: ColorsConstants.lightPrimary,
       ),
       getPages: CustomRoutes.routes,
-      home: SplashScreen(),
+      home: Login(),
       defaultTransition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
     );
