@@ -1,5 +1,7 @@
+import 'package:feribot_lines/models/profile/ticket_model.dart';
+import 'package:feribot_lines/models/response_model.dart';
+import 'package:feribot_lines/services/ticket_service.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
@@ -23,15 +25,30 @@ class AllTickets extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              itemCount: ticketModelList.length,
-              itemBuilder: (context, index) {
-                TicketModel model = ticketModelList[index];
-                return ticket(model);
-              },
-            ),
-          ),
+              child: FutureBuilder(
+            future: TicketService.getAllTickets(),
+            builder: (context,
+                AsyncSnapshot<ResponseModel<List<TicketModel>>> snapshot) {
+              while (true) {
+                if (snapshot.data != null) {
+                  List<TicketModel> _tickets = snapshot.data!.data;
+                  return ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 20),
+                    itemCount: _tickets.length,
+                    itemBuilder: (context, index) {
+                      TicketModel model = _tickets[index];
+                      return ticket(model);
+                    },
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }
+            },
+          )),
         ],
       ),
     );
@@ -41,7 +58,7 @@ class AllTickets extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.to(
-          () => TicketDetails(),
+          () => TicketDetails(ticket: model),
           duration: Duration(milliseconds: 300),
           transition: Transition.rightToLeft,
         );
@@ -149,58 +166,3 @@ class AllTickets extends StatelessWidget {
     );
   }
 }
-
-class TicketModel {
-  IconData icon;
-  String companyImage;
-  String type;
-  String name;
-  String phone;
-  String eMail;
-  bool isActive;
-
-  TicketModel(
-    this.icon,
-    this.companyImage,
-    this.type,
-    this.name,
-    this.phone,
-    this.eMail,
-    this.isActive,
-  );
-}
-
-List<TicketModel> ticketModelList = ticketDataList
-    .map(
-      (item) => TicketModel(
-        item['icon'] as IconData,
-        item['companyImage'] as String,
-        item['type'].toString(),
-        item['name'].toString(),
-        item['phone'] as String,
-        item['eMail'] as String,
-        item['isActive'] as bool,
-      ),
-    )
-    .toList();
-
-var ticketDataList = [
-  {
-    "icon": FontAwesomeIcons.ship,
-    "companyImage": "",
-    "type": "Fethiye - Rodos",
-    "name": "Harun Calis",
-    "phone": "+90 555 666 7777",
-    "eMail": "testDeneme@gmail.com",
-    "isActive": true
-  },
-  {
-    "icon": FontAwesomeIcons.ship,
-    "companyImage": "",
-    "type": "Rodos - Fethiye",
-    "name": "Harun Calis",
-    "phone": "+90 555 666 7777",
-    "eMail": "testDeneme@gmail.com",
-    "isActive": false
-  },
-];

@@ -143,13 +143,5 @@ class CustomRoutes {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
     ),
-    GetPage(
-      name: "/TicketDetails",
-      page: () {
-        return TicketDetails();
-      },
-      transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 300),
-    ),
   ];
 }

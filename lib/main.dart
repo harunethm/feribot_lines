@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         unselectedWidgetColor: ColorsConstants.lightPrimary,
       ),
       getPages: CustomRoutes.routes,
-      home: Login(),
+      home: SplashScreen(),
       defaultTransition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
     );

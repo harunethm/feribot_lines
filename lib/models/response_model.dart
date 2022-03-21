@@ -1,7 +1,7 @@
-class ResponseModel {
+class ResponseModel<T> {
   final bool error;
   final String errorMessage;
-  final dynamic data;
+  final T data;
   ResponseModel({
     required this.error,
     required this.errorMessage,

@@ -1,3 +1,4 @@
+import 'package:feribot_lines/models/profile/ticket_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,7 +7,11 @@ import '../../utils/theme_constants.dart';
 import '../payment/payment_success.dart';
 
 class TicketDetails extends StatelessWidget {
-  const TicketDetails({Key? key}) : super(key: key);
+  late TicketModel ticket;
+  TicketDetails({
+    Key? key,
+    required this.ticket,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +41,18 @@ class TicketDetails extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      backgroundColor: Get.theme.backgroundColor,
+      elevation: 4,
+      shadowColor: Colors.grey.shade300,
+      title: Text(
+        "Bilet Bilgileri",
+        style: ThemeConstants.themeTitleStyle,
       ),
     );
   }
@@ -364,41 +381,6 @@ class TicketDetails extends StatelessWidget {
     );
   }
 
-  AppBar appBar() {
-    return AppBar(
-      backgroundColor: Get.theme.backgroundColor,
-      elevation: 4,
-      shadowColor: Colors.grey.shade300,
-      title: Text(
-        "Bilet Bilgileri",
-        style: ThemeConstants.themeTitleStyle,
-      ),
-    );
-  }
-
-  Widget bottomNaviBarButton() {
-    return InkWell(
-      onTap: () {
-        Get.back();
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: ColorsConstants.lightPrimary,
-        ),
-        child: const Center(
-          child: Text(
-            "Geri Dön",
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget divierWithTitle(String title) {
     return Column(
       children: [
@@ -515,6 +497,7 @@ class TicketDetails extends StatelessWidget {
       ),
     );
   }
+
   Widget travelInfo(
     String from,
     String to,
@@ -674,6 +657,29 @@ class TicketDetails extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget bottomNaviBarButton() {
+    return InkWell(
+      onTap: () {
+        Get.back();
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: ColorsConstants.lightPrimary,
+        ),
+        child: const Center(
+          child: Text(
+            "Geri Dön",
+            style: TextStyle(
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+        ),
       ),
     );
   }

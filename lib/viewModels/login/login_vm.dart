@@ -37,6 +37,7 @@ class LoginVM extends GetxController {
           } else {
             // TODO devam ettir
             USER.name = model.name;
+            USER.isLogined = true;
             Get.offAll(() => FerryScreen());
           }
         },

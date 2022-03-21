@@ -1,3 +1,4 @@
+import 'package:feribot_lines/services/login.dart';
 import 'package:feribot_lines/views/Login/login.dart';
 import 'package:feribot_lines/views/profile/all_tickets.dart';
 import 'package:feribot_lines/views/profile/edit_profile.dart';
@@ -245,7 +246,8 @@ class Profile extends StatelessWidget {
           iconColor: ColorsConstants.profileColor5,
           icon: FontAwesomeIcons.signOutAlt,
           onTap: () {
-            Get.to(
+            LoginService.logOut();
+            Get.offAll(
               () => Login(),
               duration: Duration(milliseconds: 300),
               transition: Transition.rightToLeft,
