@@ -3,9 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../utils/colors_const.dart';
-import '../utils/common_functions.dart';
 import '../utils/strings.dart';
-import '../views/ferry/ferry_information.dart';
 import 'custom_seperator.dart';
 
 class FerryTicket extends StatelessWidget {

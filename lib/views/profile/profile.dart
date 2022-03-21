@@ -1,5 +1,4 @@
 import 'package:feribot_lines/views/Login/login.dart';
-import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/profile/all_tickets.dart';
 import 'package:feribot_lines/views/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/common_functions.dart';
 import '../../utils/strings.dart';
 import 'notifications.dart';
 
@@ -23,7 +21,7 @@ class Profile extends StatelessWidget {
         elevation: 0,
         title: const Text(
           "Profil",
-          style: titleStyle,
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(

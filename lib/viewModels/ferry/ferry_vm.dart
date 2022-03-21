@@ -1,8 +1,11 @@
+import 'package:feribot_lines/models/user.dart';
 import 'package:feribot_lines/viewModels/ferry/ferry_consolidations_vm.dart';
 import 'package:feribot_lines/viewModels/ferry/ferry_information_vm.dart';
 import 'package:get/get.dart';
 
 import '../../models/ferry/search_model.dart';
+import '../../views/login/login.dart';
+import '../../views/profile/profile.dart';
 
 class FerryVM extends GetxController {
   setCount(int index, int count) {
@@ -75,6 +78,22 @@ class FerryVM extends GetxController {
         return _list.join(joinString).obs;
       default:
         return "".obs;
+    }
+  }
+
+  void openProfile() {
+    if (USER.isLogined) {
+      Get.to(
+        () => Profile(),
+        duration: Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
+    } else {
+      Get.offAll(
+        () => Login(),
+        duration: Duration(milliseconds: 300),
+        transition: Transition.rightToLeft,
+      );
     }
   }
 

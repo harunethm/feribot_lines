@@ -6,11 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/ferry/search_model.dart';
-import '../../models/key_value_model.dart';
 import '../../utils/colors_const.dart';
-import '../../utils/common_functions.dart';
 import '../../utils/strings.dart';
 import '../../viewModels/ferry/ferry_consolidations_vm.dart';
+import '../../viewModels/ferry/ferry_vm.dart';
 import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_tabs.dart';
 import '../../widgets/ferry_details.dart';
@@ -22,7 +21,7 @@ class FerryConsolidations extends StatelessWidget {
   }) : super(key: key);
 
   final FerryConsolidationsVM _vm = Get.put(FerryConsolidationsVM());
-  // final FerryVM _ferryVM = Get.find();
+  final FerryVM _ferryVM = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class FerryConsolidations extends StatelessWidget {
               size: 20,
             ),
             onPressed: () {
-              CommonFunctions.openProfile();
+              _ferryVM.openProfile();
             },
           ),
         ],

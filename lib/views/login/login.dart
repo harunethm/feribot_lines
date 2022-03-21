@@ -1,19 +1,14 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:feribot_lines/models/login/login_model.dart';
-import 'package:feribot_lines/services/login.dart';
-import 'package:feribot_lines/utils/common_functions.dart';
 import 'package:feribot_lines/utils/validations.dart';
 import 'package:feribot_lines/viewModels/login/login_vm.dart';
 import 'package:feribot_lines/views/Login/forgot_password.dart';
 import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/login/register.dart';
-import 'package:feribot_lines/widgets/custom_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors_const.dart';
-import '../../utils/theme_constants.dart';
 import '../../utils/strings.dart';
 
 class Login extends StatelessWidget {
@@ -69,7 +64,7 @@ class Login extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 "ÜYE GİRİŞİ",
-                                style: titleStyle,
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),

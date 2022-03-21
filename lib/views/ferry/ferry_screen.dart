@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../../models/ferry/search_model.dart';
 import '../../models/key_value_model.dart';
 import '../../utils/colors_const.dart';
-import '../../utils/common_functions.dart';
 import '../../utils/strings.dart';
 import '../../viewModels/ferry/ferry_screen_vm.dart';
 import '../../viewModels/ferry/ferry_vm.dart';
@@ -41,7 +40,7 @@ class FerryScreen extends StatelessWidget {
                 icon: const FaIcon(FontAwesomeIcons.userAlt),
                 iconSize: 28,
                 onPressed: () {
-                  CommonFunctions.openProfile();
+                  _ferryVM.openProfile();
                 },
               ),
             ),
@@ -182,11 +181,11 @@ class FerryScreen extends StatelessWidget {
                                     SearchModel.isOneWay.value
                                         ? Strings.oneWay
                                         : Strings.twoWay,
-                                    style: titleStyle,
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
                                   const Text(
                                     "Değiştirmek için tıklayınız.",
-                                    style: subtitleStyle,
+                                    style: TextStyle(color: Colors.grey, fontSize: 12),
                                   )
                                 ],
                               ),

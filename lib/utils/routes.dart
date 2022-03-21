@@ -1,3 +1,6 @@
+import 'package:feribot_lines/utils/page_transation/enum.dart';
+import 'package:feribot_lines/utils/page_transation/page_transition.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:feribot_lines/views/splash_screen.dart';
@@ -17,6 +20,24 @@ import 'package:feribot_lines/views/profile/profile.dart';
 import 'package:feribot_lines/views/profile/ticket_details.dart';
 
 class CustomRoutes {
+  static PageTransition pushWithRightAnimation(
+      {required Widget child, required Duration duration}) {
+    return PageTransition(
+        child: child, type: PageTransitionType.rightToLeft, duration: duration);
+  }
+
+  static PageTransition pushWithTopAnimation(
+      {required Widget child, required Duration duration}) {
+    return PageTransition(
+        child: child, type: PageTransitionType.bottomToTop, duration: duration);
+  }
+
+  static PageTransition pushWithFadeAnimation(
+      {required Widget child, required Duration duration}) {
+    return PageTransition(
+        child: child, type: PageTransitionType.fade, duration: duration);
+  }
+
   static List<GetPage<dynamic>> routes = [
     GetPage(
       name: "/",
