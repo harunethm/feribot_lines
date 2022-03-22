@@ -89,15 +89,18 @@ class FerryScreen extends StatelessWidget {
                         Container(
                           width: Get.size.width * .3,
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Obx(() => CustomDropDownTrip(
-                                items: _vm.deperturePorts.value,
-                                selected: SearchModel.deperturePort.value.key,
-                                onChanged: (val) {
-                                  SearchModel.deperturePort.value =
-                                      _vm.deperturePorts.value[val!];
-                                  SearchModel.deperturePort.refresh();
-                                },
-                              )),
+                          child: Obx(
+                            () => CustomDropDownTrip(
+                              items: _vm.deperturePorts.value,
+                              selected: SearchModel.deperturePort.value.key,
+                              onChanged: (val) {
+                                SearchModel.deperturePort.value =
+                                    _vm.deperturePorts.value[val!];
+                                SearchModel.deperturePort.refresh();
+                                _vm.updateArrivePorts();
+                              },
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           width: 5,
@@ -140,7 +143,7 @@ class FerryScreen extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: SearchModel.isOneWay.value
-                                          ? FaIcon(
+                                          ? const FaIcon(
                                               FontAwesomeIcons.arrowDown,
                                               color: Colors.white,
                                               size: 12,
@@ -181,11 +184,14 @@ class FerryScreen extends StatelessWidget {
                                     SearchModel.isOneWay.value
                                         ? Strings.oneWay
                                         : Strings.twoWay,
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   const Text(
                                     "Değiştirmek için tıklayınız.",
-                                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 12),
                                   )
                                 ],
                               ),

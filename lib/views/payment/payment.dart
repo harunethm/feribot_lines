@@ -63,12 +63,13 @@ class Payment extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _controller.runJavascriptReturningResult(clearScreen).then(
-                (value) => debugPrint("test clearScreen: " + value),
-              );
+          // _controller.runJavascriptReturningResult(clearScreen).then(
+          //       (value) => debugPrint("test clearScreen: " + value),
+          //     );
+          Get.offAll(PaymentSuccess());
         },
         child: const Icon(
-          FontAwesomeIcons.spinner,
+          FontAwesomeIcons.check,
         ),
       ),
       // bottomNavigationBar: bottomButton(),

@@ -51,24 +51,38 @@ class FerryServices {
   }
 
   static Future<List<KeyValue>> getDeperturePorts() async {
-    return [
-      KeyValue(0, "Fethiye"),
-      KeyValue(1, "Atina"),
-      KeyValue(2, "Ayvalık"),
-      KeyValue(3, "Bodrum"),
-      KeyValue(4, "Çeşme"),
-      KeyValue(5, "Didim"),
-    ];
+    List<KeyValue> _ports = [];
+    await Future.delayed(const Duration(seconds: 2), () {
+      _ports = [
+        KeyValue(0, "Fethiye"),
+        KeyValue(1, "Atina"),
+        KeyValue(2, "Ayvalık"),
+        KeyValue(3, "Bodrum"),
+        KeyValue(4, "Çeşme"),
+        KeyValue(5, "Didim"),
+      ];
+    });
+    return _ports;
   }
 
   static Future<List<KeyValue>> getArrivePorts(int deperturePort) async {
-    return [
-      KeyValue(0, "Paros"),
-      KeyValue(1, "Patmos"),
-      KeyValue(2, "Rodos"),
-      KeyValue(3, "Sakarya"),
-      KeyValue(4, "Sarız"),
-      KeyValue(5, "Samoz"),
-    ];
+    List<KeyValue> _ports = [];
+    await Future.delayed(const Duration(seconds: 2), () {
+      if (deperturePort == 0) {
+        _ports = [
+          KeyValue(2, "Rodos"),
+        ];
+      } else {
+        _ports = [
+          KeyValue(0, "Paros"),
+          KeyValue(1, "Patmos"),
+          KeyValue(2, "Rodos"),
+          KeyValue(3, "Sakarya"),
+          KeyValue(4, "Sarız"),
+          KeyValue(5, "Samoz"),
+        ];
+      }
+    });
+    return _ports;
   }
 }

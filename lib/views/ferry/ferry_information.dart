@@ -13,7 +13,6 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-
 class FerryInformation extends StatelessWidget {
   FerryInformation({Key? key}) : super(key: key);
 
@@ -132,7 +131,7 @@ class FerryInformation extends StatelessWidget {
               return;
             },
             validation: (val) {
-             return Validation.surNameValidation(text: val!);
+              return Validation.surNameValidation(text: val!);
             },
           ),
           Column(
@@ -368,51 +367,36 @@ class FerryInformation extends StatelessWidget {
                 height: 5,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    flex: 2,
-                    child: Obx(
-                      () => CustomDropDown(
-                        items: _vm.days,
-                        value: passenger.birthDay.value,
-                        onChange: (val) {
-                          passenger.birthDay.value = val!;
-                        },
-                        bgColor: ColorsConstants.lightPrimary2,
-                      ),
+                  Obx(
+                    () => CustomDropDown(
+                      items: _vm.days,
+                      value: passenger.birthDay.value,
+                      onChange: (val) {
+                        passenger.birthDay.value = val!;
+                      },
+                      bgColor: ColorsConstants.lightPrimary2,
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Obx(
-                      () => CustomDropDown(
-                        items: _vm.months,
-                        value: passenger.birthMonth.value,
-                        onChange: (val) {
-                          passenger.birthMonth.value = val!;
-                        },
-                        bgColor: ColorsConstants.lightPrimary2,
-                      ),
+                  Obx(
+                    () => CustomDropDown(
+                      items: _vm.months,
+                      value: passenger.birthMonth.value,
+                      onChange: (val) {
+                        passenger.birthMonth.value = val!;
+                      },
+                      bgColor: ColorsConstants.lightPrimary2,
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Obx(
-                      () => CustomDropDown(
-                        items: _vm.years,
-                        value: passenger.birthYear.value,
-                        onChange: (val) {
-                          passenger.birthYear.value = val!;
-                        },
-                        bgColor: ColorsConstants.lightPrimary2,
-                      ),
+                  Obx(
+                    () => CustomDropDown(
+                      items: _vm.years,
+                      value: passenger.birthYear.value,
+                      onChange: (val) {
+                        passenger.birthYear.value = val!;
+                      },
+                      bgColor: ColorsConstants.lightPrimary2,
                     ),
                   ),
                 ],
@@ -469,7 +453,7 @@ class FerryInformation extends StatelessWidget {
               return;
             },
             validation: (val) {
-             return Validation.passportNumberValidation(text: val!);
+              return Validation.passportNumberValidation(text: val!);
             },
           ),
           Obx(
@@ -486,7 +470,7 @@ class FerryInformation extends StatelessWidget {
                   return;
                 },
                 validation: (val) {
-                 return Validation.identificationNumberValidation(text: val!);
+                  return Validation.identificationNumberValidation(text: val!);
                 },
               ),
             ),

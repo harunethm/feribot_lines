@@ -1,4 +1,6 @@
+import 'package:feribot_lines/views/ferry/ferry_screen.dart';
 import 'package:feribot_lines/views/profile/all_tickets.dart';
+import 'package:feribot_lines/widgets/custom_seperator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,36 +18,49 @@ class PaymentSuccess extends StatelessWidget {
       backgroundColor: Get.theme.backgroundColor,
       extendBody: true,
       appBar: appBar(),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-          child: Column(
-            children: <Widget>[
-              ticketSuccessfullyCreated(),
-              dividerWithTitle(""),
-              goToMap(context),
-              dividerWithTitle("Sefer Bilgileri"),
-              tripInformation(),
-              dividerWithTitle("İletişim Bilgileri"),
-              contactInfo(),
-              dividerWithTitle("Yolcu Bilgileri"),
-              passangerInfo(),
-              dividerWithTitle("Ödeme Bilgileri"),
-              paymentInfo(),
-              dividerWithTitle("Voucher Gönder"),
-              Row(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+            child: Column(
+              children: <Widget>[
+                ticketSuccessfullyCreated(),
+                dividerWithTitle(""),
+                goToMap(context),
+                dividerWithTitle("Sefer Bilgileri"),
+                tripInformation(),
+                dividerWithTitle("İletişim Bilgileri"),
+                contactInfo(),
+                dividerWithTitle("Yolcu Bilgileri"),
+                passangerInfo(),
+                dividerWithTitle("Ödeme Bilgileri"),
+                paymentInfo(),
+                dividerWithTitle("Voucher Gönder"),
+                sendVoucher(),
+                dividerWithTitle(""),
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: bottomNaviBarButton(),
+    );
+  }
+
+  Row sendVoucher() {
+    return Row(
                 children: [
                   Expanded(
                     child: InkWell(
                       onTap: () {},
                       child: Container(
                         margin: const EdgeInsets.only(
-                            bottom: 15, left: 10, right: 10),
+                            bottom: 16, left: 16, right: 8),
                         height: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: ColorsConstants.success,
+                          color: ColorsConstants.lightAccent2,
                         ),
                         child: const Center(
                           child: Text(
@@ -66,11 +81,11 @@ class PaymentSuccess extends StatelessWidget {
                       },
                       child: Container(
                         margin: const EdgeInsets.only(
-                            bottom: 15, left: 10, right: 10),
+                            bottom: 16, left: 8, right: 16),
                         height: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: ColorsConstants.success,
+                          color: ColorsConstants.lightAccent2,
                         ),
                         child: const Center(
                           child: Text(
@@ -85,16 +100,7 @@ class PaymentSuccess extends StatelessWidget {
                     ),
                   )
                 ],
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: bottomNaviBarButton(),
-    );
+              );
   }
 
   Widget row(
@@ -429,17 +435,13 @@ class PaymentSuccess extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Flexible(
             flex: 1,
-            child: Center(
-              heightFactor: 1,
-              widthFactor: 1,
-              child: Image.asset(
-                "assets/icons/invoice.png",
-                alignment: Alignment.center,
-              ),
+            child: Image.asset(
+              "assets/icons/invoice.png",
+              alignment: Alignment.center,
             ),
           ),
           const SizedBox(width: 10.0),
@@ -482,25 +484,57 @@ class PaymentSuccess extends StatelessWidget {
   }
 
   Widget bottomNaviBarButton() {
-    return InkWell(
-      onTap: () {
-        Get.off(() => AllTickets());
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: ColorsConstants.lightPrimary,
-        ),
-        child: const Center(
-          child: Text(
-            "Tüm Biletlerim",
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+    return Row(
+      children: [
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              Get.offAll(() => FerryScreen());
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 16, left: 16, right: 8),
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: ColorsConstants.lightPrimary,
+              ),
+              child: const Center(
+                child: Text(
+                  "Ana Sayfa",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
           ),
         ),
-      ),
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              Get.offAll(() => AllTickets());
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 16, left: 8, right: 16),
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: ColorsConstants.lightPrimary,
+              ),
+              child: const Center(
+                child: Text(
+                  "Tüm Biletlerim",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -568,44 +602,20 @@ class PaymentSuccess extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-              Row(
-                children: List.generate(
-                  3,
-                  (ii) => Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, right: 10, top: 5, bottom: 5),
-                    child: Container(
-                      height: 2,
-                      width: 3,
-                      color: Colors.grey,
-                    ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(child: CustomSeperator()),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: const Icon(
+                    Icons.directions_ferry,
+                    color: ColorsConstants.grey,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: const Icon(
-                  Icons.directions_ferry,
-                  color: ColorsConstants.grey,
-                ),
-              ),
-              Row(
-                children: List.generate(
-                  3,
-                  (ii) => Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, right: 10, top: 5, bottom: 5),
-                    child: Container(
-                      height: 2,
-                      width: 3,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+                Expanded(child: CustomSeperator()),
+              ],
+            ),
           ),
           Column(
             children: [
@@ -645,50 +655,56 @@ class PaymentSuccess extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    from,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500, fontSize: 30),
-                  ),
-                  Text(
-                    to,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  RichText(
-                    text: TextSpan(
+              Flexible(
+                flex: 7,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      from,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 30),
+                    ),
+                    Text(
+                      to,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    Column(
                       children: [
-                        TextSpan(
-                            text: "Yolculuk süresi: ",
-                            style: TextStyle(
-                              color: Colors.grey.shade700,
-                            )),
-                        TextSpan(
-                          text: tripTime,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: ColorsConstants.lightAccent,
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: "Yolculuk süresi: ",
+                                  style: TextStyle(
+                                    color: Colors.grey.shade700,
+                                  )),
+                              TextSpan(
+                                text: tripTime,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorsConstants.lightAccent,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Image.asset(
-                "assets/images/frame.png",
-                width: Get.size.width * .3,
-                height: Get.size.width * .3,
+              Flexible(
+                flex: 3,
+                child: Image.asset(
+                  "assets/images/frame.png",
+                  fit: BoxFit.contain,
+                ),
               ),
             ],
-          ),
-          const SizedBox(
-            height: 9.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

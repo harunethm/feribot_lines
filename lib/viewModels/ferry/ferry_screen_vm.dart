@@ -11,12 +11,19 @@ class FerryScreenVM extends GetxController {
   Rx<List<KeyValue>> arrivePorts = Rx([]);
 
   init() {
+    updateDeperturePorts();
+    updateArrivePorts();
+  }
+
+  void updateDeperturePorts() {
     FerryServices.getDeperturePorts().then((value) {
       deperturePorts.value = value;
       deperturePorts.refresh();
       SearchModel.deperturePort.value = deperturePorts.value.first;
     });
+  }
 
+  void updateArrivePorts() {
     FerryServices.getArrivePorts(SearchModel.deperturePort.value.key)
         .then((value) {
       arrivePorts.value = value;
