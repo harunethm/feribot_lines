@@ -687,6 +687,7 @@ class FerryScreen extends StatelessWidget {
         if (disabled) {
           SearchModel.isOpenReturn.value = false;
           SearchModel.isOneWay.value = false;
+          iconColor.value = ColorsConstants.lightPrimary;
         }
       },
       child: Padding(
