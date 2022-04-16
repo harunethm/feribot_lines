@@ -22,7 +22,8 @@ class PaymentSuccess extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             child: Column(
               children: <Widget>[
                 ticketSuccessfullyCreated(),
@@ -50,57 +51,55 @@ class PaymentSuccess extends StatelessWidget {
 
   Row sendVoucher() {
     return Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 16, left: 16, right: 8),
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: ColorsConstants.lightAccent2,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "Telefonuma",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Get.off(() => AllTickets());
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 16, left: 8, right: 16),
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: ColorsConstants.lightAccent2,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "Mail Adresime",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              );
+      children: [
+        Expanded(
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 16, left: 16, right: 8),
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: ColorsConstants.lightAccent2,
+              ),
+              child: const Center(
+                child: Text(
+                  "Telefonuma",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              Get.off(() => AllTickets());
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 16, left: 8, right: 16),
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: ColorsConstants.lightAccent2,
+              ),
+              child: const Center(
+                child: Text(
+                  "Mail Adresime",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
   }
 
   Widget row(
@@ -492,7 +491,7 @@ class PaymentSuccess extends StatelessWidget {
               Get.offAll(() => FerryScreen());
             },
             child: Container(
-              margin: const EdgeInsets.only(bottom: 16, left: 16, right: 8),
+              margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -501,30 +500,6 @@ class PaymentSuccess extends StatelessWidget {
               child: const Center(
                 child: Text(
                   "Ana Sayfa",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: InkWell(
-            onTap: () {
-              Get.offAll(() => AllTickets());
-            },
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 16, left: 8, right: 16),
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: ColorsConstants.lightPrimary,
-              ),
-              child: const Center(
-                child: Text(
-                  "Tüm Biletlerim",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

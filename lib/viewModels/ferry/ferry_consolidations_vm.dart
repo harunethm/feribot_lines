@@ -44,6 +44,8 @@ class FerryConsolidationsVM extends GetxController {
   init() {
     tabController = Get.put(CustomTabController(active: 0));
     tabController.tabs = tabs;
+    FerryInfoModel.sConsolidation.value = ConsolidationModel.empty();
+    FerryInfoModel.sReturnConsolidation.value = ConsolidationModel.empty();
 
     List<PassengerModel> _temp = [];
     int _pageNumber = 0;

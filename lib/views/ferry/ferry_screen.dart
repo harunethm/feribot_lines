@@ -27,196 +27,185 @@ class FerryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _ferryVM.init();
     _vm.init();
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Get.theme.backgroundColor,
-        extendBody: true,
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                icon: const FaIcon(FontAwesomeIcons.userAlt),
-                iconSize: 28,
-                onPressed: () {
-                  _ferryVM.openProfile();
-                },
-              ),
-            ),
-          ],
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          elevation: 0,
-        ),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Container(
-                color: Get.theme.backgroundColor,
-                height: Get.size.height * .4,
-                child: Image.asset(strBackgroundGif),
-              ),
-              SizedBox(
-                height: Get.size.height * 0.01,
-              ),
-              Text(
-                Strings.bookTrip,
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: Get.size.height * 0.02,
-              ),
+    return Container(
+      color: Get.theme.backgroundColor,
+      child: SafeArea(
+        child: Scaffold(
+          extendBody: true,
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            actions: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Obx(
-                          () => FaIcon(
-                            FontAwesomeIcons.ship,
-                            size: 16,
-                            color: iconColor.value,
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: const FaIcon(FontAwesomeIcons.userAlt),
+                  iconSize: 28,
+                  onPressed: () {
+                    _ferryVM.openProfile();
+                  },
+                ),
+              ),
+            ],
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Container(
+                  color: Get.theme.backgroundColor,
+                  height: Get.size.height * .4,
+                  child: Image.asset(strBackgroundGif),
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.01,
+                ),
+                Text(
+                  Strings.bookTrip,
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.02,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Obx(
+                            () => FaIcon(
+                              FontAwesomeIcons.ship,
+                              size: 16,
+                              color: iconColor.value,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                          width: Get.size.width * .3,
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Obx(
-                            () => CustomDropDownTrip(
-                              items: _vm.deperturePorts.value,
-                              selected: SearchModel.deperturePort.value.key,
-                              onChanged: (val) {
-                                SearchModel.deperturePort.value =
-                                    _vm.deperturePorts.value[val!];
-                                SearchModel.deperturePort.refresh();
-                                _vm.updateArrivePorts();
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Container(
+                            width: Get.size.width * .3,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Obx(
+                              () => CustomDropDownTrip(
+                                items: _vm.deperturePorts.value,
+                                selected: SearchModel.deperturePort.value.key,
+                                onChanged: (val) {
+                                  SearchModel.deperturePort.value =
+                                      _vm.deperturePorts.value[val!];
+                                  SearchModel.deperturePort.refresh();
+                                  _vm.updateArrivePorts();
+                                },
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 1,
+                                color: ColorsConstants.dividerColor,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: InkWell(
+                              onTap: () {
+                                toggleWays();
                               },
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 1,
-                              color: ColorsConstants.dividerColor,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              SearchModel.isOneWay(!SearchModel.isOneWay.value);
-                              SearchModel.isOneWay.value
-                                  ? SearchModel.isOpenReturn.value = false
-                                  : null;
-
-                              SearchModel.isOneWay.refresh();
-                              SearchModel.isOpenReturn.refresh();
-                            },
-                            child: Obx(
-                              () => Row(
-                                children: [
-                                  Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      color: iconColor.value,
-                                      shape: BoxShape.circle,
+                              child: Obx(
+                                () => Row(
+                                  children: [
+                                    Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        color: iconColor.value,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Center(
+                                        child: SearchModel.isOneWay.value
+                                            ? const FaIcon(
+                                                FontAwesomeIcons.arrowDown,
+                                                color: Colors.white,
+                                                size: 12,
+                                              )
+                                            : Image.asset(
+                                                strSortIcon,
+                                                color: Colors.white,
+                                                height: 15,
+                                                width: 15,
+                                              ),
+                                      ),
                                     ),
-                                    child: Center(
-                                      child: SearchModel.isOneWay.value
-                                          ? const FaIcon(
-                                              FontAwesomeIcons.arrowDown,
-                                              color: Colors.white,
-                                              size: 12,
-                                            )
-                                          : Image.asset(
-                                              strSortIcon,
-                                              color: Colors.white,
-                                              height: 15,
-                                              width: 15,
-                                            ),
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              SearchModel.isOneWay(!SearchModel.isOneWay.value);
-                              SearchModel.isOneWay.value
-                                  ? SearchModel.isOpenReturn.value = false
-                                  : null;
-
-                              SearchModel.isOneWay.refresh();
-                              SearchModel.isOpenReturn.refresh();
-
-                              iconColor.value = SearchModel.isOneWay.value
-                                  ? ColorsConstants.lightAccent
-                                  : ColorsConstants.lightPrimary;
-                            },
-                            child: Obx(
-                              () => Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    SearchModel.isOneWay.value
-                                        ? Strings.oneWay
-                                        : Strings.twoWay,
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const Text(
-                                    "Değiştirmek için tıklayınız.",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
-                                  )
-                                ],
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                toggleWays();
+                              },
+                              child: Obx(
+                                () => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      SearchModel.isOneWay.value
+                                          ? Strings.oneWay
+                                          : Strings.twoWay,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const Text(
+                                      "Değiştirmek için tıklayınız.",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 12),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Obx(
-                          () => FaIcon(
-                            FontAwesomeIcons.ship,
-                            size: 16,
-                            color: iconColor.value,
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Obx(
+                            () => FaIcon(
+                              FontAwesomeIcons.ship,
+                              size: 16,
+                              color: iconColor.value,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                          width: Get.size.width * .3,
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Obx(() => CustomDropDownTrip(
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Container(
+                            width: Get.size.width * .3,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Obx(
+                              () => CustomDropDownTrip(
                                 items: _vm.arrivePorts.value,
                                 selected: SearchModel.arrivePort.value.key,
                                 onChanged: (val) {
@@ -224,155 +213,175 @@ class FerryScreen extends StatelessWidget {
                                       _vm.arrivePorts.value[val!];
                                   SearchModel.arrivePort.refresh();
                                 },
-                              )),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: Get.size.height * 0.03,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          customCalendar(0),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Transform.scale(
-                          scale: 1.2,
-                          child: Obx(
-                            () => Checkbox(
-                              value: SearchModel.isOpenReturn.value,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              activeColor: ColorsConstants.lightAccent,
-                              onChanged: (val) {
-                                SearchModel.isOpenReturn.value = val ?? false;
-                                if (val!) {
-                                  iconColor.value =
-                                      ColorsConstants.lightPrimary;
-                                  SearchModel.isOneWay.value = false;
-                                } else {
-                                  iconColor.value = ColorsConstants.lightAccent;
-                                }
-                              },
-                              visualDensity: VisualDensity(
-                                horizontal: VisualDensity.minimumDensity,
-                                vertical: VisualDensity.minimumDensity,
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          const SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.03,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
                           children: [
-                            Text(
-                              Strings.openReturn,
+                            customCalendar(0),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Transform.scale(
+                            scale: 1.2,
+                            child: Obx(
+                              () => Checkbox(
+                                value: SearchModel.isOpenReturn.value,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                activeColor: ColorsConstants.lightAccent,
+                                onChanged: (val) {
+                                  SearchModel.isOpenReturn.value = val!;
+                                  if (val) {
+                                    SearchModel.isOneWay.value = false;
+                                    iconColor.value =
+                                        ColorsConstants.lightPrimary;
+                                  } else {
+                                    SearchModel.isOneWay.value
+                                        ? iconColor.value =
+                                            ColorsConstants.lightAccent
+                                        : ColorsConstants.lightPrimary;
+                                  }
+                                },
+                                visualDensity: VisualDensity(
+                                  horizontal: VisualDensity.minimumDensity,
+                                  vertical: VisualDensity.minimumDensity,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                Strings.openReturn,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                        Expanded(
+                        child: Column(
+                          children: [
+                            Obx(
+                              () => customCalendar(1,
+                                  disabled: SearchModel.isOneWay.value ||
+                                      SearchModel.isOpenReturn.value),
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Obx(
-                            () => customCalendar(1,
-                                disabled: SearchModel.isOneWay.value ||
-                                    SearchModel.isOpenReturn.value),
-                          ),
-                        ],
                       ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.01,
+                ),
+                SizedBox(height: Get.size.height * .02),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        _vm.choosePassengers(!_vm.choosePassengers.value);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Obx(
+                              () => FaIcon(
+                                FontAwesomeIcons.userAlt,
+                                size: 16,
+                                color: iconColor.value,
+                              ),
+                            ),
+                            Obx(
+                              () => Text(
+                                _ferryVM.passengersAndCars().value,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            const Center(
+                              child: FaIcon(
+                                FontAwesomeIcons.chevronDown,
+                                size: 16,
+                                color: ColorsConstants.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Divider(
+                      indent: 24,
+                      endIndent: 24,
+                      thickness: 1,
+                      color: ColorsConstants.dividerColor,
+                    ),
+                    Obx(
+                      () =>
+                          customPassangerCountsCard(_vm.choosePassengers.value),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: Get.size.height * 0.01,
-              ),
-              SizedBox(height: Get.size.height * .02),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      _vm.choosePassengers(!_vm.choosePassengers.value);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.userAlt,
-                            size: 16,
-                            color: iconColor.value,
-                          ),
-                          Obx(
-                            () => Text(
-                              _ferryVM.passengersAndCars().value,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          const Center(
-                            child: FaIcon(
-                              FontAwesomeIcons.chevronDown,
-                              size: 16,
-                              color: ColorsConstants.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    indent: 24,
-                    endIndent: 24,
-                    thickness: 1,
-                    color: ColorsConstants.dividerColor,
-                  ),
-                  Obx(
-                    () => customPassangerCountsCard(_vm.choosePassengers.value),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: Get.size.height * 0.1,
-              ),
-            ],
+                SizedBox(
+                  height: Get.size.height * 0.1,
+                ),
+              ],
+            ),
           ),
+          bottomNavigationBar: bottomButton(),
         ),
-        bottomNavigationBar: bottomButton(),
       ),
     );
+  }
+
+  void toggleWays() {
+    SearchModel.isOneWay(!SearchModel.isOneWay.value);
+    SearchModel.isOneWay.value ? SearchModel.isOpenReturn.value = false : null;
+
+    SearchModel.isOneWay.refresh();
+    SearchModel.isOpenReturn.refresh();
+
+    iconColor.value = SearchModel.isOneWay.value
+        ? ColorsConstants.lightAccent
+        : ColorsConstants.lightPrimary;
   }
 
   InkWell bottomButton() {
@@ -696,38 +705,34 @@ class FerryScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Obx(
-                    () => FaIcon(
-                      FontAwesomeIcons.calendarDay,
-                      size: 16,
-                      color: disabled ? Colors.grey : iconColor.value,
-                    ),
-                  ),
-                  Obx(
-                    () => Text(
-                      DateFormat("dd MMM", "tr_TR").format(index == 0
-                          ? SearchModel.depertureDate.value
-                          : SearchModel.arriveDate.value),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: disabled
-                            ? Colors.grey
-                            : Get.theme.textTheme.bodyText1!.color,
+              child: Obx(() => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.calendarDay,
+                        size: 16,
+                        color: disabled ? Colors.grey : iconColor.value,
                       ),
-                    ),
-                  ),
-                  FaIcon(
-                    FontAwesomeIcons.chevronDown,
-                    size: 12,
-                    color: disabled ? Colors.grey : Colors.black,
-                  ),
-                ],
-              ),
+                      Text(
+                        DateFormat("dd MMM", "tr_TR").format(index == 0
+                            ? SearchModel.depertureDate.value
+                            : SearchModel.arriveDate.value),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: disabled
+                              ? Colors.grey
+                              : Get.theme.textTheme.bodyText1!.color,
+                        ),
+                      ),
+                      FaIcon(
+                        FontAwesomeIcons.chevronDown,
+                        size: 12,
+                        color: disabled ? Colors.grey : Colors.black,
+                      ),
+                    ],
+                  )),
             ),
             const SizedBox(
               height: 5,

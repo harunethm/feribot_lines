@@ -27,6 +27,7 @@ class FerryConsolidations extends StatelessWidget {
   Widget build(BuildContext context) {
     _vm.init();
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         actions: [
@@ -44,57 +45,63 @@ class FerryConsolidations extends StatelessWidget {
         shadowColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Stack(
-        children: [
-          Container(
-            height: Get.size.height * .4,
-            decoration: const BoxDecoration(
-              color: ColorsConstants.lightPrimary,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(45.0),
-                bottomRight: Radius.circular(45.0),
-              ),
-            ),
-          ),
-          Column(
-            children: <Widget>[
-              FerryDetails(
-                from: SearchModel.deperturePort.value.value.toString(),
-                to: SearchModel.arrivePort.value.value.toString(),
-                fromDate: DateFormat("d MMMM", "tr_TR")
-                    .format(SearchModel.depertureDate.value),
-                toDate: DateFormat("d MMMM", "tr_TR")
-                    .format(SearchModel.arriveDate.value),
-              ),
-              const SizedBox(height: 10.0),
-              sortingDetailsAndPassengerCounts(),
-              const SizedBox(height: 20.0),
-              CustomTabs(
-                onChange: () {},
-                tabController: _vm.tabController,
-              ),
-              Expanded(
-                child: Obx(
-                  () => PageView(
-                    physics: const ClampingScrollPhysics(),
-                    controller: _vm.tabController.pageController,
-                    onPageChanged: (int page) {
-                      _vm.tabController.activeTab(page);
-                    },
-                    children: [
-                      Obx(() => FerryTicketsList(_vm.consolidations.value)),
-                      if (!SearchModel.isOneWay.value)
-                        !SearchModel.isOpenReturn.value
-                            ? Obx(() => FerryTicketsList(
-                                _vm.returnConsolidations.value))
-                            : openReturnCard()
-                    ],
-                  ),
+      body: SafeArea(
+        maintainBottomViewPadding: true,
+        child: Stack(
+          children: [
+            Container(
+              height: Get.size.height * .4,
+              decoration: const BoxDecoration(
+                color: ColorsConstants.lightPrimary,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(45.0),
+                  bottomRight: Radius.circular(45.0),
                 ),
               ),
-            ],
-          )
-        ],
+            ),
+            Column(
+              children: <Widget>[
+                FerryDetails(
+                  from: SearchModel.deperturePort.value.value.toString(),
+                  to: SearchModel.arrivePort.value.value.toString(),
+                  fromDate: DateFormat("d MMMM", "tr_TR")
+                      .format(SearchModel.depertureDate.value),
+                  toDate: DateFormat("d MMMM", "tr_TR")
+                      .format(SearchModel.arriveDate.value),
+                ),
+                const SizedBox(height: 10.0),
+                sortingDetailsAndPassengerCounts(),
+                const SizedBox(height: 20.0),
+                CustomTabs(
+                  onChange: () {},
+                  tabController: _vm.tabController,
+                ),
+                Expanded(
+                  child: Obx(
+                    () => PageView(
+                      physics: const ClampingScrollPhysics(),
+                      controller: _vm.tabController.pageController,
+                      onPageChanged: (int page) {
+                        _vm.tabController.activeTab(page);
+                      },
+                      children: [
+                        Obx(() => FerryTicketsList(_vm.consolidations.value)),
+                        if (!SearchModel.isOneWay.value)
+                          !SearchModel.isOpenReturn.value
+                              ? Obx(
+                                  () => FerryTicketsList(
+                                    _vm.returnConsolidations.value,
+                                  ),
+                                )
+                              : openReturnCard()
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: bottomButton(),
     );
