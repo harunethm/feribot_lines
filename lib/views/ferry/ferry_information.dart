@@ -1,3 +1,4 @@
+import 'package:feribot_lines/models/others/user.dart';
 import 'package:feribot_lines/utils/colors_const.dart';
 import 'package:feribot_lines/utils/theme_constants.dart';
 import 'package:feribot_lines/utils/strings.dart';
@@ -111,9 +112,9 @@ class FerryInformation extends StatelessWidget {
             "Adınız",
             Icons.person,
             TextInputType.name,
-            value: _vm.contactInfo.name.value.toString(),
+            value: _vm.contactInfo.firstname ?? "",
             onChange: (newVal) {
-              _vm.contactInfo.name.value = newVal;
+              _vm.contactInfo.firstname = newVal;
               return;
             },
             validation: (val) {
@@ -125,9 +126,9 @@ class FerryInformation extends StatelessWidget {
             "Soyadınız",
             Icons.person,
             TextInputType.name,
-            value: _vm.contactInfo.surName.toString(),
+            value: _vm.contactInfo.lastname ?? "",
             onChange: (newVal) {
-              _vm.contactInfo.surName.value = newVal;
+              _vm.contactInfo.lastname = newVal;
               return;
             },
             validation: (val) {
@@ -154,7 +155,10 @@ class FerryInformation extends StatelessWidget {
                         items: _vm.phoneCodes,
                         value: _vm.contactInfo.phoneCode.value,
                         onChange: (val) {
-                          _vm.contactInfo.phoneCode.value = val!;
+                          _vm.contactInfo.phoneCode.value = _vm.phoneCodes
+                              .firstWhere((element) => element.key == val!)
+                              .key;
+                          return;
                         },
                         bgColor: ColorsConstants.lightPrimary2,
                       ),
@@ -172,9 +176,9 @@ class FerryInformation extends StatelessWidget {
             "Telefon Numaranız",
             Icons.phone,
             TextInputType.phone,
-            value: _vm.contactInfo.phoneNumber.toString(),
-            onChange: (newVal) {
-              _vm.contactInfo.phoneNumber.value = newVal;
+            value: _vm.contactInfo.phone.toString(),
+            onChange: (val) {
+              _vm.contactInfo.phone = val;
               return;
             },
             validation: (val) {
@@ -186,9 +190,9 @@ class FerryInformation extends StatelessWidget {
             "Mail Adresiniz",
             Icons.mail,
             TextInputType.emailAddress,
-            value: _vm.contactInfo.eMail.toString(),
-            onChange: (newVal) {
-              _vm.contactInfo.eMail.value = newVal;
+            value: _vm.contactInfo.mailperm.toString(),
+            onChange: (val) {
+              _vm.contactInfo.email = val;
               return;
             },
             validation: (val) {
@@ -219,9 +223,10 @@ class FerryInformation extends StatelessWidget {
                       Radius.circular(5),
                     ),
                   ),
-                  value: _vm.contactInfo.confirmSMS.value,
+                  value: _vm.contactInfo.mailperm.value == "1",
                   onChanged: (bool? value) {
-                    _vm.contactInfo.confirmSMS.value = value!;
+                    _vm.contactInfo.mailperm.value =
+                        (value ?? false) ? "1" : "0";
                   },
                 ),
               ),
@@ -263,30 +268,28 @@ class FerryInformation extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Obx(
-              () => ResponsiveGridList(
-                shrinkWrap: true,
-                horizontalGridMargin: 10,
-                verticalGridMargin: 10,
-                verticalGridSpacing: 10,
-                horizontalGridSpacing: 10,
-                minItemWidth: Get.size.width * .2,
-                rowMainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: _vm.passengers
-                    .map(
-                      (e) => ElevatedButton(
-                        onPressed: () {
-                          _vm.pageController.animateToPage(
-                            e.pageNumber.value,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
-                        },
-                        child: Text(e.title.value),
-                      ),
-                    )
-                    .toList(),
-              ),
+            ResponsiveGridList(
+              shrinkWrap: true,
+              horizontalGridMargin: 10,
+              verticalGridMargin: 10,
+              verticalGridSpacing: 10,
+              horizontalGridSpacing: 10,
+              minItemWidth: Get.size.width * .2,
+              rowMainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: _vm.passengers
+                  .map(
+                    (e) => ElevatedButton(
+                      onPressed: () {
+                        _vm.pageController.animateToPage(
+                          e.pageNumber,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      },
+                      child: Obx(() => Text(e.title.value)),
+                    ),
+                  )
+                  .toList(),
             ),
             const SizedBox(
               height: 5,
@@ -312,7 +315,8 @@ class FerryInformation extends StatelessWidget {
     );
   }
 
-  Widget passengerInfoView(PassengerModel passenger) {
+  Widget passengerInfoView(InfoModel passenger) {
+    User user = passenger.user;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -333,9 +337,9 @@ class FerryInformation extends StatelessWidget {
             "Adınız",
             FontAwesomeIcons.userAlt,
             TextInputType.name,
-            value: passenger.name.value.toString(),
+            value: user.firstname.toString(),
             onChange: (newVal) {
-              passenger.name.value = newVal;
+              user.firstname = newVal;
               return;
             },
             validation: (val) {
@@ -347,9 +351,9 @@ class FerryInformation extends StatelessWidget {
             "Soyadınız",
             FontAwesomeIcons.userAlt,
             TextInputType.name,
-            value: passenger.surName.value.toString(),
+            value: user.lastname.toString(),
             onChange: (newVal) {
-              passenger.surName.value = newVal;
+              user.lastname = newVal;
               return;
             },
             validation: (val) {
@@ -372,9 +376,13 @@ class FerryInformation extends StatelessWidget {
                   Obx(
                     () => CustomDropDown(
                       items: _vm.days,
-                      value: passenger.birthDay.value,
+                      value: user.birthday!.value.day,
                       onChange: (val) {
-                        passenger.birthDay.value = val!;
+                        user.birthday!.value = DateTime(
+                          user.birthday!.value.year,
+                          user.birthday!.value.month,
+                          val ?? 0,
+                        );
                       },
                       bgColor: ColorsConstants.lightPrimary2,
                     ),
@@ -382,9 +390,13 @@ class FerryInformation extends StatelessWidget {
                   Obx(
                     () => CustomDropDown(
                       items: _vm.months,
-                      value: passenger.birthMonth.value,
+                      value: user.birthday!.value.month,
                       onChange: (val) {
-                        passenger.birthMonth.value = val!;
+                        user.birthday!.value = DateTime(
+                          user.birthday!.value.year,
+                          val ?? 0,
+                          user.birthday!.value.day,
+                        );
                       },
                       bgColor: ColorsConstants.lightPrimary2,
                     ),
@@ -392,9 +404,13 @@ class FerryInformation extends StatelessWidget {
                   Obx(
                     () => CustomDropDown(
                       items: _vm.years,
-                      value: passenger.birthYear.value,
+                      value: user.birthday!.value.year,
                       onChange: (val) {
-                        passenger.birthYear.value = val!;
+                        user.birthday!.value = DateTime(
+                          val ?? 0,
+                          user.birthday!.value.month,
+                          user.birthday!.value.day,
+                        );
                       },
                       bgColor: ColorsConstants.lightPrimary2,
                     ),
@@ -424,11 +440,11 @@ class FerryInformation extends StatelessWidget {
                     child: Obx(
                       () => CustomDropDown(
                         items: _vm.nations,
-                        value: passenger.nationalityCode.value,
+                        value: user.countryCode.value,
                         onChange: (val) {
-                          passenger.nationalityCode.value = val!;
-                          if (val != 90) {
-                            passenger.identificationNumber.value = "";
+                          user.countryCode.value = val ?? -1;
+                          if (val != 90 && user.identitynumber!.isNotEmpty) {
+                            user.identitynumber = "";
                           }
                         },
                         bgColor: ColorsConstants.lightPrimary2,
@@ -447,9 +463,9 @@ class FerryInformation extends StatelessWidget {
             "Pasaport Numaranız",
             FontAwesomeIcons.passport,
             TextInputType.phone,
-            value: passenger.passportNumber.value.toString(),
+            value: user.passportnumber.toString(),
             onChange: (newVal) {
-              passenger.passportNumber.value = newVal;
+              user.passportnumber = newVal;
               return;
             },
             validation: (val) {
@@ -458,15 +474,15 @@ class FerryInformation extends StatelessWidget {
           ),
           Obx(
             () => Visibility(
-              visible: passenger.nationalityCode.value == 90,
+              visible: user.countryCode.value == "90",
               child: CustomTextFormField(
                 "TC Kimlik No",
                 "Türkiye Cumhuriyeti Kimlik Numaranız",
                 FontAwesomeIcons.idCard,
                 TextInputType.phone,
-                value: passenger.identificationNumber.value.toString(),
+                value: user.identitynumber.toString(),
                 onChange: (newVal) {
-                  passenger.identificationNumber.value = newVal;
+                  user.identitynumber = newVal;
                   return;
                 },
                 validation: (val) {
@@ -495,15 +511,16 @@ class FerryInformation extends StatelessWidget {
                       Obx(
                         () => Radio<bool>(
                           value: true,
-                          groupValue: passenger.genderIsMale.value,
+                          groupValue: user.gender.value == "male",
                           onChanged: (val) {
-                            passenger.genderIsMale.value = val!;
+                            user.gender.value =
+                                (val ?? false) ? "male" : "female";
                           },
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
-                          passenger.genderIsMale.value = true;
+                          user.gender.value = "male";
                         },
                         child: Text(Strings.male),
                       ),
@@ -517,15 +534,16 @@ class FerryInformation extends StatelessWidget {
                       Obx(
                         () => Radio<bool>(
                           value: false,
-                          groupValue: passenger.genderIsMale.value,
+                          groupValue: user.gender.value == "male",
                           onChanged: (val) {
-                            passenger.genderIsMale.value = val!;
+                            user.gender.value =
+                                (val ?? false) ? "female" : "male";
                           },
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
-                          passenger.genderIsMale.value = false;
+                          user.gender.value = "female";
                         },
                         child: Text(Strings.female),
                       ),
@@ -543,11 +561,16 @@ class FerryInformation extends StatelessWidget {
   Widget bottomButton() {
     return InkWell(
       onTap: () {
-        Get.to(
-          () => Payment(),
-          duration: Duration(milliseconds: 300),
-          transition: Transition.rightToLeft,
-        );
+        if (/*_vm.isSuccess()*/ true) {
+          // OrderService.createOrder(
+          //   user: user,
+          // );
+          Get.to(
+            () => Payment(),
+            duration: Duration(milliseconds: 300),
+            transition: Transition.rightToLeft,
+          );
+        }
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12, right: 16, left: 16),

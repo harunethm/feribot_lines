@@ -87,7 +87,7 @@ class LoginService {
 
     //   return ResponseModel(error: false, errorMessage: "", data: ["user1"]);
     // });
-    USER.isLogined = false;
+    USER_old.isLogined = false;
     return true;
   }
 }

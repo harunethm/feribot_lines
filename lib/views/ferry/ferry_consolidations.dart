@@ -30,12 +30,20 @@ class FerryConsolidations extends StatelessWidget {
       extendBody: true,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
+        leading: IconButton(
+          icon: const FaIcon(FontAwesomeIcons.arrowLeft),
+          iconSize: 20,
+          splashRadius: 24,
+          onPressed: () {
+            _vm.clear();
+            Get.back();
+          },
+        ),
         actions: [
           IconButton(
-            icon: const FaIcon(
-              FontAwesomeIcons.userAlt,
-              size: 20,
-            ),
+            icon: const FaIcon(FontAwesomeIcons.userAlt),
+            iconSize: 20,
+            splashRadius: 24,
             onPressed: () {
               _ferryVM.openProfile();
             },
@@ -62,10 +70,10 @@ class FerryConsolidations extends StatelessWidget {
             Column(
               children: <Widget>[
                 FerryDetails(
-                  from: SearchModel.deperturePort.value.value.toString(),
+                  from: SearchModel.departurePort.value.value.toString(),
                   to: SearchModel.arrivePort.value.value.toString(),
                   fromDate: DateFormat("d MMMM", "tr_TR")
-                      .format(SearchModel.depertureDate.value),
+                      .format(SearchModel.departureDate.value),
                   toDate: DateFormat("d MMMM", "tr_TR")
                       .format(SearchModel.arriveDate.value),
                 ),
@@ -85,15 +93,28 @@ class FerryConsolidations extends StatelessWidget {
                         _vm.tabController.activeTab(page);
                       },
                       children: [
-                        Obx(() => FerryTicketsList(_vm.consolidations.value)),
-                        if (!SearchModel.isOneWay.value)
-                          !SearchModel.isOpenReturn.value
-                              ? Obx(
-                                  () => FerryTicketsList(
-                                    _vm.returnConsolidations.value,
-                                  ),
-                                )
-                              : openReturnCard()
+                        !_vm.isLoadingConsolidations.value
+                            ? _vm.consolidations.value.isNotEmpty
+                                ? Obx(() =>
+                                    FerryTicketsList(_vm.consolidations.value))
+                                : Container()
+                            : noTripValue(),
+                        !_vm.isLoadingReturnConsolidations.value
+                            ? _vm.returnConsolidations.value.isEmpty
+                                ? noTripValue()
+                                : Obx(() => FerryTicketsList(
+                                    _vm.returnConsolidations.value))
+                            : !SearchModel.isOneWay.value &&
+                                    !SearchModel.isOpenReturn.value
+                                ? Obx(
+                                    () => FerryTicketsList(
+                                      _vm.returnConsolidations.value,
+                                    ),
+                                  )
+                                : !SearchModel.isOneWay.value &&
+                                        SearchModel.isOpenReturn.value
+                                    ? openReturnCard()
+                                    : Container(),
                       ],
                     ),
                   ),
@@ -125,6 +146,64 @@ class FerryConsolidations extends StatelessWidget {
             ),
             const Text(
               "Dönüş biletiniz açık tarihlidir.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget noTripValue() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Card(
+        color: Get.theme.backgroundColor,
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.search_off, size: 32),
+            SizedBox(
+              height: Get.size.height * .01,
+            ),
+            const Text(
+              "Aradığınız kriterde sefer bulunamadı.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget searchTrip() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Card(
+        color: Get.theme.backgroundColor,
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const FaIcon(Icons.search_rounded, size: 32),
+            SizedBox(
+              height: Get.size.height * .01,
+            ),
+            const Text(
+              "Sefer aranıyor ...",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
@@ -239,10 +318,13 @@ class FerryConsolidations extends StatelessWidget {
   Widget bottomButton() {
     return Obx(
       () => Visibility(
-        visible: FerryInfoModel.sConsolidation.value.consolidationID != 0 &&
-            (FerryInfoModel.sReturnConsolidation.value.consolidationID != 0 ||
+        visible: (FerryInfoModel.sConsolidation.value.expeditionId != null &&
+            FerryInfoModel.sConsolidation.value.expeditionId != -1 &&
+            (FerryInfoModel.sReturnConsolidation.value.expeditionId != null &&
+                    FerryInfoModel.sReturnConsolidation.value.expeditionId !=
+                        -1 ||
                 SearchModel.isOneWay.value ||
-                SearchModel.isOpenReturn.value),
+                SearchModel.isOpenReturn.value)),
         child: InkWell(
           onTap: () {
             Get.to(

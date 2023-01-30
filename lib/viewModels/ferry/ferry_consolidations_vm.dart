@@ -1,7 +1,7 @@
-import 'package:feribot_lines/models/ferry/consolidation_model.dart';
 import 'package:feribot_lines/models/ferry/ferry_info_model.dart';
 import 'package:feribot_lines/models/ferry/search_model.dart';
-import 'package:feribot_lines/models/key_value_model.dart';
+import 'package:feribot_lines/models/others/key_value_model.dart';
+import 'package:feribot_lines/models/response/ferry/search_trip_response.dart';
 import 'package:feribot_lines/viewModels/ferry/ferry_vm.dart';
 import 'package:feribot_lines/viewModels/tab_controller_vm.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +15,11 @@ class FerryConsolidationsVM extends GetxController {
   FerryVM ferryVM = Get.find();
   FerryInformationVM infoVM = Get.find();
 
-  Rx<List<ConsolidationModel>> consolidations = Rx([]);
-  Rx<List<ConsolidationModel>> returnConsolidations = Rx([]);
+  RxBool isLoadingConsolidations = false.obs;
+  RxBool isLoadingReturnConsolidations = false.obs;
+
+  Rx<List<Trip>> consolidations = Rx([]);
+  Rx<List<Trip>> returnConsolidations = Rx([]);
 
   RxInt sortType = 0.obs;
   List<KeyValue> sortTypes = [
@@ -29,83 +32,84 @@ class FerryConsolidationsVM extends GetxController {
     return SearchModel.isOneWay.value ? ["Tek Yön"] : ["Gidiş", "Dönüş"];
   }
 
-  void searchTrip(int tripIndex /* 0 => gidiş, 1 => dönüş */) {
-    if (tripIndex == 0) {
-      FerryServices.searchTrip(0).then((value) {
-        consolidations.value = value;
-      });
-    } else if (tripIndex == 1) {
-      FerryServices.searchTrip(1).then((value) {
-        returnConsolidations.value = value;
-      });
-    }
+  void searchTrip() {
+    FerryServices.searchTrip().then((value) {
+      consolidations.value = value.departureModel ?? [];
+      returnConsolidations.value = value.returnModel ?? [];
+    });
+    isLoadingConsolidations.value = false;
+    isLoadingReturnConsolidations.value = false;
+  }
+
+  void clear() {
+    isLoadingConsolidations.value = false;
+    isLoadingReturnConsolidations.value = false;
+    consolidations.value = [];
+    returnConsolidations.value = [];
+    FerryInfoModel.sConsolidation.value = Trip();
+    FerryInfoModel.sReturnConsolidation.value = Trip();
   }
 
   init() {
     tabController = Get.put(CustomTabController(active: 0));
     tabController.tabs = tabs;
-    FerryInfoModel.sConsolidation.value = ConsolidationModel.empty();
-    FerryInfoModel.sReturnConsolidation.value = ConsolidationModel.empty();
+    FerryInfoModel.sConsolidation.value = Trip();
+    FerryInfoModel.sReturnConsolidation.value = Trip();
+    isLoadingConsolidations.value = true;
+    isLoadingReturnConsolidations.value = true;
 
-    List<PassengerModel> _temp = [];
+    List<InfoModel> _temp = [];
     int _pageNumber = 0;
     List.generate(
       SearchModel.adultCount.value,
       (index) => _temp.add(
-        PassengerModel(
+        InfoModel(
           title: "Yetişkin ${index + 1}".obs,
-          pageNumber: (_pageNumber++).obs,
+          pageNumber: (_pageNumber++),
         ),
       ),
     );
     List.generate(
       SearchModel.childCount.value,
       (index) => _temp.add(
-        PassengerModel(
+        InfoModel(
           title: "Çocuk ${index + 1}".obs,
-          pageNumber: (_pageNumber++).obs,
+          pageNumber: (_pageNumber++),
         ),
       ),
     );
     List.generate(
       SearchModel.babyCount.value,
       (index) => _temp.add(
-        PassengerModel(
+        InfoModel(
           title: "Bebek ${index + 1}".obs,
-          pageNumber: (_pageNumber++).obs,
+          pageNumber: (_pageNumber++),
         ),
       ),
     );
     infoVM.passengers = _temp.obs;
 
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      searchTrip(0);
-
-      if (!SearchModel.isOneWay.value && !SearchModel.isOpenReturn.value) {
-        searchTrip(1);
-      } else {
-        returnConsolidations.value = [];
-      }
+      searchTrip();
 
       consolidations.refresh();
       returnConsolidations.refresh();
     });
   }
 
-  void selectConsolidation(ConsolidationModel? item) {
+  void selectConsolidation(Trip? item) {
     if (tabController.activeTab.value == 0) {
-      FerryInfoModel.sConsolidation.value = item ?? ConsolidationModel.empty();
+      FerryInfoModel.sConsolidation.value = item ?? Trip();
     } else if (tabController.activeTab.value == 1) {
-      FerryInfoModel.sReturnConsolidation.value =
-          item ?? ConsolidationModel.empty();
+      FerryInfoModel.sReturnConsolidation.value = item ?? Trip();
     }
 
     if (!SearchModel.isOneWay.value && item != null) {
       if (tabController.activeTab.value == 0 &&
-          FerryInfoModel.sReturnConsolidation.value.consolidationID == 0) {
+          FerryInfoModel.sReturnConsolidation.value.expeditionId == null) {
         tabController.activeTab.value = 1;
       } else if (tabController.activeTab.value == 1 &&
-          FerryInfoModel.sConsolidation.value.consolidationID == 0) {
+          FerryInfoModel.sConsolidation.value.expeditionId == null) {
         tabController.activeTab.value = 0;
       }
 

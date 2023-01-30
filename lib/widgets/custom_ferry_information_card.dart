@@ -1,6 +1,6 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:feribot_lines/widgets/custom_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/flutter_image.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -35,15 +35,24 @@ class CustomFerryInfoCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image(
-                    image: NetworkImageWithRetry(
-                      FerryInfoModel
-                              .sConsolidation.value.componyImagePath.isNotEmpty
-                          ? FerryInfoModel.sConsolidation.value.componyImagePath
-                          : Strings.emptyCompanyImagePath,
-                    ),
-                    width: 64,
-                    height: 64,
+                  // Image(
+                  //   image: NetworkImageWithRetry(
+                  //     FerryInfoModel.sConsolidation.value.companyLogo != null &&
+                  //             FerryInfoModel
+                  //                 .sConsolidation.value.companyLogo!.isNotEmpty
+                  //         ? FerryInfoModel.sConsolidation.value.companyLogo!
+                  //         : Strings.emptyCompanyImagePath,
+                  //   ),
+                  //   width: 64,
+                  //   height: 64,
+                  // ),
+                  CustomNetworkImage(
+                    url: FerryInfoModel.sConsolidation.value.companyLogo !=
+                                null &&
+                            FerryInfoModel
+                                .sConsolidation.value.companyLogo!.isNotEmpty
+                        ? FerryInfoModel.sConsolidation.value.companyLogo!
+                        : Strings.emptyCompanyImagePath,
                   ),
                   SizedBox(
                     width: Get.size.width * .02,
@@ -52,7 +61,7 @@ class CustomFerryInfoCard extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          FerryInfoModel.sConsolidation.value.companyName,
+                          FerryInfoModel.sConsolidation.value.companyName ?? "",
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -60,7 +69,10 @@ class CustomFerryInfoCard extends StatelessWidget {
                           height: 3,
                         ),
                         Text(
-                          FerryInfoModel.sConsolidation.value.ferryName,
+                          FerryInfoModel.sConsolidation.value.ferryName
+                                  ?.split("/")[1]
+                                  .trim() ??
+                              "",
                           style:
                               const TextStyle(fontSize: 16, color: Colors.grey),
                         ),
@@ -70,13 +82,17 @@ class CustomFerryInfoCard extends StatelessWidget {
                   SizedBox(
                     width: Get.size.width * .02,
                   ),
-                  Image(
-                    image: NetworkImageWithRetry(FerryInfoModel
-                            .sConsolidation.value.ferryImagePath.isNotEmpty
-                        ? FerryInfoModel.sConsolidation.value.ferryImagePath
-                        : Strings.emptyFerryImagePath),
-                    width: 64,
-                    height: 64,
+                  // Image(
+                  //   image: NetworkImageWithRetry(FerryInfoModel
+                  //           .sConsolidation.value.ferryImagePath.isNotEmpty
+                  //       ? FerryInfoModel.sConsolidation.value.ferryImagePath
+                  //       : Strings.emptyFerryImagePath),
+                  //   image: NetworkImageWithRetry(Strings.emptyFerryImagePath),
+                  //   width: 64,
+                  //   height: 64,
+                  // ),
+                  CustomNetworkImage(
+                    url: Strings.emptyFerryImagePath,
                   ),
                 ],
               ),
@@ -86,10 +102,12 @@ class CustomFerryInfoCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: tourInfo(
-                  FerryInfoModel.sConsolidation.value.depertureDate,
-                  FerryInfoModel.sConsolidation.value.deperturePort.value,
-                  FerryInfoModel.sConsolidation.value.arriveDate,
-                  FerryInfoModel.sConsolidation.value.arrivePort.value,
+                  // FerryInfoModel.sConsolidation.value.depertureDate,
+                  DateTime.now(),
+                  FerryInfoModel.sConsolidation.value.departurePortName ?? "",
+                  // FerryInfoModel.sConsolidation.value.arriveDate,
+                  DateTime.now(),
+                  FerryInfoModel.sConsolidation.value.arrivePortName ?? "",
                   Strings.consolidation,
                 ),
               ),
@@ -102,17 +120,27 @@ class CustomFerryInfoCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Image(
-                    image: NetworkImageWithRetry(FerryInfoModel
-                            .sReturnConsolidation
-                            .value
-                            .componyImagePath
-                            .isNotEmpty
-                        ? FerryInfoModel
-                            .sReturnConsolidation.value.componyImagePath
-                        : Strings.emptyCompanyImagePath),
-                    width: 64,
-                    height: 64,
+                  // Image(
+                  //   image: NetworkImageWithRetry(
+                  //     FerryInfoModel.sReturnConsolidation.value.companyLogo !=
+                  //                 null &&
+                  //             FerryInfoModel.sReturnConsolidation.value
+                  //                 .companyLogo!.isNotEmpty
+                  //         ? FerryInfoModel
+                  //             .sReturnConsolidation.value.companyLogo!
+                  //         : Strings.emptyCompanyImagePath,
+                  //   ),
+                  //   width: 64,
+                  //   height: 64,
+                  // ),
+                  CustomNetworkImage(
+                    url: FerryInfoModel
+                                    .sReturnConsolidation.value.companyLogo !=
+                                null &&
+                            FerryInfoModel.sReturnConsolidation.value
+                                .companyLogo!.isNotEmpty
+                        ? FerryInfoModel.sReturnConsolidation.value.companyLogo!
+                        : Strings.emptyCompanyImagePath,
                   ),
                   SizedBox(
                     width: Get.size.width * .02,
@@ -121,7 +149,7 @@ class CustomFerryInfoCard extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          FerryInfoModel.sConsolidation.value.companyName,
+                          FerryInfoModel.sConsolidation.value.companyName ?? "",
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -129,7 +157,10 @@ class CustomFerryInfoCard extends StatelessWidget {
                           height: 3,
                         ),
                         Text(
-                          FerryInfoModel.sConsolidation.value.ferryName,
+                          FerryInfoModel.sConsolidation.value.ferryName
+                                  ?.split("/")[1]
+                                  .trim() ??
+                              "",
                           style:
                               const TextStyle(fontSize: 16, color: Colors.grey),
                         ),
@@ -139,17 +170,20 @@ class CustomFerryInfoCard extends StatelessWidget {
                   SizedBox(
                     width: Get.size.width * .02,
                   ),
-                  Image(
-                    image: NetworkImageWithRetry(FerryInfoModel
-                            .sReturnConsolidation
-                            .value
-                            .ferryImagePath
-                            .isNotEmpty
-                        ? FerryInfoModel
-                            .sReturnConsolidation.value.ferryImagePath
-                        : Strings.emptyFerryImagePath),
-                    width: 64,
-                    height: 64,
+                  // Image(
+                  //   image: NetworkImageWithRetry(
+                  //     FerryInfoModel.sReturnConsolidation.value.ferryImagePath
+                  //             .isNotEmpty
+                  //         ? FerryInfoModel
+                  //             .sReturnConsolidation.value.ferryImagePath
+                  //         : Strings.emptyFerryImagePath,
+                  //     Strings.emptyFerryImagePath,
+                  //   ),
+                  //   width: 64,
+                  //   height: 64,
+                  // ),
+                  CustomNetworkImage(
+                    url: Strings.emptyFerryImagePath,
                   ),
                 ],
               ),
@@ -159,10 +193,14 @@ class CustomFerryInfoCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: tourInfo(
-                  FerryInfoModel.sReturnConsolidation.value.depertureDate,
-                  FerryInfoModel.sReturnConsolidation.value.deperturePort.value,
-                  FerryInfoModel.sReturnConsolidation.value.arriveDate,
-                  FerryInfoModel.sReturnConsolidation.value.arrivePort.value,
+                  // FerryInfoModel.sReturnConsolidation.value.depertureDate,
+                  DateTime.now(),
+                  FerryInfoModel.sReturnConsolidation.value.departurePortName ??
+                      "",
+                  // FerryInfoModel.sReturnConsolidation.value.arriveDate,
+                  DateTime.now(),
+                  FerryInfoModel.sReturnConsolidation.value.arrivePortName ??
+                      "",
                   Strings.returnConsolidation,
                 ),
               ),

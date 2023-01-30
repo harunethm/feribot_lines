@@ -30,20 +30,20 @@ class FerryVM extends GetxController {
     }
   }
 
-  String _carType() {
+  String carType() {
     switch (SearchModel.carType.value) {
       case 0:
         return "Araçsız";
       case 1:
         return "Bisiklet";
       case 2:
-        return "Motosiklet";
+        return "Motorsiklet";
       case 3:
         return "Otomobil";
       case 4:
-        return "Otobüs";
-      case 5:
         return "Minibüs";
+      case 5:
+        return "Otobüs";
       default:
         return "";
     }
@@ -59,7 +59,7 @@ class FerryVM extends GetxController {
         _count += SearchModel.babyCount.value;
         _return = "$_count Yolcu,";
         if (SearchModel.carCount > 0 && SearchModel.carType.value != 0) {
-          _return += SearchModel.carCount.value.toString() + " " + _carType();
+          _return += SearchModel.carCount.value.toString() + " " + carType();
         } else {
           _return += " Araçsız";
         }
@@ -71,7 +71,7 @@ class FerryVM extends GetxController {
         _list.add(SearchModel.babyCount.value.toString() + " Bebek");
 
         if (SearchModel.carCount > 0 && SearchModel.carType.value != 0) {
-          _list.add(SearchModel.carCount.value.toString() + " " + _carType());
+          _list.add(SearchModel.carCount.value.toString() + " " + carType());
         } else {
           _list.add("Araçsız");
         }
@@ -82,7 +82,7 @@ class FerryVM extends GetxController {
   }
 
   void openProfile() {
-    if (USER.isLogined) {
+    if (USER_old.isLogined) {
       Get.to(
         () => Profile(),
         duration: Duration(milliseconds: 300),

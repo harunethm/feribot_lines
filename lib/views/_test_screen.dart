@@ -1,4 +1,4 @@
-import 'package:feribot_lines/models/key_value_model.dart';
+import 'package:feribot_lines/models/others/key_value_model.dart';
 import 'package:feribot_lines/widgets/custom_drop_down_trip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,11 +38,7 @@ class TestScreen extends StatelessWidget {
                       ),
                       width: MediaQuery.of(context).size.width * .5,
                       child: CustomDropDownTrip(
-                        items: [
-                          KeyValue(0, "name0"),
-                          KeyValue(1, "name1"),
-                          KeyValue(2, "name2")
-                        ],
+                        items: [],
                         selected: 0,
                         onChanged: (val) {},
                       ),

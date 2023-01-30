@@ -502,7 +502,7 @@ class TicketDetails extends StatelessWidget {
     String from,
     String to,
     String tripTime,
-    DateTime depertureDateTime,
+    DateTime departureDateTime,
     DateTime arriveDateTime,
     String ferryNo,
   ) {
@@ -584,7 +584,7 @@ class TicketDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${depertureDateTime.day.toString().padLeft(2, "0")}.${depertureDateTime.month.toString().padLeft(2, "0")}.${depertureDateTime.year.toString().substring(2, 4)}",
+                "${departureDateTime.day.toString().padLeft(2, "0")}.${departureDateTime.month.toString().padLeft(2, "0")}.${departureDateTime.year.toString().substring(2, 4)}",
                 style: TextStyle(color: Colors.grey.shade700),
               ),
               Icon(
@@ -601,7 +601,7 @@ class TicketDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${depertureDateTime.hour.toString().padLeft(2, "0")}:${depertureDateTime.minute.toString().padLeft(2, "0")}",
+                "${departureDateTime.hour.toString().padLeft(2, "0")}:${departureDateTime.minute.toString().padLeft(2, "0")}",
                 style: TextStyle(color: Colors.grey.shade700),
               ),
               Text(

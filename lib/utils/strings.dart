@@ -67,7 +67,7 @@ class Strings {
   static String ferryPolicy = "Bilet İptali ve İptal Etme Politikaları";
   static String confirmSMS =
       "Feribotlines bana bilgilendirme ve tanıtım amaçlı eposta ve SMS mesajları gönderebilir.";
-  static String basePrice = "Temel Fiyat";
+  static String totalPrice = "Toplam Fiyat";
   static String tDiscount = "İndirim Miktarı";
   static String priceDiscount = "İndirimli Fiyat";
   static String amountPaid = "Ödenecek Tutar";

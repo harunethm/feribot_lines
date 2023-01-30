@@ -1,4 +1,4 @@
-class USER {
+class USER_old {
   static bool isLogined = false;
   static String name = "";
   static String surName = "";

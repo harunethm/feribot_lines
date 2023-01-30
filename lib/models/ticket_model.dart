@@ -11,8 +11,8 @@ class TicketModelTest {
   // List<PassengerModel> passengers = List<PassengerModel>();
 
   TicketModelTest() {
-    consolidation = FerryInfoModel.sConsolidation.value;
-    returnConsolidation = FerryInfoModel.sReturnConsolidation.value;
-    contactInfo = ContactInfoModel.createEmpty();
+    // consolidation = FerryInfoModel.sConsolidation.value;
+    // returnConsolidation = FerryInfoModel.sReturnConsolidation.value;
+    // contactInfo = ContactInfoModel.createEmpty();
   }
 }

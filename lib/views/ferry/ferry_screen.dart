@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/ferry/search_model.dart';
-import '../../models/key_value_model.dart';
+import '../../models/others/key_value_model.dart';
 import '../../utils/colors_const.dart';
 import '../../utils/strings.dart';
 import '../../viewModels/ferry/ferry_screen_vm.dart';
@@ -84,21 +84,28 @@ class FerryScreen extends StatelessWidget {
                               color: iconColor.value,
                             ),
                           ),
-                          const SizedBox(
-                            width: 15,
+                          SizedBox(
+                            width: Get.size.width * 0.02,
                           ),
                           Container(
-                            width: Get.size.width * .3,
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            width: Get.size.width * 0.3,
+                            // padding:
+                            //     const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Obx(
                               () => CustomDropDownTrip(
-                                items: _vm.deperturePorts.value,
-                                selected: SearchModel.deperturePort.value.key,
+                                items: _vm.departurePorts.value,
+                                selected: SearchModel.departurePort.value.key,
                                 onChanged: (val) {
-                                  SearchModel.deperturePort.value =
-                                      _vm.deperturePorts.value[val!];
-                                  SearchModel.deperturePort.refresh();
+                                  if (val != null) {
+                                    SearchModel.departurePort.value =
+                                        _vm.departurePorts.value.firstWhere(
+                                      (element) => element.key == val,
+                                      orElse: () =>
+                                          _vm.departurePorts.value.first,
+                                    );
+
+                                    SearchModel.departurePort.refresh();
+                                  }
                                   _vm.updateArrivePorts();
                                 },
                               ),
@@ -197,21 +204,23 @@ class FerryScreen extends StatelessWidget {
                               color: iconColor.value,
                             ),
                           ),
-                          const SizedBox(
-                            width: 15,
+                          SizedBox(
+                            width: Get.size.width * 0.02,
                           ),
                           Container(
-                            width: Get.size.width * .3,
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            width: Get.size.width * 0.3,
+                            // padding:
+                            //     const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Obx(
                               () => CustomDropDownTrip(
                                 items: _vm.arrivePorts.value,
                                 selected: SearchModel.arrivePort.value.key,
                                 onChanged: (val) {
-                                  SearchModel.arrivePort.value =
-                                      _vm.arrivePorts.value[val!];
-                                  SearchModel.arrivePort.refresh();
+                                  if (val != null) {
+                                    SearchModel.arrivePort.value =
+                                        _vm.arrivePorts.value[val];
+                                    SearchModel.arrivePort.refresh();
+                                  }
                                 },
                               ),
                             ),
@@ -290,7 +299,7 @@ class FerryScreen extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                        Expanded(
+                      Expanded(
                         child: Column(
                           children: [
                             Obx(
@@ -667,10 +676,10 @@ class FerryScreen extends StatelessWidget {
           context: Get.context!,
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: index == 0
-              ? SearchModel.depertureDate.value
+              ? SearchModel.departureDate.value
               : SearchModel.arriveDate.value,
           firstDate:
-              index == 1 ? SearchModel.depertureDate.value : DateTime.now(),
+              index == 1 ? SearchModel.departureDate.value : DateTime.now(),
           lastDate: DateTime(2100, 12, 31),
           cancelText: Strings.cancel,
           confirmText: Strings.select,
@@ -681,8 +690,8 @@ class FerryScreen extends StatelessWidget {
             value != null
                 ? index == 0
                     ? {
-                        SearchModel.depertureDate.value = value,
-                        SearchModel.depertureDate.value
+                        SearchModel.departureDate.value = value,
+                        SearchModel.departureDate.value
                                 .isAfter(SearchModel.arriveDate.value)
                             ? SearchModel.arriveDate.value = value
                             : null
@@ -690,7 +699,7 @@ class FerryScreen extends StatelessWidget {
                     : SearchModel.arriveDate.value = value
                 : "";
             SearchModel.arriveDate.refresh();
-            SearchModel.depertureDate.refresh();
+            SearchModel.departureDate.refresh();
           },
         );
         if (disabled) {
@@ -716,7 +725,7 @@ class FerryScreen extends StatelessWidget {
                       ),
                       Text(
                         DateFormat("dd MMM", "tr_TR").format(index == 0
-                            ? SearchModel.depertureDate.value
+                            ? SearchModel.departureDate.value
                             : SearchModel.arriveDate.value),
                         style: TextStyle(
                           fontWeight: FontWeight.w600,

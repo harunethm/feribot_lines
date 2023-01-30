@@ -1,3 +1,4 @@
+import 'package:feribot_lines/widgets/custom_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -9,14 +10,17 @@ import 'custom_seperator.dart';
 class FerryTicket extends StatelessWidget {
   final int ID = 0;
   final double price;
+  final String exchange;
 
   final String arrivePort;
-  final String deperturePort;
+  final String departurePort;
 
   final String companyName;
   final String companyLogoPath;
   final String ferryName;
+
   final RxBool isSelected;
+  final bool bestPriceGuarantee;
 
   final String arrivalTime;
   final String arrivalDate;
@@ -34,13 +38,15 @@ class FerryTicket extends StatelessWidget {
     required this.departureDate,
     required this.departureTime,
     required this.arrivePort,
-    required this.deperturePort,
+    required this.departurePort,
     required this.totalTime,
     required this.companyName,
     required this.companyLogoPath,
     required this.ferryName,
     required this.isSelected,
     required this.price,
+    required this.bestPriceGuarantee,
+    required this.exchange,
     required this.arrivalTime,
     required this.onTap,
   }) : super(key: key);
@@ -65,7 +71,7 @@ class FerryTicket extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Text(
-                        '$price TL',
+                        '$price $exchange',
                         style: const TextStyle(
                           color: ColorsConstants.lightAccent,
                           fontSize: 22.0,
@@ -99,7 +105,7 @@ class FerryTicket extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        deperturePort,
+                        departurePort,
                         style: const TextStyle(
                           fontSize: 20.0,
                         ),
@@ -142,11 +148,8 @@ class FerryTicket extends StatelessWidget {
                         child: CustomSeperator(),
                       ),
                       companyLogoPath.isNotEmpty
-                          ? Image.asset(
-                              companyLogoPath,
-                              width: 48,
-                              height: 48,
-                              fit: BoxFit.fill,
+                          ? CustomNetworkImage(
+                              url: companyLogoPath,
                             )
                           : Image.asset(
                               "assets/images/fethiye-rodos-ferry-tilos.jpg",
@@ -172,19 +175,19 @@ class FerryTicket extends StatelessWidget {
                       fontSize: 12.0,
                     ),
                   ),
-                  const SizedBox(height: 10.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        totalTime,
-                        style: const TextStyle(
-                          color: Colors.black54,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
-                  )
+                  // const SizedBox(height: 10.0),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: <Widget>[
+                  //     Text(
+                  //       totalTime,
+                  //       style: const TextStyle(
+                  //         color: Colors.black54,
+                  //         fontSize: 15.0,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // )
                 ],
               ),
             ),
@@ -223,6 +226,44 @@ class FerryTicket extends StatelessWidget {
               ),
             ),
           ),
+          Visibility(
+            visible: isSelected.value, // TODO isBestPrice
+            child: Positioned(
+              bottom: 4,
+              left: 4,
+              child: Container(
+                margin: const EdgeInsets.only(right: 3, top: 3),
+                decoration: const BoxDecoration(
+                  color: ColorsConstants.success,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    topRight: Radius.circular(10),
+                  ),
+                ),
+                constraints: const BoxConstraints(
+                  minHeight: 32,
+                  minWidth: 70,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 4.0,
+                  ),
+                  child: Column(
+                    children: const [
+                      Text(
+                        "En İyi Fiyat",
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
           Positioned(
             bottom: 4,
             right: 0,
@@ -240,8 +281,10 @@ class FerryTicket extends StatelessWidget {
                       topLeft: Radius.circular(10),
                     ),
                   ),
-                  height: 32.0,
-                  width: 70,
+                  constraints: const BoxConstraints(
+                    minHeight: 32,
+                    minWidth: 70,
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10.0,

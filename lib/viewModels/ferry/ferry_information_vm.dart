@@ -1,45 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:feribot_lines/models/ferry/search_model.dart';
-import 'package:feribot_lines/models/key_value_model.dart';
 import 'package:intl/intl.dart';
+
+import 'package:feribot_lines/models/others/key_value_model.dart';
+import 'package:feribot_lines/models/others/user.dart';
+import 'package:feribot_lines/services/ferry_services.dart';
 
 class FerryInformationVM extends GetxController {
   PageController pageController =
       PageController(initialPage: 0, keepPage: true);
 
-  RxList<PassengerModel> passengers = RxList();
-  ContactInfoModel contactInfo = ContactInfoModel.createEmpty();
+  RxList<InfoModel> passengers = RxList();
+  User contactInfo = User();
 
   List<KeyValue> days = [];
   List<KeyValue> months = [];
-  // List<KeyValue> years = List.generate(
-  //   151,
-  //   (index) {
-  //     return KeyValue(
-  //       index,
-  //       index == 0 ? "Yıl" : (index + 1900).toString().padLeft(2, "0"),
-  //     );
-  //   },
-  // );
-
-  late List<KeyValue> years = [];
+  List<KeyValue> years = [];
 
   List<KeyValue> phoneCodes = [
+    KeyValue(-1, "Seçiniz"),
     KeyValue(90, "Türkiye +90"),
     KeyValue(1, "US +1"),
     KeyValue(1684, "American Samoa +1684"),
     KeyValue(355, "Albenia +355"),
   ];
-  List<KeyValue> nations = [
-    KeyValue(90, "Türkiye"),
-    KeyValue(30, "Yunanistan"),
-    KeyValue(359, "Bulgaristan"),
-    KeyValue(994, "Azerbeycan"),
-  ];
+
+  RxList<KeyValue> nations = RxList([KeyValue(-1, "Seçiniz")]);
+
+  void getNations() async {
+    await FerryServices.getCountries().then(
+      (value) => nations.value = value
+          .map(
+            (e) =>
+                KeyValue(int.parse(e.countryCode ?? "0"), e.countryName ?? ""),
+          )
+          .toList(),
+    );
+  }
 
   init() {
+    // getNations();
     days = List.generate(
       31,
       (index) {
@@ -95,7 +95,7 @@ class PassengerModel {
   RxInt birthDay = 1.obs;
   RxInt birthMonth = 1.obs;
   RxInt birthYear = DateTime.now().year.obs;
-  RxInt nationalityCode = 90.obs;
+  RxInt nationalityCode = 0.obs;
   RxString passportNumber = "".obs;
   RxString identificationNumber = "".obs;
 
@@ -124,4 +124,15 @@ class PassengerModel {
   }
 
   PassengerModel.createEmpty();
+}
+
+class InfoModel {
+  int pageNumber = 0;
+  RxString title = "".obs;
+  User user = User();
+
+  InfoModel({
+    required this.pageNumber,
+    required this.title,
+  });
 }

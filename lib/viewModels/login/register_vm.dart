@@ -36,9 +36,9 @@ class RegisterVM extends GetxController {
             _dialog.show();
           } else {
             // TODO devam ettir
-            USER.name = model.name;
-            USER.surName = model.surName;
-            USER.password = model.password;
+            USER_old.name = model.name;
+            USER_old.surName = model.surName;
+            USER_old.password = model.password;
             Get.offAll(
               () => FerryScreen(),
               duration: Duration(milliseconds: 300),
