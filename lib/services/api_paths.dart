@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class API {
-  static const String baseApiUrl = "https://ferryhunter.net/api";
-  static const String baseUrl = "https://ferryhunter.net/";
+  static const String baseApiUrl = "https://ferryhunter.nt/api";
+  static const String baseUrl = "https://ferryhunter.nt/";
 
   static const String departurePorts = "/departure-seaports";
   static const String arrivePorts = "/return-seaports";
@@ -28,10 +28,8 @@ class API {
 }
 
 _basicAuth() {
-  String _username =
-      '749d571bb83abb63898dc7b058de8fadc4f4d5b731f4f72c0080fb41102b6ccf';
-  String _password =
-      '170404b724f2828169b20d9deae0ae033db2456900d5600553d55654d2f3e5a5';
+  String _username = '';
+  String _password = '';
   String _basicAuth =
       'Basic ' + base64Encode(utf8.encode('$_username:$_password'));
   return _basicAuth;

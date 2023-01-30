@@ -21,61 +21,65 @@ class FerryServices {
     SearchTripResponse _searchResults = SearchTripResponse();
     SearchTripRequest _requestBody = SearchTripRequest.fromModel();
 
-    var url = Uri.parse(API.baseApiUrl + API.searchTrip).toString();
-    final _dio = await _getInstance();
-    var response = await _dio.post(
-      url,
-      // headers: API.headers,
-      data: _requestBody,
-    );
+    // var url = Uri.parse(API.baseApiUrl + API.searchTrip).toString();
+    // final _dio = await _getInstance();
+    // var response = await _dio.post(
+    //   url,
+    //   // headers: API.headers,
+    //   data: _requestBody,
+    // );
 
-    if (response.statusCode == 200) {
-      _searchResults = SearchTripResponse.fromJson(response.data);
-      _searchResults.departureModel!.add(Trip(
-        expeditionId: 34,
-        companyName: "Turyol",
-        companyLogo: API.baseUrl +
-            "uploads/companies/875d442879ebde4dc51e9058c500f6d8777b2f6974381e9e79fb2dd83214ed14.jpg",
-        arrivePortName: "Midilli",
-        departurePortName: "Ayvalık",
-        bestPriceGuarantee: "0",
-        ferryName: "ARAÇLI FERİBOT / FOKAIA",
-        adult: "15",
-        children: "7",
-        baby: "2",
-        bike: "5",
-        motorcycle: "20",
-        automobile: "40",
-        minibus: "125",
-        bus: "200",
-        exchangeCode: "EUR",
-        exchangeId: 3,
-        totalAmount: 34,
-      ));
-      _searchResults.returnModel!.add(Trip(
-        expeditionId: 170,
-        companyName: "Turyol",
-        companyLogo: API.baseApiUrl +
-            "uploads/companies/875d442879ebde4dc51e9058c500f6d8777b2f6974381e9e79fb2dd83214ed14.jpg",
-        arrivePortName: "Midilli",
-        departurePortName: "Ayvalık",
-        bestPriceGuarantee: "0",
-        ferryName: "ARAÇLI FERİBOT / FOKAIA",
-        adult: "15",
-        children: "7",
-        baby: "2",
-        bike: "5",
-        motorcycle: "20",
-        automobile: "40",
-        minibus: "125",
-        bus: "200",
-        exchangeCode: "EUR",
-        exchangeId: 3,
-        totalAmount: 34,
-      ));
-    } else {
-      Get.snackbar("Hata", "Lütfen internet bağlantınızı kontrol ediniz.");
-    }
+    // _searchResults = SearchTripResponse.fromJson(response.data);
+    _searchResults = SearchTripResponse(
+      departureModel: [],
+      returnModel: [],
+    );
+    _searchResults.departureModel!.add(Trip(
+      expeditionId: 34,
+      companyName: "Turyol",
+      companyLogo: API.baseUrl +
+          "uploads/companies/875d442879ebde4dc51e9058c500f6d8777b2f6974381e9e79fb2dd83214ed14.jpg",
+      arrivePortName: "Midilli",
+      departurePortName: "Ayvalık",
+      bestPriceGuarantee: "0",
+      ferryName: "ARAÇLI FERİBOT / FOKAIA",
+      adult: "15",
+      children: "7",
+      baby: "2",
+      bike: "5",
+      motorcycle: "20",
+      automobile: "40",
+      minibus: "125",
+      bus: "200",
+      exchangeCode: "EUR",
+      exchangeId: 3,
+      totalAmount: 34,
+    ));
+    _searchResults.returnModel!.add(Trip(
+      expeditionId: 170,
+      companyName: "Turyol",
+      companyLogo: API.baseApiUrl +
+          "uploads/companies/875d442879ebde4dc51e9058c500f6d8777b2f6974381e9e79fb2dd83214ed14.jpg",
+      arrivePortName: "Midilli",
+      departurePortName: "Ayvalık",
+      bestPriceGuarantee: "0",
+      ferryName: "ARAÇLI FERİBOT / FOKAIA",
+      adult: "15",
+      children: "7",
+      baby: "2",
+      bike: "5",
+      motorcycle: "20",
+      automobile: "40",
+      minibus: "125",
+      bus: "200",
+      exchangeCode: "EUR",
+      exchangeId: 3,
+      totalAmount: 34,
+    ));
+    // if (response.statusCode == 200) {
+    // } else {
+    //   Get.snackbar("Hata", "Lütfen internet bağlantınızı kontrol ediniz.");
+    // }
 
     return _searchResults;
   }
